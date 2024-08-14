@@ -11,19 +11,19 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Solid
+  - Shifting
+  - SolidLife
+  - Life
+  - Hazard
+  - Light
+  - LightFog
+  - SkySphere
+  - Particles
+  - ParticleKill
+  - StalkStart
+  - StalkEnd
+  - Flocking
   - 
   - 
   - 

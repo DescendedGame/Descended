@@ -40,8 +40,9 @@ void AddAdditionalLights_float(float Porosity, float Ambience, float AmbShade, f
     half4 shadowMask = half4(1, 1, 1, 1);
 #endif
 
-#ifndef SHADERGRAPH_PREVIEW
-    
+#ifdef SHADERGRAPH_PREVIEW
+
+#else 
 int pixelLightCount = GetAdditionalLightsCount();
 
     for (int i = 0; i < pixelLightCount; i++) {
@@ -59,7 +60,7 @@ int pixelLightCount = GetAdditionalLightsCount();
 
 		float3 t_color = light.color;
 		float t_distance1 = length(light.direction);
-		float t_distance2 = length(WorldView);
+		//float t_distance2 = length(WorldView);
 
 		float atten = light.distanceAttenuation;
 
@@ -67,7 +68,8 @@ int pixelLightCount = GetAdditionalLightsCount();
 		Ambient += amb* ceil(atten);
 		Ambient += atten * Porosity * t_color * MainColor;
 
-		float3 absorb2 = float3(pow(0.5, t_distance2/WaterAtt.x),pow(0.5, t_distance2/WaterAtt.y),pow(0.5, t_distance2/WaterAtt.z));
+		//The attenuation between the eye and the object, calculated later in the shader graph.
+		//float3 absorb2 = float3(pow(0.5, t_distance2/WaterAtt.x),pow(0.5, t_distance2/WaterAtt.y),pow(0.5, t_distance2/WaterAtt.z));
 
 
 		//Ambient *= absorb2;
