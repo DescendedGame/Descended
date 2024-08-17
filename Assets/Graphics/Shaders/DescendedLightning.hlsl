@@ -155,7 +155,7 @@ void VVolFog_float(float Random, float3 WorldPosition, float3 WorldView, float4 
 			//distgone = clamp(distgone, 0, t_dist);
 
 			
-			float3 t_col = light2.color * t_rand *  (light2.distanceAttenuation * (light2.shadowAttenuation) * 0.5 + light2.lightDistance)/* +  0.2*sqrt(log10(10*(1-0.9*(1-light2.distanceAttenuation))))*/;
+			float3 t_col = light2.color * t_rand *  (light2.distanceAttenuation * light2.shadowAttenuation * 0.5 /*+ light2.lightDistance*/)/* +  0.2*sqrt(log10(10*(1-0.9*(1-light2.distanceAttenuation))))*/;
 			t_col.r *= pow(0.5, (t_dist - distgone + length(light2.direction))/WaterAtt.x);
 			t_col.g *= pow(0.5, (t_dist - distgone + length(light2.direction))/WaterAtt.y);
 			t_col.b *= pow(0.5, (t_dist - distgone + length(light2.direction))/WaterAtt.z);
@@ -306,7 +306,7 @@ void VVolFogSphere_float(float3 objPos, float Random, float3 WorldPosition, floa
 			
 
 			
-			float3 t_col = light2.color * t_rand *  (light2.distanceAttenuation * (light2.shadowAttenuation) * 0.5 + light2.lightDistance)/* +  0.2*sqrt(log10(10*(1-0.9*(1-light2.distanceAttenuation))))*/;
+			float3 t_col = light2.color * t_rand *  (light2.distanceAttenuation * (light2.shadowAttenuation) * 0.5 /*+ light2.lightDistance*/)/* +  0.2*sqrt(log10(10*(1-0.9*(1-light2.distanceAttenuation))))*/;
 			//float3 t_col = light2.color * t_rand * light2.distanceAttenuation *  (light2.shadowAttenuation) +  0.3*(log10(1-0.9*(1-light2.distanceAttenuation))+1));
 			t_col.r *= pow(0.5, (t_dist - distgone + length(light2.direction))/WaterAtt.x);
 			t_col.g *= pow(0.5, (t_dist - distgone+ length(light2.direction))/WaterAtt.y);
