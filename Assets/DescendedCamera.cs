@@ -13,7 +13,7 @@ public class DescendedCamera : MonoBehaviour
     {
         Shader.SetGlobalFloat("Sonar", 0);
         Shader.SetGlobalVector("WaterAttenuation", new Vector4(5, 10, 25, 1));
-        Shader.SetGlobalVector("FogColor", new Vector4(1f, 1f, 1f, 1f));
+        Shader.SetGlobalColor("FogColor", new Vector4(1f, 1f, 1f, 1f));
         m_screen_x = (int)((float)Screen.width * 0.75f);
         m_screen_y = (int)((float)Screen.height * 0.75f);
         UpdateRenderTexCam(m_fog_camera, "FogTexture");
