@@ -23,7 +23,6 @@ public class PlayerInput : Brain
     public KeyCode k_sprint = KeyCode.LeftShift;
     public KeyCode k_balance = KeyCode.LeftControl;
 
-    // Update is called once per frame
     public override void UpdateCommands()
     {
         SetMovementDirections();
@@ -49,12 +48,15 @@ public class PlayerInput : Brain
     void SetRotationDirections()
     {
         commands.roll = 0;
-        if (Input.GetKey(k_rollClockwise)) commands.roll += 1;
         if (Input.GetKey(k_rollClockwise)) commands.roll -= 1;
+        if (Input.GetKey(k_rollCounterClockwise)) commands.roll += 1;
 
         commands.look = new Vector2(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"));
     }
 
+    /// <summary>
+    /// Listens for action bar selection input, and calls to action.
+    /// </summary>
     void SetToolActions()
     {
         if (Input.GetKey(k_1)) commands.selected = 1;
