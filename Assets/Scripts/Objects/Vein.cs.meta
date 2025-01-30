@@ -3,7 +3,10 @@ guid: 23fe1a8cac5e92945be5f40834bcf58b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_vein_ends: {fileID: 11400000, guid: 409c31ba2b35222478caa64e8e10ce70, type: 2}
+  - m_target: {instanceID: 0}
+  - endPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
