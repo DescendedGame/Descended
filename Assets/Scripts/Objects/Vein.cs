@@ -1,11 +1,5 @@
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.UI.GridLayoutGroup;
 
 //Clean this up!!!
 //Less cluttered, separate functions, choose if hollow or not upon creation, clear parameters for corners and segments and radius and stuff...

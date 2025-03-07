@@ -20,7 +20,7 @@ public class Body : MonoBehaviour
         m_brain.UpdateCommands();
         UpdateRotation();
         var emission = m_glitter.emission;
-        emission.rateOverTime = m_physics.velocity.magnitude * 5;
+        emission.rateOverTime = m_physics.linearVelocity.magnitude * 5;
     }
 
     protected virtual void UpdateRotation()
