@@ -85,6 +85,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - LuminescenceIntensity: 100
     - MAIN_LIGHT_CALCULATE_SHADOWS: 0
     - MainDiffuse: 0
     - MainSpecular: 0
@@ -131,6 +132,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
+    - Luminescence: {r: 1, g: 1, b: 1, a: 0}
     - Luminiscence: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

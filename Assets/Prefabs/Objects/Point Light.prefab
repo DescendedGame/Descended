@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8308441686887514223}
@@ -134,8 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b63841207ec8be4ea1a1a1bddbad133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_luminance: 10
-  m_color: {r: 0, g: 0, b: 0, a: 0}
+  m_luminance: 30
+  m_color: {r: 1, g: 1, b: 1, a: 0}
   m_light_source: {fileID: 2254218112114378195}
   m_light_dome: {fileID: 7722663710791131997}
   m_light_orb: {fileID: 1413765344790938865}
@@ -149,9 +149,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_Intensity: 0.5
-  m_Range: 10
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Intensity: 1
+  m_Range: 30
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
