@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A "living" game object. Needs a brain to function, can carry and use tools. Create a prefab variant from the prefab "Pawn" to get started on a new pawn!
+/// </summary>
 public class Pawn : Attackable
 {
     [SerializeField] PawnProperties m_properties;
@@ -8,24 +11,38 @@ public class Pawn : Attackable
     [SerializeField] protected Brain m_brain;
     [SerializeField] ParticleSystem m_glitter;
 
+    /// <summary>
+    /// This will call its Updated() in Update(). Can result in a change then, or for example when this pawn takes damage.
+    /// </summary>
     PawnState currentState;
+
+    /// <summary>
+    /// Contains all the pawn's states. Pass the wanted state type to get a reference to a specific state.
+    /// </summary>
     [SerializeField] Dictionary<PawnStateType, PawnState> m_lookUpState = new Dictionary<PawnStateType, PawnState>();
 
     protected override void Awake()
     {
         base.Awake();
+
         m_brain.Initialize(m_properties);
-        currentState = new IdlePawnState();
-        currentState.Initialize(m_brain, m_properties, m_lookUpState);
+
+        // Add the states
+        new IdlePawnState().Initialize(m_brain, m_properties, m_lookUpState);
         new SprintPawnState().Initialize(m_brain, m_properties, m_lookUpState);
         new ToppledPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+
+        // Set the initial state
+        currentState = m_lookUpState[PawnStateType.Idle];
         currentState.Enter();
     }
 
     protected virtual void Update()
     {
+        // All pawns trigger small bioluminescent things around them when they move.
         var emission = m_glitter.emission;
         emission.rateOverTime = m_properties.m_physics.linearVelocity.magnitude * 5;
+
         m_brain.UpdateCommands();
 
         while (true)
@@ -43,16 +60,30 @@ public class Pawn : Attackable
         currentState.Enter();
     }
 
-    public override void TakeDamage(float damage)
-    {
-        base.TakeDamage(damage);
-        SetState(PawnStateType.Toppled);
-    }
-
     protected virtual void FixedUpdate()
     {
         currentState.FixedUpdate();
     }
+
+    public override void Hit(Hazard damage)
+    {
+        base.Hit(damage);
+
+        // alert the brain of the hazard
+        m_brain.OnDamaged(damage);
+
+        // add the push force from the hazard
+        m_properties.m_physics.AddForce(damage.pushForce, ForceMode.Impulse);
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        //Now the pawn always becomes toppled by damage...
+        SetState(PawnStateType.Toppled);
+    }
+
 }
 
 public abstract class PawnState

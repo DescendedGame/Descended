@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// That which controls a pawn.
+/// </summary>
 public class Brain : MonoBehaviour
 {
     //Should maybe have this private and only send out a copy with Get so that other's can't alter something's commands.
