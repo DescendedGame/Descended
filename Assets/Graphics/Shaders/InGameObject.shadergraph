@@ -249,6 +249,9 @@
     "m_StickyNoteDatas": [
         {
             "m_Id": "676ebe13ac4340bc9b8e7cf5e8fda250"
+        },
+        {
+            "m_Id": "0897bcfb4f034a7b953925915af3af56"
         }
     ],
     "m_Edges": [
@@ -1389,8 +1392,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 1136.0,
-            "y": 407.9999694824219
+            "x": 931.0001220703125,
+            "y": 123.99996185302735
         },
         "m_Blocks": [
             {
@@ -1406,8 +1409,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 1136.0,
-            "y": 607.9999389648438
+            "x": 931.0001220703125,
+            "y": 323.9999694824219
         },
         "m_Blocks": [
             {
@@ -1610,6 +1613,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "0897bcfb4f034a7b953925915af3af56",
+    "m_Title": "Note",
+    "m_Content": "Could maybe add different lights before and simplify the attenuation function.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -187.0,
+        "y": 427.0,
+        "width": 182.0,
+        "height": 104.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "08a3c0cc89154add8c9bef3dd8217137",
     "m_Id": 2,
@@ -1773,10 +1796,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "0bf6c3d594374b23811739a978ca0f8f",
     "m_Id": 2,
-    "m_DisplayName": "Out_Vector1",
+    "m_DisplayName": "BlackAtten",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "OutVector1",
+    "m_ShaderOutputName": "BlackAtten",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -4981,7 +5004,7 @@
     "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
     "m_ObjectId": "676ebe13ac4340bc9b8e7cf5e8fda250",
     "m_Title": "Rain Outlines",
-    "m_Content": "",
+    "m_Content": "Unused until polished",
     "m_TextSize": 0,
     "m_Theme": 0,
     "m_Position": {
@@ -8269,9 +8292,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 714.9999389648438,
-            "y": 257.0,
-            "width": 208.00006103515626,
+            "x": 577.9999389648438,
+            "y": 161.99998474121095,
+            "width": 208.00018310546876,
             "height": 302.0
         }
     },

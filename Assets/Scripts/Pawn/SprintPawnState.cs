@@ -9,21 +9,34 @@ public class SprintPawnState : PawnState
 
     public override void Enter()
     {
+        //Reduce the friction to make the able to accelerate to a higher speed.
         m_properties.m_physics.linearDamping /= 2;
     }
 
     public override PawnStateType Update()
     {
-        if(!m_brain.commands.sprint || !m_brain.IsTryingToMove())
+        //Go back to idle state if sprint input no longer applies.
+        if (!m_brain.commands.sprint || !m_brain.IsTryingToMove())
         {
             return PawnStateType.Idle;
         }
 
+        //Can still change the selected tool during sprint.
+        m_properties.selectedToolIndex = m_brain.commands.selected;
+
+        //Can still use a tool during sprint, but with sprint behaviour!
+        if (m_brain.commands.primary)
+        {
+            m_properties.selectedTool.StartPrimaryAction(m_properties.actionPoint);
+        }
+
         UpdateRotation();
-        return this.stateType;
+        return stateType;
     }
     protected override void UpdateRotation()
     {
+        //Will need to override the rotation behaviour during sprint....
+
         Vector3 normalizedLook = m_brain.commands.look.normalized;
         m_properties.m_pivot.rotation *= Quaternion.AngleAxis(m_brain.commands.look.magnitude, Vector3.right * normalizedLook.y + Vector3.up * normalizedLook.x);
 
@@ -42,6 +55,7 @@ public class SprintPawnState : PawnState
 
     public override void Exit()
     {
+        //Return the friction to normal.
         m_properties.m_physics.linearDamping *= 2;
     }
 }

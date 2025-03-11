@@ -18,6 +18,7 @@ public class Pawn : Attackable
         currentState = new IdlePawnState();
         currentState.Initialize(m_brain, m_properties, m_lookUpState);
         new SprintPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new ToppledPawnState().Initialize(m_brain, m_properties, m_lookUpState);
         currentState.Enter();
     }
 
@@ -32,12 +33,21 @@ public class Pawn : Attackable
             PawnStateType nextState = currentState.Update();
             if (nextState == currentState.stateType) break;
 
-            currentState.Exit();
-            currentState = m_lookUpState[nextState];
-            currentState.Enter();
+            SetState(nextState);
         }
     }
+    void SetState(PawnStateType nextState)
+    {
+        currentState.Exit();
+        currentState = m_lookUpState[nextState];
+        currentState.Enter();
+    }
 
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        SetState(PawnStateType.Toppled);
+    }
 
     protected virtual void FixedUpdate()
     {
@@ -51,8 +61,14 @@ public abstract class PawnState
     protected Brain m_brain;
     protected PawnProperties m_properties;
 
+    /// <summary>
+    /// In a state's public constructor, define its PawnStateType!
+    /// </summary>
     protected PawnState() { }
 
+    /// <summary>
+    /// Use this to set up the state properly.
+    /// </summary>
     public virtual void Initialize(Brain brain, PawnProperties properties, Dictionary<PawnStateType, PawnState> lookUpState)
     {
         m_brain = brain;
@@ -60,11 +76,19 @@ public abstract class PawnState
         lookUpState.Add(stateType, this);
     }
 
+    /// <summary>
+    /// Called when this state is entered.
+    /// </summary>
     public virtual void Enter()
     {
 
     }
 
+    /// <summary>
+    /// Called in the pawn's Update() and makes the pawn switch state to match its return value.
+    /// First check if conditions are met to switch state, if not, do the update logic!
+    /// </summary>
+    /// <returns></returns>
     public virtual PawnStateType Update()
     {
         UpdateRotation();
@@ -81,6 +105,9 @@ public abstract class PawnState
         m_properties.m_pivot.rotation *= Quaternion.AngleAxis(m_properties.roll_speed * Time.deltaTime, Vector3.forward);
     }
 
+    /// <summary>
+    /// The physical behaviour of this state, called in the pawn's FixedUpdate().
+    /// </summary>
     public virtual void FixedUpdate()
     {
         m_properties.m_physics.AddForce((m_properties.m_pivot.forward * m_brain.commands.forwards + 
@@ -89,6 +116,9 @@ public abstract class PawnState
             m_properties.m_swim_force);
     }
 
+    /// <summary>
+    /// Called when the state is exited.
+    /// </summary>
     public virtual void Exit()
     {
 

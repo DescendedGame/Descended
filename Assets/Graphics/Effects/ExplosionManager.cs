@@ -1,6 +1,9 @@
 
 using UnityEngine;
 
+/// <summary>
+/// Particle systems in the game scene should report in to this, then anything that needs to use particles can easily do so through this data item.
+/// </summary>
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ParticleExplosion", order = 1)]
 public class ExplosionManager : ScriptableObject
 {

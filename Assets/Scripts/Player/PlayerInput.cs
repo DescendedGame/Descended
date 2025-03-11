@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Contains input and GUI logic for the player pawn.
+/// </summary>
 public class PlayerInput : Brain
 {
     public KeyCode k_forwards = KeyCode.W;
@@ -38,6 +41,8 @@ public class PlayerInput : Brain
 
     void SetMovementDirections()
     {
+        //Expects the ZeroCommands() to have been called before this.
+
         if (Input.GetKey(k_forwards)) commands.forwards += 1;
         if (Input.GetKey(k_backwards)) commands.forwards -= 1;
 
@@ -50,7 +55,8 @@ public class PlayerInput : Brain
 
     void SetRotationDirections()
     {
-        commands.roll = 0;
+        //Expects the ZeroCommands() to have been called before this.
+
         if (Input.GetKey(k_rollClockwise)) commands.roll -= 1;
         if (Input.GetKey(k_rollCounterClockwise)) commands.roll += 1;
 
@@ -81,5 +87,10 @@ public class PlayerInput : Brain
     void SetActions()
     {
         commands.sprint = Input.GetKey(k_sprint);
+    }
+
+    public override void OnDamaged(Hazard damage)
+    {
+        // Update healthbar not implemented
     }
 }

@@ -104,7 +104,17 @@
         }
     ],
     "m_GroupDatas": [],
-    "m_StickyNoteDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "16c08c36a5224ffcbe36c9da83c9ec41"
+        },
+        {
+            "m_Id": "3e30a40209964800a96ee6738a81acb8"
+        },
+        {
+            "m_Id": "bbcfbd8c8e9c44ce82aab60478c7088a"
+        }
+    ],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -630,7 +640,7 @@
             "m_Id": "42321fc5c656409c845530ba5f4a62eb"
         },
         {
-            "m_Id": "f5cea7adfe754e8a98f5f4c75f28ea21"
+            "m_Id": "a7c49db57c3a4b45a7ac68f8f50b4051"
         }
     ],
     "synonyms": [],
@@ -808,10 +818,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -484.0000305175781,
-            "y": -654.9999389648438,
-            "width": 124.0,
-            "height": 33.99993896484375
+            "x": -468.0,
+            "y": -662.0,
+            "width": 123.99996948242188,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -829,6 +839,26 @@
     },
     "m_Property": {
         "m_Id": "85a8b45c3439423aa0e8e1b62b364655"
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "16c08c36a5224ffcbe36c9da83c9ec41",
+    "m_Title": "Add Light Contributors",
+    "m_Content": "",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -604.0,
+        "y": -355.0,
+        "width": 257.0,
+        "height": 100.0
+    },
+    "m_Group": {
+        "m_Id": ""
     }
 }
 
@@ -859,10 +889,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -373.0000305175781,
-            "y": -96.99993896484375,
-            "width": 152.00001525878907,
-            "height": 33.999977111816409
+            "x": -512.0000610351563,
+            "y": 93.0000228881836,
+            "width": 152.0,
+            "height": 33.99998474121094
         }
     },
     "m_Slots": [
@@ -1184,10 +1214,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 152.99998474121095,
-            "y": 383.0,
-            "width": 207.99998474121095,
-            "height": 301.9999694824219
+            "x": 480.99993896484377,
+            "y": 502.0,
+            "width": 207.99993896484376,
+            "height": 302.0
         }
     },
     "m_Slots": [
@@ -1300,6 +1330,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "3e30a40209964800a96ee6738a81acb8",
+    "m_Title": "Additional Attenuation",
+    "m_Content": "Like particles that blocks light",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 474.0,
+        "y": 403.0,
+        "width": 231.0,
+        "height": 100.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "3e4d7a6a0cac402f8cd642ee07630b2e",
     "m_Id": 2,
@@ -1398,10 +1448,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -203.00003051757813,
-            "y": -242.99998474121095,
-            "width": 208.0000457763672,
-            "height": 302.0
+            "x": -344.00006103515627,
+            "y": -243.00001525878907,
+            "width": 207.99996948242188,
+            "height": 302.00006103515627
         }
     },
     "m_Slots": [
@@ -1452,10 +1502,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 361.0,
-            "y": -414.0,
+            "x": 320.0,
+            "y": -392.0000305175781,
             "width": 120.0,
-            "height": 149.00003051757813
+            "height": 148.99998474121095
         }
     },
     "m_Slots": [
@@ -1734,10 +1784,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -289.0,
-            "y": 284.0000305175781,
-            "width": 137.0,
-            "height": 34.000030517578128
+            "x": -285.0,
+            "y": 295.9999694824219,
+            "width": 133.0,
+            "height": 33.999969482421878
         }
     },
     "m_Slots": [
@@ -2444,6 +2494,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "a7c49db57c3a4b45a7ac68f8f50b4051",
+    "m_Id": 2,
+    "m_DisplayName": "BlackAtten",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "BlackAtten",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "b0d67fcdb96d481ba08b0785574b3e8b",
     "m_Id": 0,
@@ -2550,6 +2615,26 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "bbcfbd8c8e9c44ce82aab60478c7088a",
+    "m_Title": "Calculate Water Attenuation",
+    "m_Content": "0.5 raised by x halfs the light every 1 x. Divide x by the attenuation of the separate colour bands, them multiply it by the color that has travelled that distance.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -182.0,
+        "y": -945.0,
+        "width": 315.0,
+        "height": 100.0
+    },
+    "m_Group": {
+        "m_Id": ""
     }
 }
 
@@ -3187,21 +3272,6 @@
         "z": 0.0,
         "w": 0.0
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "f5cea7adfe754e8a98f5f4c75f28ea21",
-    "m_Id": 2,
-    "m_DisplayName": "Out_Vector1",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "OutVector1",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": []
 }
 
 {

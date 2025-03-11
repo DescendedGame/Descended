@@ -1,4 +1,6 @@
-using UnityEngine;
+/// <summary>
+/// The default state used for basic movement and whatnot.
+/// </summary>
 public class IdlePawnState : PawnState
 {
     public IdlePawnState()
@@ -8,19 +10,22 @@ public class IdlePawnState : PawnState
 
     public override PawnStateType Update()
     {
+        // Go to sprint if sprint conditions are met.
         if (m_brain.commands.sprint && m_brain.IsTryingToMove())
         {
-            Debug.Log("Go to sprint!");
             return PawnStateType.Sprint;
         }
 
+        // Tool selection
         m_properties.selectedToolIndex = m_brain.commands.selected;
-        UpdateRotation();
+
+        // Tool usage can result in a different state!
         if (m_brain.commands.primary)
         {
-            m_properties.selectedTool.StartAction(m_properties.actionPoint);
+            m_properties.selectedTool.StartPrimaryAction(m_properties.actionPoint);
         }
 
-        return this.stateType;
+        UpdateRotation();
+        return stateType;
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public struct Commands
@@ -9,17 +7,30 @@ public struct Commands
     /// </summary>
     public sbyte forwards, rightwards, upwards, roll;
     
+    /// <summary>
+    /// Which way the camera should be tilted.
+    /// </summary>
     public Vector2 look;
-    public bool sprint;
-    public bool balance;
 
     /// <summary>
     /// For toolbar selection.
     /// </summary>
     public byte selected;
     /// <summary>
-    /// Each tool can have up to three actions.
+    /// Each tool can have up to three actions (more if how they react in different pawn states are counted).
+    /// Only returns true the frame it was pressed.
     /// </summary>
     public bool primary, secondary, tertiary;
+
+    /// <summary>
+    /// Each tool can have up to three actions (more if how they react in different pawn states are counted).
+    /// </summary>
     public bool primaryHold, secondaryHold, tertiaryHold;
+
+    public bool sprint;
+
+    /// <summary>
+    /// If this is toggled, the steering becomes less accurate and less confusing.
+    /// </summary>
+    public bool balance;
 }

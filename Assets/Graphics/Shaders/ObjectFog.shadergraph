@@ -99,7 +99,14 @@
         }
     ],
     "m_GroupDatas": [],
-    "m_StickyNoteDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "510b8548ff11417f932090b8851b5b83"
+        },
+        {
+            "m_Id": "c85b74ac2a9d4036baa669d1f1e0362d"
+        }
+    ],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -1476,6 +1483,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "510b8548ff11417f932090b8851b5b83",
+    "m_Title": "Add part of previous fog",
+    "m_Content": "To make the static even out",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -846.0,
+        "y": -410.0,
+        "width": 326.0,
+        "height": 100.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1Node",
     "m_ObjectId": "51dfb753901c43e4a2a95f2582b4e183",
     "m_Group": {
@@ -2775,6 +2802,26 @@
         "z": 0.0
     },
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "c85b74ac2a9d4036baa669d1f1e0362d",
+    "m_Title": "Gets good random values",
+    "m_Content": "",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -1680.0,
+        "y": 55.0,
+        "width": 489.925048828125,
+        "height": 231.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
 }
 
 {

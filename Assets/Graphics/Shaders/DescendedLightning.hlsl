@@ -304,12 +304,33 @@ void ReflectiveTransparentLights_float(float3 WorldPosition, float3 WorldView, f
     {
         Light light = GetAdditionalLight(i, WorldPosition, shadowMask);
 
-        float3 t_col = light.color * ((ceil(light.distanceAttenuation) * ((1.1 / (1.0 + 10 * (1 - light.distanceAttenuation))) - 0.1)) * light.shadowAttenuation + Ambience);
-        t_col.r *= pow(0.5, (length(light.direction)) / WaterAtt.x);
-        t_col.g *= pow(0.5, (length(light.direction)) / WaterAtt.y);
-        t_col.b *= pow(0.5, (length(light.direction)) / WaterAtt.z);
+        // Decide what to do about particle normals!
+        //half NdotL = saturate(dot(normalize(WorldNormal), normalize(light.direction)));
+
+        half shadowAtt = light.shadowAttenuation * 2 /** ceil(NdotL - 0.1)*/;
+        shadowAtt = saturate(floor(shadowAtt * 2));
+
+
+        float3 t_color = light.color;
+        float t_distance1 = length(light.direction);
+        t_color.r *= pow(0.5, t_distance1 / WaterAtt.x);
+        t_color.g *= pow(0.5, t_distance1 / WaterAtt.y);
+        t_color.b *= pow(0.5, t_distance1 / WaterAtt.z);
+        //t_color.rgb *= pow(0.95, t_distance1);
+
+        float atten = light.distanceAttenuation;
         
-        Color += t_col;
+        float3 amb = t_color * Ambience * (1 - light.lightDistance);
+        Color += amb * ceil(atten);
+        Color += atten * t_color;
+        
+        float3 diffu = shadowAtt * t_color /** saturate(ceil((NdotL) - 0.25) + 0.6)*/ * atten;
+        Color += diffu;
+        
+        //Fix the specularity of transparent lights later!
+        //float3 spec = shadowAtt * (t_color * atten) * ceil(saturate(dot(reflect(normalize(light.direction), WorldNormal), -normalize(WorldView)) - Roughness)) * MainSpecular;
+        //Specular += spec;
+        
     }
 
 #endif
