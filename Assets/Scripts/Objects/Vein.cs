@@ -79,7 +79,7 @@ public class Vein : MonoBehaviour
 
     public void Generate(Vector3 target_position, float start_radius, float end_radius, float rotation, bool is_tunnel, EndType start_type, EndType end_type)
     {
-        Debug.Log("target position: " + target_position.magnitude);
+        //Debug.Log("target position: " + target_position.magnitude);
         UpdateVeinMesh(target_position, 12, start_radius, end_radius, rotation, is_tunnel);
         if (m_vein_end == null)
         {
@@ -107,7 +107,7 @@ public class Vein : MonoBehaviour
 
     public void UpdateVeinMesh(Vector3 end_position, int corner_count, float start_size, float end_size, float rotation, bool is_tunnel)
     {
-        Debug.Log("end_position: " + end_position.magnitude);
+        //Debug.Log("end_position: " + end_position.magnitude);
         m_corner_count = corner_count;
         m_start_size = start_size;
         m_end_size = end_size;
@@ -227,7 +227,7 @@ public class Vein : MonoBehaviour
     /// <param name="max_segments"></param>
     void PrepareMathematics(Vector3 target, int max_segments)
     {
-        Debug.Log("target - " + target.magnitude);
+        //Debug.Log("target - " + target.magnitude);
         if (Vector3.Angle(transform.forward, target) == 0 || Vector3.Angle(transform.forward, target) == 180)
         {
             m_joint_count = 2;
@@ -235,7 +235,7 @@ public class Vein : MonoBehaviour
             m_joint_middles = new Vector3[m_joint_count];
             m_joint_middles[0] = Vector3.zero;
             m_joint_middles[1] = target;
-            Debug.Log("THIS IS THE TARGET: " + m_joint_middles[1].magnitude);
+            //Debug.Log("THIS IS THE TARGET: " + m_joint_middles[1].magnitude);
 
             m_hypothetical_start_rotation = Quaternion.identity;
             m_hypothetical_start_position = -target;
@@ -244,7 +244,7 @@ public class Vein : MonoBehaviour
         }
         else
         {
-            Debug.Log("Else shit");
+            //Debug.Log("Else shit");
             Vector2 m_target_to_plane = target;
             //calculate line equation
             float x = m_target_to_plane.magnitude;
@@ -328,13 +328,13 @@ public class Vein : MonoBehaviour
 
 
 
-        Debug.Log(" JOINT COUNT MUNS"+(m_joint_count - 1));
+        //Debug.Log(" JOINT COUNT MUNS"+(m_joint_count - 1));
         m_vein_length = m_joint_middles[1].magnitude * (m_joint_count - 1);
         float delta_size = Mathf.Abs(m_end_size - m_start_size);
-        Debug.Log(m_joint_count);
-        Debug.Log(delta_size+ " dsize");
-        Debug.Log((double)m_vein_length);
-        Debug.Log("end before " + m_end_size);
+        //Debug.Log(m_joint_count);
+        //Debug.Log(delta_size+ " dsize");
+        //Debug.Log((double)m_vein_length);
+        //Debug.Log("end before " + m_end_size);
         if (delta_size / m_vein_length > 0.2f)
         {
             m_end_size = m_start_size + m_vein_length * Mathf.Sign(m_end_size-m_start_size) * 0.2f;
@@ -342,7 +342,7 @@ public class Vein : MonoBehaviour
         }
         else
         {
-            Debug.Log("NO!");
+            //Debug.Log("NO!");
         }
 
         m_size_step = (m_end_size - m_start_size) / m_joint_count;

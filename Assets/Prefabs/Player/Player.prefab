@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3840425688949616939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4098816880439428567}
+  m_Layer: 0
+  m_Name: ActionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4098816880439428567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840425688949616939}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.071, z: 0.397}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3143298189078938008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4365585147696511777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87,6 +118,43 @@ PrefabInstance:
       propertyPath: m_brain
       value: 
       objectReference: {fileID: 724427475827353193}
+    - target: {fileID: 952714736107552464, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+        type: 3}
+      propertyPath: m_properties.m_pivot
+      value: 
+      objectReference: {fileID: 5834036778398597956}
+    - target: {fileID: 952714736107552464, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+        type: 3}
+      propertyPath: m_properties.m_physics
+      value: 
+      objectReference: {fileID: 4751000877771882897}
+    - target: {fileID: 952714736107552464, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+        type: 3}
+      propertyPath: m_properties.actionPoint
+      value: 
+      objectReference: {fileID: 4098816880439428567}
+    - target: {fileID: 952714736107552464, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+        type: 3}
+      propertyPath: m_properties.m_swim_force
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 952714736107552464, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+        type: 3}
+      propertyPath: m_properties.tools.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 952714736107552464, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+        type: 3}
+      propertyPath: 'm_properties.tools.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ef1f4138b872e9c49a228a236fd8dde5,
+        type: 2}
+    - target: {fileID: 952714736107552464, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+        type: 3}
+      propertyPath: 'm_properties.tools.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 08012eb9113c19742bfed185667bdc38,
+        type: 2}
     - target: {fileID: 4548362596941959748, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
         type: 3}
       propertyPath: m_Name
@@ -149,12 +217,28 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8254647572026102605}
+    - targetCorrespondingSourceObject: {fileID: 5098679802865068860, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4098816880439428567}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4548362596941959748, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
         type: 3}
       insertIndex: 2
       addedObject: {fileID: 724427475827353193}
   m_SourcePrefab: {fileID: 100100000, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae, type: 3}
+--- !u!4 &3143298189078938008 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5098679802865068860, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+    type: 3}
+  m_PrefabInstance: {fileID: 7880484922343221924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &4751000877771882897 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 3221174793956977461, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,
+    type: 3}
+  m_PrefabInstance: {fileID: 7880484922343221924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5834036778398597956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4443842007669254624, guid: ad7ceb50e4dd77a4dbb291eabb6b8dae,

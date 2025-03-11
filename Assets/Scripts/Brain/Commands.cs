@@ -21,4 +21,5 @@ public struct Commands
     /// Each tool can have up to three actions.
     /// </summary>
     public bool primary, secondary, tertiary;
+    public bool primaryHold, secondaryHold, tertiaryHold;
 }

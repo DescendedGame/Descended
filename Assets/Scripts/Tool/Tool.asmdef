@@ -1,7 +1,10 @@
 {
     "name": "Tool",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:b9eb5896f8ca10f4e9103bc392d5dce0",
+        "GUID:b1746b7540ce1da44a73cc80c970b71e"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
