@@ -1,12 +1,12 @@
 using UnityEngine;
 
 /// <summary>
-/// Inheret from this and add: 
-/// [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/WHATEVER NAME YOU WANT", order = 1)]
-/// to create a new tool!
+/// To create a new tool, Inheret from this and add it to a prefab, add a new enum for it, and then add it to AllTools.
+/// A tool decides how a pawn's primary, secondary, and tertiary actions behave.
 /// </summary>
-public class Tool : ScriptableObject
+public class Tool : MonoBehaviour
 {
+    [SerializeField] ToolType toolType;
     [SerializeField] protected int manaCost = 0;
 
     /// <summary>
@@ -23,4 +23,19 @@ public class Tool : ScriptableObject
     {
         return manaCost;
     }
+
+    public ToolType GetToolType()
+    {
+        return toolType;
+    }
+
+}
+
+/// <summary>
+/// All tools should have a unique tool type. It is used to request its tool prefab from AllTools.
+/// </summary>
+public enum ToolType
+{
+    PressurePistol,
+    ChemicalSpray,
 }

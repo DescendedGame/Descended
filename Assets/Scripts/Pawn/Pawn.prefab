@@ -119,7 +119,10 @@ MonoBehaviour:
     m_swim_drag: 0
     roll_acc: 1500
     roll_speed: 0
+    m_balance: 0
     actionPoint: {fileID: 0}
+    toolStorage: {fileID: 11400000, guid: 4a6f27f8924a6fe48940ef71a5eb4d0a, type: 2}
+    toolTypes: 
     tools: []
     selectedToolIndex: 0
   m_brain: {fileID: 0}

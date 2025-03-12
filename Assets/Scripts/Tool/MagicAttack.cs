@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/MagicAttack", order = 1)]
 public class MagicAttack : Tool
 {
     public GameObject projectilePrefab; // Drag the projectile prefab in Unity Inspector

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1308514318580740821}
   - component: {fileID: 9104019612474315260}
   m_Layer: 6
-  m_Name: ProjectileChemical
+  m_Name: ChemicalProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
