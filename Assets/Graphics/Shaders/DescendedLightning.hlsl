@@ -26,12 +26,10 @@ void CalculateMainLight_float(float3 WorldPos, out float3 Direction, out float3 
 
 void AddAdditionalLights_float(float Porosity, float Ambience, float Roughness, float3 WorldPosition, float3 WorldNormal, float3 WorldView,
     float MainDiffuse, float MainSpecular, float3 MainColor, float4 WaterAtt,
-    out float3 Diffuse, out float3 Specular, out float3 Ambient)
+    out float3 Color)
 {
     
-    Diffuse = 0;
-    Specular = 0;
-    Ambient = 0;
+    Color = 0;
 
 
 #if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)
@@ -67,14 +65,14 @@ void AddAdditionalLights_float(float Porosity, float Ambience, float Roughness, 
         float atten = light.distanceAttenuation;
 
         float3 amb = t_color * Ambience * MainColor * (1-light.lightDistance);
-        Ambient += amb * ceil(atten);
-        Ambient += atten * Porosity * t_color * MainColor;
+        Color += amb * ceil(atten);
+        Color += atten * Porosity * t_color * MainColor;
         
         float3 diffu = shadowAtt * t_color * saturate(ceil((NdotL) - 0.25) + 0.6) * atten * MainDiffuse * MainColor;
-        Diffuse += diffu;
+        Color += diffu;
         
         float3 spec = shadowAtt * (t_color * atten) * ceil(saturate(dot(reflect(normalize(light.direction), WorldNormal), -normalize(WorldView)) - Roughness)) * MainSpecular;
-        Specular += spec;
+        Color += spec;
 
 		//Water attenuation between the eye and the object calculated later in the shader graph
 
@@ -137,7 +135,7 @@ void VVolFog_float(float Random, float3 WorldPosition, float3 WorldView, float4 
             distgone = clamp((distgone + t_step), 0, t_dist);
 
 			
-            float3 t_col = light2.color * t_rand * (light2.distanceAttenuation * light2.shadowAttenuation  + 1-light2.lightDistance);
+            float3 t_col = light2.color * t_rand * (light2.distanceAttenuation * light2.shadowAttenuation + (1 - light2.lightDistance)*0.2);
             t_col.r *= pow(0.5, (t_dist - distgone + length(light2.direction)) / WaterAtt.x);
             t_col.g *= pow(0.5, (t_dist - distgone + length(light2.direction)) / WaterAtt.y);
             t_col.b *= pow(0.5, (t_dist - distgone + length(light2.direction)) / WaterAtt.z);
@@ -263,7 +261,7 @@ void VVolFogSphere_float(float3 objPos, float Random, float3 WorldPosition, floa
         distgone = clamp((distgone + t_step), 0, t_dist);
 
 			
-        float3 t_col = light2.color * t_rand * (light2.distanceAttenuation * light2.shadowAttenuation  + 1-light2.lightDistance);
+        float3 t_col = light2.color * t_rand * (light2.distanceAttenuation * light2.shadowAttenuation + (1 - light2.lightDistance) * 0.2);
         t_col.r *= pow(0.5, (t_dist - distgone + length(light2.direction)) / WaterAtt.x);
         t_col.g *= pow(0.5, (t_dist - distgone + length(light2.direction)) / WaterAtt.y);
         t_col.b *= pow(0.5, (t_dist - distgone + length(light2.direction)) / WaterAtt.z);
