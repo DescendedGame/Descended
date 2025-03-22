@@ -85,6 +85,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - LuminescenceIntensity: 0
     - MAIN_LIGHT_CALCULATE_SHADOWS: 0
     - MainDiffuse: 0.4
     - MainSpecular: 0.1
@@ -94,7 +95,7 @@ Material:
     - _ADDITIONAL_LIGHT_SHADOWS: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Ambience: 1
+    - _Ambience: 0.2
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -137,6 +138,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TransitionColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1573421989177205565
