@@ -20,7 +20,7 @@ public class GeneratedLimb : MonoBehaviour
     public Color endColor;
     [SerializeField] Material mat;
 
-    ArmInitializer m_initializer;
+    LimbInitializer m_initializer;
 
     MeshRenderer armRenderer;
     MeshFilter limbFilter;
@@ -86,7 +86,11 @@ public class GeneratedLimb : MonoBehaviour
 
         for (int i = 0; i < vertices.Length; i++)
         {
-            vertices[i] = transformSpace.InverseTransformPoint(transform.TransformPoint(limbFilter.sharedMesh.vertices[stitchSeams[i]]));
+            Vector3 point = limbFilter.sharedMesh.vertices[stitchSeams[i]];
+            if(point.y < 0)
+                point = new Vector3(point.x, point.y *0.5f, point.z*0.5f);
+            point = transform.TransformPoint(point);
+            vertices[i] = transformSpace.InverseTransformPoint(point);
             normals[i] = transformSpace.InverseTransformDirection(transform.TransformDirection(limbFilter.sharedMesh.normals[stitchSeams[i]]));
             uvs[i] = limbFilter.sharedMesh.uv[stitchSeams[i]];
         }
@@ -343,7 +347,7 @@ public class GeneratedLimb : MonoBehaviour
 
     }
 
-    public void Initialize(ArmInitializer initializer)
+    public void Initialize(LimbInitializer initializer)
     {
         m_initializer = initializer;
         SetInitialState();
@@ -355,6 +359,7 @@ public class GeneratedLimb : MonoBehaviour
     {
         if (prevLength != length || prevStartRadius != startRadius || prevEndRadius != endRadius)
         {
+            m_initializer = transform.root.GetComponent<LimbInitializer>();
             m_initializer?.Initialize();
         }
         if (target != null && initialized)

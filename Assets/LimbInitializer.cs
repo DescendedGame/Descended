@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class ArmInitializer : MonoBehaviour
+public class LimbInitializer : MonoBehaviour
 {
     public Color startColor;
     public Color endColor;
@@ -16,7 +16,6 @@ public class ArmInitializer : MonoBehaviour
     public void Initialize()
     {
         InitializeRecursively(transform);
-        InitializeRecursively2(transform);
         StitchRecursively(transform);
     }
 
@@ -49,19 +48,6 @@ public class ArmInitializer : MonoBehaviour
         for (int i = 0; i < current.childCount; i++)
         {
             ColorRecursively(current.GetChild(i));
-        }
-    }
-
-    public void InitializeRecursively2(Transform current)
-    {
-        DynamicLimb generator = current.GetComponent<DynamicLimb>();
-        if (generator != null)
-        {
-            generator.Initialize(this);
-        }
-        for (int i = 0; i < current.childCount; i++)
-        {
-            InitializeRecursively2(current.GetChild(i));
         }
     }
 
