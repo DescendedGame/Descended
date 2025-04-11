@@ -72,8 +72,16 @@ public class Vein : MonoBehaviour
     //    //}
     //}
 
-    private void Update()
+    private void Awake()
     {
+        if (GetComponent<MeshFilter>().sharedMesh == null) GetComponent<MeshFilter>().mesh = new Mesh();
+        Generate(target.position, 1, 0.1f, m_rotation, true, EndType.None, EndType.None);
+    }
+
+    private void OnValidate()
+    {
+        if (target == null) return;
+        if (GetComponent<MeshFilter>().sharedMesh == null) GetComponent<MeshFilter>().mesh = new Mesh();
         Generate(target.position, 1, 0.1f, m_rotation, true, EndType.None, EndType.None);
     }
 
@@ -132,7 +140,7 @@ public class Vein : MonoBehaviour
 
         CorrectNormalsForScale(normals, vertices);
 
-        Mesh mesh = GetComponent<MeshFilter>().mesh;
+        Mesh mesh = GetComponent<MeshFilter>().sharedMesh;
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.normals = normals;
