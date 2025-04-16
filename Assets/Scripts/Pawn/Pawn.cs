@@ -7,7 +7,6 @@ using UnityEngine;
 public class Pawn : Attackable
 {
     [SerializeField] PawnProperties m_properties;
-
     [SerializeField] protected Brain m_brain;
     [SerializeField] ParticleSystem m_glitter;
 
@@ -24,6 +23,8 @@ public class Pawn : Attackable
     protected override void Awake()
     {
         base.Awake();
+
+        m_properties.bodyParts = GetComponentsInChildren<BodyPart>(); // This should already be in place when the character is created.
 
         m_brain.Initialize(m_properties);
 

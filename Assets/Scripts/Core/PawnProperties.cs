@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ public class PawnProperties
     public Transform actionPoint;
 
     /// <summary>
-    /// The tool types that should be readied the pawn, can be 5.
+    /// A data item that contains all the available tools in the game.
     /// </summary>
     public AllTools toolStorage;
 
@@ -64,6 +63,11 @@ public class PawnProperties
         get { return tools[selectedToolIndex]; }
         private set { }
     }
+
+    /// <summary>
+    /// All the body parts of this pawn. Should maybe be kept elsewhere.
+    /// </summary>
+    public BodyPart[] bodyParts;
 }
 
 /// <summary>

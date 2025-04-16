@@ -26,6 +26,12 @@ public class ToppledPawnState : PawnState
             return PawnStateType.Idle;
         }
         timeToRaise -= Time.deltaTime;
+
+        for (int i = 0; i < m_properties.bodyParts.Length; i++)
+        {
+            m_properties.bodyParts[i].Toppled();
+        }
+
         return stateType;
     }
 

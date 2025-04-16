@@ -28,7 +28,7 @@ public class HumanArm : BodyLinkage
         initialForearmRotation = Quaternion.identity;
     }
 
-    private void Update()
+    public override void Idle()
     {
         shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
 

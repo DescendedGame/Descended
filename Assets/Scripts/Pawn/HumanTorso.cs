@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HumanTorso : BodyLinkage
+public class HumanTorso : BodyPart
 {
     public bool isRight = true;
 
@@ -8,18 +8,7 @@ public class HumanTorso : BodyLinkage
     [SerializeField] Transform middleTorso;
     [SerializeField] Transform lowerTorso;
 
-    Quaternion initialUpperRotation;
-    Quaternion initialMiddleRotation;
-    Quaternion initialLowerRotation;
-
-    private void Awake()
-    {
-        initialUpperRotation = Quaternion.identity;
-        initialMiddleRotation = Quaternion.identity;
-        initialLowerRotation = Quaternion.identity;
-    }
-
-    private void Update()
+    public override void Idle()
     {
         float upperRotationSin = WaveVariables.sinTimeRushQuarter;
         float middleRotationSin = WaveVariables.sinTime;

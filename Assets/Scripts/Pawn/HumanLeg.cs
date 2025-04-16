@@ -29,7 +29,7 @@ public class HumanLeg : BodyLinkage
         initialFootRotation = Quaternion.identity;
     }
 
-    private void Update()
+    public override void Idle()
     {
         if (isRight)
         {

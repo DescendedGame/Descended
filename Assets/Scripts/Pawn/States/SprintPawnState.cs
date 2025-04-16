@@ -31,6 +31,12 @@ public class SprintPawnState : PawnState
         }
 
         UpdateRotation();
+
+        for (int i = 0; i < m_properties.bodyParts.Length; i++)
+        {
+            m_properties.bodyParts[i].Sprint();
+        }
+
         return stateType;
     }
     protected override void UpdateRotation()
