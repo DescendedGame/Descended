@@ -16,12 +16,24 @@ public class HumanoidBodyCreator : MonoBehaviour
     public float waist;
     public float bellyLength;
     public float shoulderWidth;
+    public float shoulderSize;
+    public float armLength;
+    public float elbowSize;
+    public float forearmLength;
+    public float wristSize;
 
     public float upperHipWidth;
     public float upperHipRadius;
     public float lowerHipRadius;
     public float hipLength;
     public float hipOutRotation;
+
+    public float thighLength;
+    public float kneeRadius;
+    public float upperCalfLength;
+    public float calfRadius;
+    public float lowerCalfLength;
+    public float ankleRadius;
 
     public Color skinColor;
 
@@ -139,9 +151,81 @@ public class HumanoidBodyCreator : MonoBehaviour
         sticher.Initialize();
         //----------------------------------------------------------------------------
 
-        //Shoulders
+        //Shoulders and arms
         //----------------------------------------------------------------------------
+        go = new GameObject("LeftShoulder");
+        go.transform.SetParent(atlas.transform, false);
+        go.transform.localPosition = atlasEnd - Vector3.right * torsoWidth;
+        go.transform.localRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
+        GeneratedLimb leftShoulder = go.AddComponent<GeneratedLimb>();
+        leftShoulder.length = shoulderWidth;
+        leftShoulder.startRadius = torsoDepth;
+        leftShoulder.endRadius = shoulderSize;
+        leftShoulder.mat = new Material(basicInGameObject);
+        leftShoulder.startColor = skinColor;
+        leftShoulder.endColor = skinColor;
+        leftShoulder.Initialize();
 
+        go = new GameObject("RightShoulder");
+        go.transform.SetParent(atlas.transform, false);
+        go.transform.localPosition = atlasEnd + Vector3.right * torsoWidth;
+        go.transform.localRotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
+        GeneratedLimb rightShoulder = go.AddComponent<GeneratedLimb>();
+        rightShoulder.length = shoulderWidth;
+        rightShoulder.startRadius = torsoDepth;
+        rightShoulder.endRadius = shoulderSize;
+        rightShoulder.mat = new Material(basicInGameObject);
+        rightShoulder.startColor = skinColor;
+        rightShoulder.endColor = skinColor;
+        rightShoulder.Initialize();
+
+        go = new GameObject("LeftArm");
+        go.transform.SetParent(leftShoulder.transform, false);
+        GeneratedLimb leftArm = go.AddComponent<GeneratedLimb>();
+        leftArm.snapToParent = true;
+        leftArm.length = armLength;
+        leftArm.startRadius = shoulderSize;
+        leftArm.endRadius = elbowSize;
+        leftArm.mat = new Material(basicInGameObject);
+        leftArm.startColor = skinColor;
+        leftArm.endColor = skinColor;
+        leftArm.Initialize();
+
+        go = new GameObject("RightArm");
+        go.transform.SetParent(rightShoulder.transform, false);
+        GeneratedLimb rightArm = go.AddComponent<GeneratedLimb>();
+        rightArm.snapToParent = true;
+        rightArm.length = armLength;
+        rightArm.startRadius = shoulderSize;
+        rightArm.endRadius = elbowSize;
+        rightArm.mat = new Material(basicInGameObject);
+        rightArm.startColor = skinColor;
+        rightArm.endColor = skinColor;
+        rightArm.Initialize();
+
+        go = new GameObject("LeftForearm");
+        go.transform.SetParent(leftArm.transform, false);
+        GeneratedLimb leftForearm = go.AddComponent<GeneratedLimb>();
+        leftForearm.snapToParent = true;
+        leftForearm.length = forearmLength;
+        leftForearm.startRadius = elbowSize;
+        leftForearm.endRadius = wristSize;
+        leftForearm.mat = new Material(basicInGameObject);
+        leftForearm.startColor = skinColor;
+        leftForearm.endColor = skinColor;
+        leftForearm.Initialize();
+
+        go = new GameObject("RightForearm");
+        go.transform.SetParent(rightArm.transform, false);
+        GeneratedLimb rightForearm = go.AddComponent<GeneratedLimb>();
+        rightForearm.snapToParent = true;
+        rightForearm.length = forearmLength;
+        rightForearm.startRadius = elbowSize;
+        rightForearm.endRadius = wristSize;
+        rightForearm.mat = new Material(basicInGameObject);
+        rightForearm.startColor = skinColor;
+        rightForearm.endColor = skinColor;
+        rightForearm.Initialize();
 
         //----------------------------------------------------------------------------
 
@@ -195,6 +279,81 @@ public class HumanoidBodyCreator : MonoBehaviour
 
         //--------------------------------------------------------------------------------
 
+        //Legs
+        //------------------------------------------------------------------------------
+        go = new GameObject("LeftThigh");
+        go.transform.SetParent(leftHip.transform, false);
+        GeneratedLimb leftThigh = go.AddComponent<GeneratedLimb>();
+        leftThigh.snapToParent = true;
+        leftThigh.length = thighLength;
+        leftThigh.startRadius = lowerHipRadius;
+        leftThigh.endRadius = kneeRadius;
+        leftThigh.mat = new Material(basicInGameObject);
+        leftThigh.startColor = skinColor;
+        leftThigh.endColor = skinColor;
+        leftThigh.Initialize();
+
+        go = new GameObject("RightThigh");
+        go.transform.SetParent(rightHip.transform, false);
+        GeneratedLimb rightThigh = go.AddComponent<GeneratedLimb>();
+        rightThigh.snapToParent = true;
+        rightThigh.length = thighLength;
+        rightThigh.startRadius = lowerHipRadius;
+        rightThigh.endRadius = kneeRadius;
+        rightThigh.mat = new Material(basicInGameObject);
+        rightThigh.startColor = skinColor;
+        rightThigh.endColor = skinColor;
+        rightThigh.Initialize();
+
+        go = new GameObject("LeftUpperCalf");
+        go.transform.SetParent(leftThigh.transform, false);
+        GeneratedLimb leftUpperCalf = go.AddComponent<GeneratedLimb>();
+        leftUpperCalf.snapToParent = true;
+        leftUpperCalf.length = upperCalfLength;
+        leftUpperCalf.startRadius = kneeRadius;
+        leftUpperCalf.endRadius = calfRadius;
+        leftUpperCalf.mat = new Material(basicInGameObject);
+        leftUpperCalf.startColor = skinColor;
+        leftUpperCalf.endColor = skinColor;
+        leftUpperCalf.Initialize();
+
+        go = new GameObject("RightUpperCalf");
+        go.transform.SetParent(rightThigh.transform, false);
+        GeneratedLimb rightUpperCalf = go.AddComponent<GeneratedLimb>();
+        rightUpperCalf.snapToParent = true;
+        rightUpperCalf.length = upperCalfLength;
+        rightUpperCalf.startRadius = kneeRadius;
+        rightUpperCalf.endRadius = calfRadius;
+        rightUpperCalf.mat = new Material(basicInGameObject);
+        rightUpperCalf.startColor = skinColor;
+        rightUpperCalf.endColor = skinColor;
+        rightUpperCalf.Initialize();
+
+        go = new GameObject("LeftLowerCalf");
+        go.transform.SetParent(leftUpperCalf.transform, false);
+        GeneratedLimb leftLowerCalf = go.AddComponent<GeneratedLimb>();
+        leftLowerCalf.snapToParent = true;
+        leftLowerCalf.length = lowerCalfLength;
+        leftLowerCalf.startRadius = calfRadius;
+        leftLowerCalf.endRadius = ankleRadius;
+        leftLowerCalf.mat = new Material(basicInGameObject);
+        leftLowerCalf.startColor = skinColor;
+        leftLowerCalf.endColor = skinColor;
+        leftLowerCalf.Initialize();
+
+        go = new GameObject("RightLowerCalf");
+        go.transform.SetParent(rightUpperCalf.transform, false);
+        GeneratedLimb rightLowerCalf = go.AddComponent<GeneratedLimb>();
+        rightLowerCalf.snapToParent = true;
+        rightLowerCalf.length = lowerCalfLength;
+        rightLowerCalf.startRadius = calfRadius;
+        rightLowerCalf.endRadius = ankleRadius;
+        rightLowerCalf.mat = new Material(basicInGameObject);
+        rightLowerCalf.startColor = skinColor;
+        rightLowerCalf.endColor = skinColor;
+        rightLowerCalf.Initialize();
+
+        //------------------------------------------------------------------------------
 
         // Connect rib and hip with belly:
         //--------------------------------------------------------------------
