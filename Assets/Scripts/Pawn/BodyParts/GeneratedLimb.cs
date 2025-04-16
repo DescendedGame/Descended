@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class GeneratedLimb : MonoBehaviour
 {
     public bool renderHalf = false;
-    public bool snapToParent = true;
+    public bool snapToParent = false;
     public Transform target;
 
     public float startRadius;
@@ -18,7 +18,7 @@ public class GeneratedLimb : MonoBehaviour
     public Vector3 LastPoint;
     public Color startColor;
     public Color endColor;
-    [SerializeField] Material mat;
+    public Material mat;
 
     LimbInitializer m_initializer;
 
@@ -32,7 +32,9 @@ public class GeneratedLimb : MonoBehaviour
 
     public void Initialize()
     {
-
+        SetInitialState();
+        SetUpComponents();
+        CreateMesh();
     }
 
     void SetUpComponents()
@@ -50,7 +52,6 @@ public class GeneratedLimb : MonoBehaviour
         {
             length = Vector3.Distance(transform.position, target.position);
             transform.rotation = Quaternion.LookRotation(target.position - transform.position, transform.parent.up + target.up);
-            //transform.LookAt(target, transform.parent.up /*+ target.up*/);
         }
         if (startRadius < 0.001f) startRadius = 0.001f;
         if (endRadius < 0.001f) endRadius = 0.001f;
@@ -240,7 +241,7 @@ public class GeneratedLimb : MonoBehaviour
         initialized = true;
     }
 
-    void UpdateVertices()
+    public void UpdateVertices()
     {
         if (target != null)
         {

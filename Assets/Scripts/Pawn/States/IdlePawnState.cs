@@ -27,6 +27,7 @@ public class IdlePawnState : PawnState
 
         UpdateRotation();
 
+        // Move all body parts idly
         for(int i = 0; i < m_properties.bodyParts.Length; i++)
         {
             m_properties.bodyParts[i].Idle();

@@ -3,15 +3,15 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class BodyStitcher : MonoBehaviour
 {
-    [SerializeField] GeneratedLimb rightSide;
-    [SerializeField] GeneratedLimb leftSide;
+    public GeneratedLimb rightSide;
+    public GeneratedLimb leftSide;
 
     MeshRenderer skinRenderer;
     MeshFilter skinFilter;
     Mesh upperSkin;
     public Color startColor;
     public Color endColor;
-    [SerializeField] Material mat;
+    public Material mat;
 
     public void Initialize()
     {
