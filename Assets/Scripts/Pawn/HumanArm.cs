@@ -21,6 +21,8 @@ public class HumanArm : BodyLinkage
     public void Initialize(bool isRight, float shoulderWidth, float torsoDepth, float shoulderSize, Material basicInGameObject, Color skinColor, float armLength, float elbowSize
         ,float forearmLength, float wristSize)
     {
+
+
         GeneratedLimb t_shoulder = gameObject.AddComponent<GeneratedLimb>();
         t_shoulder.length = shoulderWidth;
         t_shoulder.startRadius = torsoDepth;
@@ -39,6 +41,7 @@ public class HumanArm : BodyLinkage
             rightOrLeft = "Left";
 
         GameObject go = new GameObject(rightOrLeft+"Arm");
+        go.layer = gameObject.layer;
         go.transform.SetParent(t_shoulder.transform, false);
         GeneratedLimb t_arm = go.AddComponent<GeneratedLimb>();
         t_arm.snapToParent = true;
@@ -52,6 +55,7 @@ public class HumanArm : BodyLinkage
         arm = t_arm.transform;
 
         go = new GameObject(rightOrLeft+"Forearm");
+        go.layer = gameObject.layer;
         go.transform.SetParent(t_arm.transform, false);
         GeneratedLimb t_forearm = go.AddComponent<GeneratedLimb>();
         t_forearm.snapToParent = true;
@@ -63,10 +67,7 @@ public class HumanArm : BodyLinkage
         t_forearm.endColor = skinColor;
         t_forearm.Initialize();
         forearm = t_forearm.transform;
-    }
 
-    private void Awake()
-    {
         if (isRight)
             initialShoulderRotation = Quaternion.LookRotation(Vector3.right, Vector3.forward);
         else
@@ -74,6 +75,7 @@ public class HumanArm : BodyLinkage
 
         initialArmRotation = Quaternion.identity;
         initialForearmRotation = Quaternion.identity;
+
     }
 
     public override void Idle()

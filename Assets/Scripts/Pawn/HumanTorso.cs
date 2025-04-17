@@ -4,6 +4,8 @@ public class HumanTorso : BodyPart
 {
     public bool isRight = true;
 
+    Quaternion targetRotation = Quaternion.identity;
+    public Transform head;
     [SerializeField] Transform upperTorso;
     [SerializeField] Transform middleTorso;
     [SerializeField] Transform lowerTorso;
@@ -16,30 +18,34 @@ public class HumanTorso : BodyPart
         float ribLength, float bellyLength, float waist, float upperHipWidth, float hipLength, float hipOutRotation, float upperHipRadius, float lowerHipRadius, Material basicInGameObject, Color skinColor)
     {
         upperTorso = transform;
-        GeneratedLimb atlas = gameObject.AddComponent<GeneratedLimb>();
-        atlas.transform.localRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
-        atlas.length = atlasLength;
-        atlas.startRadius = lowerNeckWidth;
-        atlas.endRadius = torsoDepth;
-        atlas.mat = new Material(basicInGameObject);
-        atlas.startColor = skinColor;
-        atlas.endColor = skinColor;
-        atlas.Initialize();
+        GameObject go = new GameObject("LowerNeck");
+        go.layer = gameObject.layer;
+        go.transform.SetParent(transform, false);
+        GeneratedLimb lowerNeck = go.AddComponent<GeneratedLimb>();
+        lowerNeck.transform.localRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
+        lowerNeck.length = atlasLength;
+        lowerNeck.startRadius = lowerNeckWidth;
+        lowerNeck.endRadius = torsoDepth;
+        lowerNeck.mat = new Material(basicInGameObject);
+        lowerNeck.startColor = skinColor;
+        lowerNeck.endColor = skinColor;
+        lowerNeck.Initialize();
 
         Vector3 atlasEnd = Vector3.forward * atlasLength;
 
         middleTorso = new GameObject("MiddleTorso").transform;
-        middleTorso.transform.SetParent(atlas.transform, false);
-        middleTorso.transform.localRotation = Quaternion.LookRotation(Vector3.up, Vector3.back);
-        middleTorso.transform.localPosition = Vector3.forward * (atlasLength + ribLength);
+        middleTorso.gameObject.layer = gameObject.layer;
+        middleTorso.transform.SetParent(transform.transform, false);
+        middleTorso.transform.localPosition = Vector3.down * (atlasLength + ribLength);
         lowerTorso = new GameObject("LowerTorso").transform;
         lowerTorso.transform.SetParent(middleTorso.transform, false);
         lowerTorso.transform.localPosition = Vector3.down * (bellyLength);
 
         //Ribs
         //---------------------------------------------------------------------------------------------------
-        GameObject go = new GameObject("LeftRibs");
-        go.transform.SetParent(atlas.transform, false);
+        go = new GameObject("LeftRibs");
+        go.layer = gameObject.layer;
+        go.transform.SetParent(lowerNeck.transform, false);
         go.transform.localPosition = atlasEnd - Vector3.right * torsoWidth;
         GeneratedLimb leftRib = go.AddComponent<GeneratedLimb>();
         leftRib.length = ribLength;
@@ -51,7 +57,8 @@ public class HumanTorso : BodyPart
         leftRib.Initialize();
 
         go = new GameObject("RightRibs");
-        go.transform.SetParent(atlas.transform, false);
+        go.layer = gameObject.layer;
+        go.transform.SetParent(lowerNeck.transform, false);
         go.transform.localPosition = atlasEnd + Vector3.right * torsoWidth;
         GeneratedLimb rightRib = go.AddComponent<GeneratedLimb>();
         rightRib.length = ribLength;
@@ -63,6 +70,7 @@ public class HumanTorso : BodyPart
         rightRib.Initialize();
 
         go = new GameObject("RibSkin");
+        go.layer = gameObject.layer;
         go.transform.SetParent(rightRib.transform, false);
         BodyStitcher sticher = go.AddComponent<BodyStitcher>();
         sticher.leftSide = leftRib;
@@ -78,6 +86,7 @@ public class HumanTorso : BodyPart
         //The hips will depend on what kind of lower body is desired.... but now just human.
 
         go = new GameObject("LeftHip");
+        go.layer = gameObject.layer;
         go.transform.SetParent(lowerTorso.transform, false);
         go.transform.localPosition = -Vector3.right * upperHipWidth;
         go.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-hipOutRotation, Vector3.forward) * Vector3.down, Vector3.forward);
@@ -91,6 +100,7 @@ public class HumanTorso : BodyPart
         leftHip.Initialize();
 
         go = new GameObject("RightHip");
+        go.layer = gameObject.layer;
         go.transform.SetParent(lowerTorso.transform, false);
         go.transform.localPosition = Vector3.right * upperHipWidth;
         go.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(hipOutRotation, Vector3.forward) * Vector3.down, Vector3.forward);
@@ -104,6 +114,7 @@ public class HumanTorso : BodyPart
         rightHip.Initialize();
 
         go = new GameObject("HipSkin");
+        go.layer = gameObject.layer;
         go.transform.SetParent(rightHip.transform, false);
         sticher = go.AddComponent<BodyStitcher>();
         sticher.leftSide = leftHip;
@@ -118,6 +129,7 @@ public class HumanTorso : BodyPart
         //--------------------------------------------------------------------
 
         go = new GameObject("LeftBelly");
+        go.layer = gameObject.layer;
         go.transform.SetParent(leftRib.transform, false);
         GeneratedLimb leftBelly = go.AddComponent<GeneratedLimb>();
         leftBelly.snapToParent = true;
@@ -131,6 +143,7 @@ public class HumanTorso : BodyPart
         leftBelly.UpdateVertices();
 
         go = new GameObject("RightBelly");
+        go.layer = gameObject.layer;
         go.transform.SetParent(rightRib.transform, false);
         GeneratedLimb rightBelly = go.AddComponent<GeneratedLimb>();
         rightBelly.snapToParent = true;
@@ -144,6 +157,7 @@ public class HumanTorso : BodyPart
         rightBelly.UpdateVertices();
 
         go = new GameObject("BellySkin");
+        go.layer = gameObject.layer;
         go.transform.SetParent(rightBelly.transform, false);
         sticher = go.AddComponent<BodyStitcher>();
         sticher.leftSide = leftBelly;
@@ -160,11 +174,15 @@ public class HumanTorso : BodyPart
 
     public override void Idle()
     {
+        float angleToHead = Quaternion.Angle(targetRotation, head.rotation);
+        if (angleToHead > 45) targetRotation = Quaternion.RotateTowards(targetRotation, head.rotation, angleToHead - 45);
+
         float upperRotationSin = WaveVariables.sinTimeRushQuarter;
         float middleRotationSin = WaveVariables.sinTime;
         float lowerRotationSin = -WaveVariables.sinTimeRushQuarter;
 
-        upperTorso.localRotation = Quaternion.RotateTowards(upperTorso.localRotation, Quaternion.AngleAxis(10 * upperRotationSin, Vector3.right), Time.deltaTime * 360);
+        //upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, targetRotation, Time.deltaTime * 360);
+        upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, targetRotation*Quaternion.AngleAxis(10 * upperRotationSin, Vector3.right), Time.deltaTime * 360);
         middleTorso.localRotation = Quaternion.RotateTowards(middleTorso.localRotation, Quaternion.AngleAxis(10 * middleRotationSin, Vector3.right), Time.deltaTime * 360);
         lowerTorso.localRotation = Quaternion.RotateTowards(lowerTorso.localRotation, Quaternion.AngleAxis(20 * lowerRotationSin, Vector3.right), Time.deltaTime * 360);
     }

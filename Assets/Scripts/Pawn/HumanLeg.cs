@@ -43,6 +43,7 @@ public class HumanLeg : BodyLinkage
             rightOrLeft = "Left";
 
         GameObject go = new GameObject(rightOrLeft + "UpperCalf");
+        go.layer = gameObject.layer;
         go.transform.SetParent(t_thigh.transform, false);
         GeneratedLimb t_upperCalf = go.AddComponent<GeneratedLimb>();
         t_upperCalf.snapToParent = true;
@@ -56,6 +57,7 @@ public class HumanLeg : BodyLinkage
         calf = t_upperCalf.transform;
 
         go = new GameObject(rightOrLeft + "LowerCalf");
+        go.layer = gameObject.layer;
         go.transform.SetParent(t_upperCalf.transform, false);
         GeneratedLimb t_lowerCalf = go.AddComponent<GeneratedLimb>();
         t_lowerCalf.snapToParent = true;

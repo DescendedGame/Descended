@@ -1,9 +1,10 @@
 using UnityEngine;
+using Unity.Netcode;
 
 /// <summary>
 /// Inherit from, or add this as a component, to create an object that can take damage.
 /// </summary>
-public class Attackable : MonoBehaviour
+public class Attackable : NetworkBehaviour
 {
     [SerializeField] protected float maxHealth = 100;
 

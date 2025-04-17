@@ -68,6 +68,11 @@ public class PawnProperties
     /// All the body parts of this pawn. Should maybe be kept elsewhere.
     /// </summary>
     public BodyPart[] bodyParts;
+
+    /// <summary>
+    /// Where to place camera for player, from where to raycast vision for npc
+    /// </summary>
+    public Transform eyeTransform;
 }
 
 /// <summary>

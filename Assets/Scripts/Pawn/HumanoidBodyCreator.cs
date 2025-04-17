@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HumanoidBodyCreator : MonoBehaviour
+public class HumanoidBodyCreator : BodyCreator
 {
     public Material basicInGameObject;
     public GameObject headPrefab;
@@ -45,22 +45,25 @@ public class HumanoidBodyCreator : MonoBehaviour
         Pentapus,
     }
 
-    private void Awake()
+    public override void CreateBody(out Transform atlas, out Transform cameraTransform)
     {
-        CreateNeckAndHead();
-        CreateTorso(out Transform atlas, out Transform leftHip, out Transform rightHip);
+        CreateTorso(out atlas, out Transform leftHip, out Transform rightHip);
         CreateArms(atlas);
         CreateLegs(leftHip, rightHip);
+        cameraTransform = CreateNeckAndHead();
+        cameraTransform.parent.gameObject.AddComponent<HumanNeck>().Initialize(cameraTransform, atlas);
+        atlas.GetComponent<HumanTorso>().head = cameraTransform;
     }
 
-    void CreateNeckAndHead()
+    Transform CreateNeckAndHead()
     {
-        CreateHead(CreateUpperNeck());
+        return CreateHead(CreateUpperNeck());
     }
 
     GeneratedLimb CreateUpperNeck()
     {
         GameObject go = new GameObject("Neck");
+        go.layer = gameObject.layer;
         go.transform.SetParent(transform, false);
         GeneratedLimb upperNeck = go.AddComponent<GeneratedLimb>();
         upperNeck.transform.localRotation = Quaternion.LookRotation(Vector3.up, -Vector3.forward);
@@ -77,6 +80,7 @@ public class HumanoidBodyCreator : MonoBehaviour
     Transform CreateHead(GeneratedLimb upperNeck)
     {
         GameObject head = Instantiate(headPrefab);
+        head.layer = gameObject.layer;
         head.transform.SetParent(upperNeck.transform, false);
         head.transform.localPosition = Vector3.forward * upperNeck.length;
         head.transform.localRotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
@@ -94,15 +98,17 @@ public class HumanoidBodyCreator : MonoBehaviour
     void CreateArms(Transform atlas)
     {
         GameObject go = new GameObject("LeftShoulder");
+        go.layer = gameObject.layer;
         go.transform.SetParent(atlas.transform, false);
-        go.transform.localPosition = Vector3.forward * atlasLength - Vector3.right * torsoWidth;
+        go.transform.localPosition = Vector3.down * atlasLength - Vector3.right * torsoWidth;
         go.transform.localRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
         HumanArm leftArm = go.AddComponent<HumanArm>();
         leftArm.Initialize(false, shoulderWidth, torsoDepth, shoulderSize, basicInGameObject, skinColor, armLength, elbowSize, forearmLength, wristSize);
 
         go = new GameObject("RightShoulder");
+        go.layer = gameObject.layer;
         go.transform.SetParent(atlas.transform, false);
-        go.transform.localPosition = Vector3.forward * atlasLength + Vector3.right * torsoWidth;
+        go.transform.localPosition = Vector3.down * atlasLength + Vector3.right * torsoWidth;
         go.transform.localRotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
         HumanArm rightArm = go.AddComponent<HumanArm>();
         rightArm.Initialize(true, shoulderWidth, torsoDepth, shoulderSize, basicInGameObject, skinColor, armLength, elbowSize, forearmLength, wristSize);
@@ -113,12 +119,14 @@ public class HumanoidBodyCreator : MonoBehaviour
         //Legs
         //------------------------------------------------------------------------------
         GameObject go = new GameObject("LeftThigh");
+        go.layer = gameObject.layer;
         go.transform.SetParent(leftHip.transform, false);
         go.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
         HumanLeg leftLeg = go.AddComponent<HumanLeg>();
         leftLeg.Initialize(false, thighLength, lowerHipRadius, kneeRadius, upperCalfLength, calfRadius, lowerCalfLength, ankleRadius, basicInGameObject, skinColor);
 
         go = new GameObject("RightThigh");
+        go.layer = gameObject.layer;
         go.transform.SetParent(rightHip.transform, false);
         go.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
         HumanLeg rightLeg = go.AddComponent<HumanLeg>();
@@ -131,8 +139,8 @@ public class HumanoidBodyCreator : MonoBehaviour
         //Torso
         //-----------------------------------------------------
         GameObject go = new GameObject("Atlas");
+        go.layer = gameObject.layer;
         go.transform.SetParent(transform, false);
-        go.transform.localRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
         HumanTorso atlas = go.AddComponent<HumanTorso>();
         atlasTransform = atlas.transform;
 
@@ -145,14 +153,13 @@ public class HumanoidBodyCreator : MonoBehaviour
         //----------------------------------------------------------------------------
 
         GameObject middleTorso = new GameObject("MiddleTorso");
+        middleTorso.layer = gameObject.layer;
         middleTorso.transform.SetParent(atlas.transform, false);
         middleTorso.transform.localRotation = Quaternion.LookRotation(Vector3.up, Vector3.back);
         middleTorso.transform.localPosition = Vector3.forward * (atlasLength + ribLength);
         GameObject lowerTorso = new GameObject("LowerTorso");
+        lowerTorso.layer = gameObject.layer;
         lowerTorso.transform.SetParent(middleTorso.transform, false);
         lowerTorso.transform.localPosition = Vector3.down * (bellyLength);
-
-        
-
     }
 }

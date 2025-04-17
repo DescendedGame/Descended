@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class PlayerInput : Brain
 {
+    public GameObject playerCamera;
+
     public KeyCode k_forwards = KeyCode.W;
     public KeyCode k_rightwards = KeyCode.D;
     public KeyCode k_backwards = KeyCode.S;
@@ -24,6 +26,12 @@ public class PlayerInput : Brain
     public KeyCode k_sprint = KeyCode.LeftShift;
     public KeyCode k_balance = KeyCode.LeftControl;
 
+    public override void Initialize(PawnProperties properties)
+    {
+        base.Initialize(properties);
+        playerCamera.transform.SetParent(m_properties.eyeTransform,false);
+        playerCamera.transform.localPosition = new Vector3(0,0.1f,0.1f);
+    }
     private void Awake()
     {
         Cursor.visible = false;

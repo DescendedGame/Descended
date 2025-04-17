@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &930154576705929045
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4485835043967422287, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_Name
+      value: HumanoidPawnPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542639738857407839, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2777704361
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4485835043967422287, guid: 95397fc1850165d488d02d28bf7d9ac7,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 8205738508129064437}
+  m_SourcePrefab: {fileID: 100100000, guid: 95397fc1850165d488d02d28bf7d9ac7, type: 3}
+--- !u!1 &3650292414262800410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4485835043967422287, guid: 95397fc1850165d488d02d28bf7d9ac7,
+    type: 3}
+  m_PrefabInstance: {fileID: 930154576705929045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8205738508129064437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650292414262800410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3ce99756ffe2d439770eafbfd82e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicInGameObject: {fileID: 2100000, guid: a67c588f3b2380e4aa548fda3fd941c9, type: 2}
+  headPrefab: {fileID: 919132149155446097, guid: d57b900f1513d5d4f8969b97081e4ba7,
+    type: 3}
+  upperNeckLength: 0.1
+  upperNeckWidth: 0.05
+  lowerNeckWidth: 0.08
+  atlasLength: 0.1
+  torsoDepth: 0.12
+  torsoWidth: 0.05
+  ribLength: 0.2
+  waist: 0.08
+  bellyLength: 0.15
+  shoulderWidth: 0.1
+  shoulderSize: 0.08
+  armLength: 0.3
+  elbowSize: 0.04
+  forearmLength: 0.25
+  wristSize: 0.025
+  upperHipWidth: 0.05
+  upperHipRadius: 0.14
+  lowerHipRadius: 0.15
+  hipLength: 0.09
+  hipOutRotation: 20
+  thighLength: 0.4
+  kneeRadius: 0.05
+  upperCalfLength: 0.1
+  calfRadius: 0.06
+  lowerCalfLength: 0.25
+  ankleRadius: 0.03
+  skinColor: {r: 0.65882355, g: 0.49411765, b: 0.4862745, a: 0}

@@ -8,7 +8,7 @@ public class Pawn : Attackable
 {
     [SerializeField] PawnProperties m_properties;
     [SerializeField] protected Brain m_brain;
-    [SerializeField] ParticleSystem m_glitter;
+    //[SerializeField] ParticleSystem m_glitter;
 
     /// <summary>
     /// This will call its Updated() in Update(). Can result in a change then, or for example when this pawn takes damage.
@@ -24,8 +24,10 @@ public class Pawn : Attackable
     {
         base.Awake();
 
-        m_properties.bodyParts = GetComponentsInChildren<BodyPart>(); // This should already be in place when the character is created.
-
+        GetComponent<BodyCreator>().CreateBody(out m_properties.m_pivot, out m_properties.eyeTransform);
+        m_properties.actionPoint = m_properties.eyeTransform;
+        m_properties.bodyParts = GetComponentsInChildren<BodyPart>(); // This should already be in place when the character is created. Or maybe this is simpler (but less optimized)
+        m_brain = GetComponent<Brain>();
         m_brain.Initialize(m_properties);
 
         InitializeTools();
@@ -53,8 +55,8 @@ public class Pawn : Attackable
     protected virtual void Update()
     {
         // All pawns trigger small bioluminescent things around them when they move.
-        var emission = m_glitter.emission;
-        emission.rateOverTime = m_properties.m_physics.linearVelocity.magnitude * 5;
+        //var emission = m_glitter.emission;
+        //emission.rateOverTime = m_properties.m_physics.linearVelocity.magnitude * 5;
 
         m_brain.UpdateCommands();
 
@@ -142,11 +144,11 @@ public abstract class PawnState
     protected virtual void UpdateRotation()
     {
         Vector3 normalizedLook = m_brain.commands.look.normalized;
-        m_properties.m_pivot.rotation *= Quaternion.AngleAxis(m_brain.commands.look.magnitude, Vector3.right * normalizedLook.y + Vector3.up * normalizedLook.x);
+        m_properties.eyeTransform.rotation *= Quaternion.AngleAxis(m_brain.commands.look.magnitude, Vector3.right * normalizedLook.y + Vector3.up * normalizedLook.x);
 
         m_properties.roll_speed += m_brain.commands.roll * m_properties.roll_acc * Time.deltaTime;
         m_properties.roll_speed = m_properties.roll_speed * Mathf.Pow(0.5f, Time.deltaTime * 18);
-        m_properties.m_pivot.rotation *= Quaternion.AngleAxis(m_properties.roll_speed * Time.deltaTime, Vector3.forward);
+        m_properties.eyeTransform.rotation *= Quaternion.AngleAxis(m_properties.roll_speed * Time.deltaTime, Vector3.forward);
     }
 
     /// <summary>
@@ -154,9 +156,9 @@ public abstract class PawnState
     /// </summary>
     public virtual void FixedUpdate()
     {
-        m_properties.m_physics.AddForce((m_properties.m_pivot.forward * m_brain.commands.forwards + 
-            m_properties.m_pivot.right * m_brain.commands.rightwards + 
-            m_properties.m_pivot.up * m_brain.commands.upwards).normalized * 
+        m_properties.m_physics.AddForce((m_properties.eyeTransform.forward * m_brain.commands.forwards + 
+            m_properties.eyeTransform.right * m_brain.commands.rightwards + 
+            m_properties.eyeTransform.up * m_brain.commands.upwards).normalized * 
             m_properties.m_swim_force);
     }
 
