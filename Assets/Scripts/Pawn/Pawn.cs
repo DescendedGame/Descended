@@ -27,6 +27,7 @@ public class Pawn : Attackable
         GetComponent<BodyCreator>().CreateBody(out m_properties.m_pivot, out m_properties.eyeTransform);
         m_properties.actionPoint = m_properties.eyeTransform;
         m_properties.bodyParts = GetComponentsInChildren<BodyPart>(); // This should already be in place when the character is created. Or maybe this is simpler (but less optimized)
+        RememberBodyTransforms();
         m_brain = GetComponent<Brain>();
         m_brain.Initialize(m_properties);
 
@@ -52,13 +53,14 @@ public class Pawn : Attackable
         }
     }
 
-    protected virtual void Update()
+    protected virtual void LateUpdate()
     {
         // All pawns trigger small bioluminescent things around them when they move.
         //var emission = m_glitter.emission;
         //emission.rateOverTime = m_properties.m_physics.linearVelocity.magnitude * 5;
 
         m_brain.UpdateCommands();
+
 
         while (true)
         {
@@ -67,7 +69,19 @@ public class Pawn : Attackable
 
             SetState(nextState);
         }
+
+        // Remember the orientation of body parts so they can move smoothly towards their parent next frame if they want to.
+        RememberBodyTransforms();
     }
+
+    void RememberBodyTransforms()
+    {
+        for(int i = 0; i < m_properties.bodyParts.Length; i++)
+        {
+            m_properties.bodyParts[i].RememberTransform();
+        }
+    }
+
     void SetState(PawnStateType nextState)
     {
         currentState.Exit();

@@ -1,14 +1,25 @@
+using Codice.CM.Client.Differences;
 using UnityEngine;
 
 public class HumanTorso : BodyPart
 {
     public bool isRight = true;
 
-    Quaternion targetRotation = Quaternion.identity;
     public Transform head;
     [SerializeField] Transform upperTorso;
     [SerializeField] Transform middleTorso;
     [SerializeField] Transform lowerTorso;
+
+    Quaternion upperTorsoTargetRotation = Quaternion.identity;
+    Quaternion middleTorsoTargetRotation = Quaternion.identity;
+    Quaternion lowerTorsoTargetRotation = Quaternion.identity;
+
+    Quaternion unalteredUpperTorsoRotation;
+    Vector3 unalteredUpperTorsoPosition;
+    Quaternion unalteredMiddleTorsoRotation;
+    Vector3 unalteredMiddleTorsoPosition;
+    Quaternion unalteredLowerTorsoRotation;
+    Vector3 unalteredLowerTorsoPosition;
 
     /// <summary>
     /// Returns left and right slots to be used for leg placement.
@@ -172,19 +183,67 @@ public class HumanTorso : BodyPart
         return (leftHip.transform, rightHip.transform);
     }
 
-    public override void Idle()
+    public override void RememberTransform()
     {
-        float angleToHead = Quaternion.Angle(targetRotation, head.rotation);
-        if (angleToHead > 45) targetRotation = Quaternion.RotateTowards(targetRotation, head.rotation, angleToHead - 45);
+        unalteredUpperTorsoPosition = upperTorso.position;
+        //unalteredUpperTorsoRotation = unanimatedUpperTorsoRotation;
+        unalteredMiddleTorsoPosition = middleTorso.position;
+        //unalteredMiddleTorsoRotation = unanimatedMiddleTorsoRotation;
+        unalteredLowerTorsoPosition = lowerTorso.position;
+        //unalteredLowerTorsoRotation = unanimatedLowerTorsoRotation;
+    }
+
+    public override void Idle(Vector3 movementDirection, ActionDirection actionDirection)
+    {
+
+        float angleToHead = Quaternion.Angle(upperTorsoTargetRotation, head.rotation);
+        if (angleToHead > 45) upperTorsoTargetRotation = Quaternion.RotateTowards(upperTorsoTargetRotation, head.rotation, angleToHead - 45);
 
         float upperRotationSin = WaveVariables.sinTimeRushQuarter;
         float middleRotationSin = WaveVariables.sinTime;
         float lowerRotationSin = -WaveVariables.sinTimeRushQuarter;
 
         //upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, targetRotation, Time.deltaTime * 360);
-        upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, targetRotation*Quaternion.AngleAxis(10 * upperRotationSin, Vector3.right), Time.deltaTime * 360);
-        middleTorso.localRotation = Quaternion.RotateTowards(middleTorso.localRotation, Quaternion.AngleAxis(10 * middleRotationSin, Vector3.right), Time.deltaTime * 360);
-        lowerTorso.localRotation = Quaternion.RotateTowards(lowerTorso.localRotation, Quaternion.AngleAxis(20 * lowerRotationSin, Vector3.right), Time.deltaTime * 360);
+
+
+
+        upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, upperTorsoTargetRotation * Quaternion.AngleAxis(10 * upperRotationSin, Vector3.right), Time.deltaTime * 360);
+
+
+        //unanimatedMiddleTorsoRotation *= FollowParentSmoothly(middleTorso, unalteredMiddleTorsoPosition, unalteredMiddleTorsoRotation, Vector3.down, 2);
+
+        //Vector3 t_vectorToLast = unalteredMiddleTorsoPosition + middleTorsoTargetRotation * Vector3.down - middleTorso.position;
+        //Vector3 t_vectorToCurrent = middleTorsoTargetRotation * Vector3.down;
+        //middleTorsoTargetRotation = Quaternion.FromToRotation(t_vectorToCurrent, t_vectorToLast) * middleTorsoTargetRotation;
+
+        middleTorsoTargetRotation = FollowParentSmoothly(unalteredMiddleTorsoPosition, middleTorsoTargetRotation, middleTorso.position, Vector3.down, 2);
+        middleTorsoTargetRotation = Quaternion.RotateTowards(middleTorsoTargetRotation, upperTorso.rotation, Time.deltaTime * 10);
+        float t_angle = Quaternion.Angle(middleTorsoTargetRotation, upperTorso.rotation);
+        if (t_angle > 25)
+        {
+            middleTorsoTargetRotation = Quaternion.RotateTowards(middleTorsoTargetRotation, upperTorso.rotation, t_angle-25);
+        }
+
+        middleTorso.rotation = Quaternion.RotateTowards(middleTorso.rotation, middleTorsoTargetRotation * Quaternion.AngleAxis(10 * middleRotationSin, Vector3.right), Time.deltaTime * 360);
+
+
+        //unanimatedLowerTorsoRotation *= FollowParentSmoothly(lowerTorso, unalteredLowerTorsoPosition, unalteredLowerTorsoRotation, Vector3.down, 2);
+
+        lowerTorsoTargetRotation = FollowParentSmoothly(unalteredLowerTorsoPosition, lowerTorsoTargetRotation, lowerTorso.position, Vector3.down, 2);
+        lowerTorsoTargetRotation = Quaternion.RotateTowards(lowerTorsoTargetRotation, middleTorso.rotation, Time.deltaTime * 10);
+        t_angle = Quaternion.Angle(lowerTorsoTargetRotation, middleTorso.rotation);
+        if (t_angle > 25)
+        {
+            lowerTorsoTargetRotation = Quaternion.RotateTowards(lowerTorsoTargetRotation, middleTorso.rotation, t_angle - 25);
+        }
+
+        lowerTorso.rotation = Quaternion.RotateTowards(lowerTorso.rotation, lowerTorsoTargetRotation * Quaternion.AngleAxis(20 * lowerRotationSin, Vector3.right), Time.deltaTime * 360);
+
+
+        // If moving...
+        //FollowParentSmoothly(middleTorso, unalteredMiddleTorsoPosition, unalteredMiddleTorsoRotation, Vector3.down, 2);
+        //FollowParentSmoothly(lowerTorso, unalteredLowerTorsoPosition, unalteredLowerTorsoRotation, Vector3.down, 2);
+
     }
 
 }

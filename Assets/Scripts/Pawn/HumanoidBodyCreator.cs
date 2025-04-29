@@ -145,21 +145,21 @@ public class HumanoidBodyCreator : BodyCreator
         atlasTransform = atlas.transform;
 
         (leftHip, rightHip) = atlas.Initialize(atlasLength, lowerNeckWidth, torsoDepth, torsoWidth, ribLength, bellyLength, waist, upperHipWidth, hipLength, hipOutRotation, upperHipRadius, lowerHipRadius, basicInGameObject, skinColor); ;
-        //------------------------------------------------------
+        ////------------------------------------------------------
 
-        //Arms
-        //----------------------------------------------------------------------------
+        ////Arms
+        ////----------------------------------------------------------------------------
         
-        //----------------------------------------------------------------------------
+        ////----------------------------------------------------------------------------
 
-        GameObject middleTorso = new GameObject("MiddleTorso");
-        middleTorso.layer = gameObject.layer;
-        middleTorso.transform.SetParent(atlas.transform, false);
-        middleTorso.transform.localRotation = Quaternion.LookRotation(Vector3.up, Vector3.back);
-        middleTorso.transform.localPosition = Vector3.forward * (atlasLength + ribLength);
-        GameObject lowerTorso = new GameObject("LowerTorso");
-        lowerTorso.layer = gameObject.layer;
-        lowerTorso.transform.SetParent(middleTorso.transform, false);
-        lowerTorso.transform.localPosition = Vector3.down * (bellyLength);
+        //GameObject middleTorso = new GameObject("MiddleTorso");
+        //middleTorso.layer = gameObject.layer;
+        //middleTorso.transform.SetParent(atlas.transform, false);
+        //middleTorso.transform.localRotation = Quaternion.LookRotation(Vector3.up, Vector3.back);
+        //middleTorso.transform.localPosition = Vector3.forward * (atlasLength + ribLength);
+        //GameObject lowerTorso = new GameObject("LowerTorso");
+        //lowerTorso.layer = gameObject.layer;
+        //lowerTorso.transform.SetParent(middleTorso.transform, false);
+        //lowerTorso.transform.localPosition = Vector3.down * (bellyLength);
     }
 }

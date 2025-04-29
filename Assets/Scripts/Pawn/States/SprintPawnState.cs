@@ -34,7 +34,7 @@ public class SprintPawnState : PawnState
 
         for (int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].Sprint();
+            m_properties.bodyParts[i].Sprint(m_brain.GetDesiredMovementDirection(), ActionDirection.Down);
         }
 
         return stateType;

@@ -53,6 +53,11 @@ public class Brain : MonoBehaviour
 
     public bool IsTryingToMove()
     {
-        return new Vector3(commands.rightwards, commands.upwards, commands.forwards).magnitude > 0;
+        return GetDesiredMovementDirection().magnitude > 0;
+    }
+
+    public Vector3 GetDesiredMovementDirection()
+    {
+        return new Vector3(commands.rightwards, commands.upwards, commands.forwards);
     }
 }

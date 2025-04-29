@@ -88,3 +88,14 @@ public enum PawnStateType
     Interact,
     Toppled,
 }
+
+/// <summary>
+/// A pawn can perform actions in different directions.
+/// </summary>
+public enum ActionDirection
+{
+    Up,
+    Down,
+    Left,
+    Right,
+}

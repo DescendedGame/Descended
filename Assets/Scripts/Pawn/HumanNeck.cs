@@ -10,7 +10,7 @@ public class HumanNeck : BodyPart
         m_atlas = atlas;
     }
 
-    public override void Idle()
+    public override void Idle(Vector3 movementDirection, ActionDirection actionDirection)
     {
         Quaternion currentHeadRotation = m_head.rotation;
 

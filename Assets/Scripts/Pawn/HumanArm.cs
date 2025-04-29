@@ -78,7 +78,7 @@ public class HumanArm : BodyLinkage
 
     }
 
-    public override void Idle()
+    public override void Idle(Vector3 movementDirection, ActionDirection actionDirection)
     {
         shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
 

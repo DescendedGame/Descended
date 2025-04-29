@@ -79,7 +79,7 @@ public class HumanLeg : BodyLinkage
         initialFootRotation = Quaternion.identity;
     }
 
-    public override void Idle()
+    public override void Idle(Vector3 movementDirection, ActionDirection actionDirection)
     {
         if (isRight)
         {
