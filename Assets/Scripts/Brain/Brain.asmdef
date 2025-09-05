@@ -2,7 +2,8 @@
     "name": "Brain",
     "rootNamespace": "",
     "references": [
-        "GUID:b9eb5896f8ca10f4e9103bc392d5dce0"
+        "GUID:b9eb5896f8ca10f4e9103bc392d5dce0",
+        "GUID:1491147abca9d7d4bb7105af628b223e"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

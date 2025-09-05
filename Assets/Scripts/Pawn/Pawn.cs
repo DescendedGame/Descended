@@ -29,8 +29,7 @@ public class Pawn : Attackable
         m_properties.bodyParts = GetComponentsInChildren<BodyPart>(); // This should already be in place when the character is created. Or maybe this is simpler (but less optimized)
         RememberBodyTransforms();
         m_brain = GetComponent<Brain>();
-        m_brain.Initialize(m_properties);
-
+        
         InitializeTools();
 
         // Add the states
@@ -41,6 +40,11 @@ public class Pawn : Attackable
         // Set the initial state
         currentState = m_lookUpState[PawnStateType.Idle];
         currentState.Enter();
+    }
+
+    private void Start()
+    {
+        m_brain.Initialize(m_properties);
     }
 
     void InitializeTools()
@@ -58,9 +62,7 @@ public class Pawn : Attackable
         // All pawns trigger small bioluminescent things around them when they move.
         //var emission = m_glitter.emission;
         //emission.rateOverTime = m_properties.m_physics.linearVelocity.magnitude * 5;
-
         m_brain.UpdateCommands();
-
 
         while (true)
         {

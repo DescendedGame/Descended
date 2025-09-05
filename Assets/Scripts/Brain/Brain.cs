@@ -1,9 +1,10 @@
+using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
 /// That which controls a pawn.
 /// </summary>
-public class Brain : MonoBehaviour
+public class Brain : NetworkBehaviour
 {
     //Should maybe have this private and only send out a copy with Get so that other's can't alter something's commands.
     public Commands commands;
@@ -26,7 +27,7 @@ public class Brain : MonoBehaviour
     /// <summary>
     /// Most commands are intended to be set every frame, and should be set to default before that.
     /// </summary>
-    public virtual void ZeroCommands()
+    protected virtual void ZeroCommands()
     {
         commands.forwards = 0;
         commands.rightwards = 0;

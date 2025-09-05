@@ -28,18 +28,22 @@ public class PlayerInput : Brain
 
     public override void Initialize(PawnProperties properties)
     {
+        if (!IsLocalPlayer) return;
         base.Initialize(properties);
+        playerCamera.SetActive(true);
         playerCamera.transform.SetParent(m_properties.eyeTransform,false);
         playerCamera.transform.localPosition = new Vector3(0,0.1f,0.1f);
     }
     private void Awake()
     {
+        if (!IsLocalPlayer) return;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public override void UpdateCommands()
     {
+        if (!IsLocalPlayer) return;
         base.UpdateCommands();
         SetMovementDirections();
         SetRotationDirections();
@@ -82,7 +86,12 @@ public class PlayerInput : Brain
         if (Input.GetKeyDown(k_4)) commands.selected = 3;
         if (Input.GetKeyDown(k_5)) commands.selected = 4;
 
-        if ((byte)(m_properties.tools.Length - 1) < commands.selected) commands.selected = (byte)(m_properties.tools.Length - 1);
+        Debug.Log(m_properties.tools.Length);
+        Debug.Log(commands.selected);
+        if ((byte)(m_properties.tools.Length - 1) < commands.selected)
+        {
+            commands.selected = (byte)(m_properties.tools.Length - 1);
+        }
 
         commands.primary = Input.GetKeyDown(k_primary);
         commands.secondary = Input.GetKeyDown(k_secondary);

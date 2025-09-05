@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 3738586299702573578, guid: 378e618d03a8b9b41adf0c148d055ad6,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3245238747
+      value: 3681830772
       objectReference: {fileID: 0}
     - target: {fileID: 5977621647889798969, guid: 378e618d03a8b9b41adf0c148d055ad6,
         type: 3}
@@ -90,6 +90,14 @@ PrefabInstance:
         type: 3}
       insertIndex: 1
       addedObject: {fileID: 3892691208970910326}
+    - targetCorrespondingSourceObject: {fileID: 3650292414262800410, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7663524238445531926}
+    - targetCorrespondingSourceObject: {fileID: 3650292414262800410, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3917804509727002204}
   m_SourcePrefab: {fileID: 100100000, guid: 378e618d03a8b9b41adf0c148d055ad6, type: 3}
 --- !u!1 &4482060798820276845 stripped
 GameObject:
@@ -109,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ee84e3ea8a50041adceddb6e9c453b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   playerCamera: {fileID: 5356672427717991895}
   k_forwards: 119
   k_rightwards: 100
@@ -128,6 +137,69 @@ MonoBehaviour:
   k_tertiary: 327
   k_sprint: 304
   k_balance: 306
+--- !u!114 &7663524238445531926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4482060798820276845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 1
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &3917804509727002204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4482060798820276845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkRigidbodyBaseExpanded: 0
+  UseRigidBodyForMotion: 0
+  AutoUpdateKinematicState: 1
+  AutoSetKinematicOnDespawn: 1
 --- !u!4 &6804882030747532622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5977621647889798969, guid: 378e618d03a8b9b41adf0c148d055ad6,
@@ -146,6 +218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 69039084198616621, guid: e5ac6ae2f0f98bc4fb088fa229e89e48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5628315036079614060, guid: e5ac6ae2f0f98bc4fb088fa229e89e48,
         type: 3}
