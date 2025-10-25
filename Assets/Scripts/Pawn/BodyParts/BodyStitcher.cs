@@ -66,15 +66,19 @@ public class BodyStitcher : MonoBehaviour
         Vector3 rotationVector = transform.InverseTransformVector(leftSide.transform.position - rightSide.transform.position);
         float rightDegreeInterval = (90 + rightAngle) / 4;
         float leftDegreeInterval = (90 + leftAngle) / 4;
+
+
+        // The top rounding vertices
         for (int i = 0; i<4;i++)
         {
+
             rightNormals[i] = Quaternion.AngleAxis(-rightDegreeInterval * i, rotationVector) * Quaternion.AngleAxis(90, rotationVector) * Vector3.Cross(rotationVector, rightStartToEnd).normalized;
             rightVertices[i] = rightNormals[i]*rightSide.startRadius;
-            rightUvs[i] = Vector2.one;
+            rightUvs[i] = new Vector2(0,0);
 
             leftNormals[i] =  Quaternion.AngleAxis(-leftDegreeInterval * i, rotationVector) * Quaternion.AngleAxis(90, rotationVector) * Vector3.Cross(rotationVector, rightStartToEnd).normalized;
             leftVertices[i] = transform.InverseTransformVector(leftSide.transform.position - rightSide.transform.position) + leftNormals[i]*leftSide.startRadius;
-            leftUvs[i] = Vector2.one;
+            leftUvs[i] = new Vector2(1, 0);
         }
 
         for (int i = 4; i<9; i++)
@@ -87,19 +91,20 @@ public class BodyStitcher : MonoBehaviour
 
             rightVertices[i] += rightNormals[i] * (rightSide.startRadius+ ((i - 4) / 4f)*(rightSide.endRadius-rightSide.startRadius));
             leftVertices[i] += leftNormals[i] * (rightSide.startRadius + ((i - 4) / 4f) * (rightSide.endRadius - rightSide.startRadius));
-
-            rightUvs[i] = Vector2.one;
-            leftUvs[i] = Vector2.one;
+            rightUvs[i] = new Vector2(0, ((float)i - 4)/4);
+            leftUvs[i] = new Vector2(1, ((float)i - 4) / 4);
         }
 
         rotationVector = transform.InverseTransformVector(leftEndPosition - rightEndPosition);
         rightDegreeInterval = (90 - rightAngle) / 4;
         leftDegreeInterval = (90 - leftAngle) / 4;
+
+        // The bot rounding vertices
         for (int i = 9; i < 13; i++)
         {
             rightNormals[i] = Quaternion.AngleAxis(-rightDegreeInterval * (i-9), rotationVector) * Quaternion.AngleAxis(rightAngle, rotationVector) * Vector3.Cross(rotationVector, rightStartToEnd).normalized;
             rightVertices[i] = transform.InverseTransformPoint(rightEndPosition) + rightNormals[i] * rightSide.endRadius;
-            rightUvs[i] = Vector2.one;
+            rightUvs[i] = new Vector2(0,1);
 
             leftNormals[i] = Quaternion.AngleAxis(-leftDegreeInterval * (i - 9), rotationVector) * Quaternion.AngleAxis(leftAngle, rotationVector) * Vector3.Cross(rotationVector, rightStartToEnd).normalized;
             leftVertices[i] = transform.InverseTransformPoint(leftEndPosition) + leftNormals[i] * leftSide.endRadius;

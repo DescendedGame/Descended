@@ -35,7 +35,7 @@ public class HumanTorso : BodyPart
     BodyStitcher bellySkin;
 
     /// <returns>Returns left and right slots to be used for leg placement.</returns>
-    public (Transform, Transform) Initialize(HumanoidBodyCreator creator)
+    public (Transform, Transform) Initialize(HumanBodySettings bodySettings)
     {
         upperTorso = transform;
 
@@ -47,15 +47,15 @@ public class HumanTorso : BodyPart
             lowerNeck = go.AddComponent<GeneratedLimb>();
             lowerNeck.transform.localRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
         }
-        lowerNeck.length = creator.atlasLength;
-        lowerNeck.startRadius = creator.lowerNeckWidth;
-        lowerNeck.endRadius = creator.torsoDepth;
-        lowerNeck.mat = new Material(creator.basicInGameObject);
-        lowerNeck.startColor = creator.skinColor;
-        lowerNeck.endColor = creator.skinColor;
+        lowerNeck.length = bodySettings.atlasLength;
+        lowerNeck.startRadius = bodySettings.lowerNeckWidth;
+        lowerNeck.endRadius = bodySettings.torsoDepth;
+        lowerNeck.mat = new Material(bodySettings.basicInGameObject);
+        lowerNeck.startColor = bodySettings.coverSettings.lowerNeck ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        lowerNeck.endColor = bodySettings.coverSettings.chest ? bodySettings.coverSettings.color : bodySettings.skinColor;
         lowerNeck.Initialize();
 
-        Vector3 atlasEnd = Vector3.forward * creator.atlasLength;
+        Vector3 atlasEnd = Vector3.forward * bodySettings.atlasLength;
 
         if(middleTorso == null)
         {
@@ -63,14 +63,14 @@ public class HumanTorso : BodyPart
             middleTorso.gameObject.layer = gameObject.layer;
             middleTorso.transform.SetParent(transform.transform, false);
         }
-        middleTorso.transform.localPosition = Vector3.down * (creator.atlasLength + creator.ribLength);
+        middleTorso.transform.localPosition = Vector3.down * (bodySettings.atlasLength + bodySettings.ribLength);
 
         if(lowerTorso == null)
         {
             lowerTorso = new GameObject("LowerTorso").transform;
             lowerTorso.transform.SetParent(middleTorso.transform, false);
         }
-        lowerTorso.transform.localPosition = Vector3.down * (creator.bellyLength);
+        lowerTorso.transform.localPosition = Vector3.down * (bodySettings.bellyLength);
 
         //Ribs
         //---------------------------------------------------------------------------------------------------
@@ -82,13 +82,13 @@ public class HumanTorso : BodyPart
             go.transform.SetParent(lowerNeck.transform, false);
             leftRib = go.AddComponent<GeneratedLimb>();
         }
-        leftRib.transform.localPosition = atlasEnd - Vector3.right * creator.torsoWidth;
-        leftRib.length = creator.ribLength;
-        leftRib.startRadius = creator.torsoDepth;
-        leftRib.endRadius = creator.waist;
-        leftRib.mat = new Material(creator.basicInGameObject);
-        leftRib.startColor = creator.skinColor;
-        leftRib.endColor = creator.skinColor;
+        leftRib.transform.localPosition = atlasEnd - Vector3.right * bodySettings.torsoWidth;
+        leftRib.length = bodySettings.ribLength;
+        leftRib.startRadius = bodySettings.torsoDepth;
+        leftRib.endRadius = bodySettings.waist;
+        leftRib.mat = new Material(bodySettings.basicInGameObject);
+        leftRib.startColor = bodySettings.coverSettings.chest ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        leftRib.endColor = bodySettings.coverSettings.waist ? bodySettings.coverSettings.color : bodySettings.skinColor;
         leftRib.Initialize();
 
         if(rightRib == null)
@@ -98,13 +98,13 @@ public class HumanTorso : BodyPart
             go.transform.SetParent(lowerNeck.transform, false);
             rightRib = go.AddComponent<GeneratedLimb>();
         }
-        rightRib.transform.localPosition = atlasEnd + Vector3.right * creator.torsoWidth;
-        rightRib.length = creator.ribLength;
-        rightRib.startRadius = creator.torsoDepth;
-        rightRib.endRadius = creator.waist;
-        rightRib.mat = new Material(creator.basicInGameObject);
-        rightRib.startColor = creator.skinColor;
-        rightRib.endColor = creator.skinColor;
+        rightRib.transform.localPosition = atlasEnd + Vector3.right * bodySettings.torsoWidth;
+        rightRib.length = bodySettings.ribLength;
+        rightRib.startRadius = bodySettings.torsoDepth;
+        rightRib.endRadius = bodySettings.waist;
+        rightRib.mat = new Material(bodySettings.basicInGameObject);
+        rightRib.startColor = bodySettings.coverSettings.chest ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        rightRib.endColor = bodySettings.coverSettings.waist ? bodySettings.coverSettings.color :  bodySettings.skinColor;
         rightRib.Initialize();
 
         if(ribSkin == null)
@@ -116,9 +116,9 @@ public class HumanTorso : BodyPart
         }
         ribSkin.leftSide = leftRib;
         ribSkin.rightSide = rightRib;
-        ribSkin.mat = new Material(creator.basicInGameObject);
-        ribSkin.startColor = creator.skinColor;
-        ribSkin.endColor = creator.skinColor;
+        ribSkin.mat = new Material(bodySettings.basicInGameObject);
+        ribSkin.startColor = bodySettings.coverSettings.chest ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        ribSkin.endColor = bodySettings.coverSettings.waist ? bodySettings.coverSettings.color : bodySettings.skinColor;
         ribSkin.Initialize();
         //----------------------------------------------------------------------------
 
@@ -133,14 +133,14 @@ public class HumanTorso : BodyPart
             go.transform.SetParent(lowerTorso.transform, false);
             leftHip = go.AddComponent<GeneratedLimb>();
         }
-        leftHip.transform.localPosition = -Vector3.right * creator.upperHipWidth;
-        leftHip.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-creator.hipOutRotation, Vector3.forward) * Vector3.down, Vector3.forward);
-        leftHip.length = creator.hipLength;
-        leftHip.startRadius = creator.upperHipRadius;
-        leftHip.endRadius = creator.lowerHipRadius;
-        leftHip.mat = new Material(creator.basicInGameObject);
-        leftHip.startColor = creator.skinColor;
-        leftHip.endColor = creator.skinColor;
+        leftHip.transform.localPosition = -Vector3.right * bodySettings.upperHipWidth;
+        leftHip.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-bodySettings.hipOutRotation, Vector3.forward) * Vector3.down, Vector3.forward);
+        leftHip.length = bodySettings.hipLength;
+        leftHip.startRadius = bodySettings.upperHipRadius;
+        leftHip.endRadius = bodySettings.lowerHipRadius;
+        leftHip.mat = new Material(bodySettings.basicInGameObject);
+        leftHip.startColor = bodySettings.coverSettings.hips ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        leftHip.endColor = bodySettings.coverSettings.butt ? bodySettings.coverSettings.color : bodySettings.skinColor;
         leftHip.Initialize();
 
         if(rightHip == null)
@@ -150,14 +150,14 @@ public class HumanTorso : BodyPart
             go.transform.SetParent(lowerTorso.transform, false);
             rightHip = go.AddComponent<GeneratedLimb>();
         }
-        rightHip.transform.localPosition = Vector3.right * creator.upperHipWidth;
-        rightHip.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(creator.hipOutRotation, Vector3.forward) * Vector3.down, Vector3.forward);
-        rightHip.length = creator.hipLength;
-        rightHip.startRadius = creator.upperHipRadius;
-        rightHip.endRadius = creator.lowerHipRadius;
-        rightHip.mat = new Material(creator.basicInGameObject);
-        rightHip.startColor = creator.skinColor;
-        rightHip.endColor = creator.skinColor;
+        rightHip.transform.localPosition = Vector3.right * bodySettings.upperHipWidth;
+        rightHip.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(bodySettings.hipOutRotation, Vector3.forward) * Vector3.down, Vector3.forward);
+        rightHip.length = bodySettings.hipLength;
+        rightHip.startRadius = bodySettings.upperHipRadius;
+        rightHip.endRadius = bodySettings.lowerHipRadius;
+        rightHip.mat = new Material(bodySettings.basicInGameObject);
+        rightHip.startColor = bodySettings.coverSettings.hips ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        rightHip.endColor = bodySettings.coverSettings.butt ? bodySettings.coverSettings.color : bodySettings.skinColor;
         rightHip.Initialize();
 
         if(hipSkin == null)
@@ -169,9 +169,9 @@ public class HumanTorso : BodyPart
         }
         hipSkin.leftSide = leftHip;
         hipSkin.rightSide = rightHip;
-        hipSkin.mat = new Material(creator.basicInGameObject);
-        hipSkin.startColor = creator.skinColor;
-        hipSkin.endColor = creator.skinColor;
+        hipSkin.mat = new Material(bodySettings.basicInGameObject);
+        hipSkin.startColor = bodySettings.coverSettings.hips ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        hipSkin.endColor = bodySettings.coverSettings.butt ? bodySettings.coverSettings.color : bodySettings.skinColor;
         hipSkin.Initialize();
 
         //--------------------------------------------------------------------------------
@@ -186,12 +186,12 @@ public class HumanTorso : BodyPart
             leftBelly = go.AddComponent<GeneratedLimb>();
         }
         leftBelly.snapToParent = true;
-        leftBelly.startRadius = creator.waist;
-        leftBelly.endRadius = creator.upperHipRadius;
+        leftBelly.startRadius = bodySettings.waist;
+        leftBelly.endRadius = bodySettings.upperHipRadius;
         leftBelly.target = leftHip.transform;
-        leftBelly.mat = new Material(creator.basicInGameObject);
-        leftBelly.startColor = creator.skinColor;
-        leftBelly.endColor = creator.skinColor;
+        leftBelly.mat = new Material(bodySettings.basicInGameObject);
+        leftBelly.startColor = bodySettings.coverSettings.waist ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        leftBelly.endColor = bodySettings.coverSettings.hips ? bodySettings.coverSettings.color : bodySettings.skinColor;
         leftBelly.Initialize();
         leftBelly.UpdateVertices();
 
@@ -203,12 +203,12 @@ public class HumanTorso : BodyPart
             rightBelly = go.AddComponent<GeneratedLimb>();
         }
         rightBelly.snapToParent = true;
-        rightBelly.startRadius = creator.waist;
-        rightBelly.endRadius = creator.upperHipRadius;
+        rightBelly.startRadius = bodySettings.waist;
+        rightBelly.endRadius = bodySettings.upperHipRadius;
         rightBelly.target = rightHip.transform;
-        rightBelly.mat = new Material(creator.basicInGameObject);
-        rightBelly.startColor = creator.skinColor;
-        rightBelly.endColor = creator.skinColor;
+        rightBelly.mat = new Material(bodySettings.basicInGameObject);
+        rightBelly.startColor = bodySettings.coverSettings.waist ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        rightBelly.endColor = bodySettings.coverSettings.hips ? bodySettings.coverSettings.color : bodySettings.skinColor;
         rightBelly.Initialize();
         rightBelly.UpdateVertices();
 
@@ -221,9 +221,9 @@ public class HumanTorso : BodyPart
         }
         bellySkin.leftSide = leftBelly;
         bellySkin.rightSide = rightBelly;
-        bellySkin.mat = new Material(creator.basicInGameObject);
-        bellySkin.startColor = creator.skinColor;
-        bellySkin.endColor = creator.skinColor;
+        bellySkin.mat = new Material(bodySettings.basicInGameObject);
+        bellySkin.startColor = bodySettings.coverSettings.waist ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        bellySkin.endColor = bodySettings.coverSettings.hips ? bodySettings.coverSettings.color : bodySettings.skinColor;
         bellySkin.Initialize();
 
         //--------------------------------------------------------------------

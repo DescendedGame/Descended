@@ -24,7 +24,7 @@ public class HumanLeg : BodyLinkage
     GeneratedLimb upperCalfLimb;
     GeneratedLimb lowerCalfLimb;
 
-    public void Initialize(HumanoidBodyCreator creator, bool isRight)
+    public void Initialize(HumanBodySettings bodySettings, bool isRight)
     {
 
         if(thighLimb == null)
@@ -34,12 +34,12 @@ public class HumanLeg : BodyLinkage
             thighLimb.snapToParent = true;
             thigh = transform;
         }
-        thighLimb.length = creator.thighLength;
-        thighLimb.startRadius = creator.lowerHipRadius;
-        thighLimb.endRadius = creator.kneeRadius;
-        thighLimb.mat = new Material(creator.basicInGameObject);
-        thighLimb.startColor = creator.skinColor;
-        thighLimb.endColor = creator.skinColor;
+        thighLimb.length = bodySettings.thighLength;
+        thighLimb.startRadius = bodySettings.lowerHipRadius;
+        thighLimb.endRadius = bodySettings.kneeRadius;
+        thighLimb.mat = new Material(bodySettings.basicInGameObject);
+        thighLimb.startColor = bodySettings.coverSettings.butt ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        thighLimb.endColor = bodySettings.coverSettings.knees ? bodySettings.coverSettings.color : bodySettings.skinColor;
         thighLimb.Initialize();
 
         if(upperCalfLimb == null)
@@ -65,21 +65,21 @@ public class HumanLeg : BodyLinkage
         }
 
 
-        upperCalfLimb.length = creator.upperCalfLength;
-        upperCalfLimb.startRadius = creator.kneeRadius;
-        upperCalfLimb.endRadius = creator.calfRadius;
-        upperCalfLimb.mat = new Material(creator.basicInGameObject);
-        upperCalfLimb.startColor = creator.skinColor;
-        upperCalfLimb.endColor = creator.skinColor;
+        upperCalfLimb.length = bodySettings.upperCalfLength;
+        upperCalfLimb.startRadius = bodySettings.kneeRadius;
+        upperCalfLimb.endRadius = bodySettings.calfRadius;
+        upperCalfLimb.mat = new Material(bodySettings.basicInGameObject);
+        upperCalfLimb.startColor = bodySettings.coverSettings.knees ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        upperCalfLimb.endColor = bodySettings.coverSettings.calves ? bodySettings.coverSettings.color : bodySettings.skinColor;
         upperCalfLimb.Initialize();
 
 
-        lowerCalfLimb.length = creator.lowerCalfLength;
-        lowerCalfLimb.startRadius = creator.calfRadius;
-        lowerCalfLimb.endRadius = creator.ankleRadius;
-        lowerCalfLimb.mat = new Material(creator.basicInGameObject);
-        lowerCalfLimb.startColor = creator.skinColor;
-        lowerCalfLimb.endColor = creator.skinColor;
+        lowerCalfLimb.length = bodySettings.lowerCalfLength;
+        lowerCalfLimb.startRadius = bodySettings.calfRadius;
+        lowerCalfLimb.endRadius = bodySettings.ankleRadius;
+        lowerCalfLimb.mat = new Material(bodySettings.basicInGameObject);
+        lowerCalfLimb.startColor = bodySettings.coverSettings.calves ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        lowerCalfLimb.endColor = bodySettings.coverSettings.ankles ? bodySettings.coverSettings.color : bodySettings.skinColor;
         lowerCalfLimb.Initialize();
     }
 

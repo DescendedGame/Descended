@@ -95,33 +95,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3ce99756ffe2d439770eafbfd82e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicInGameObject: {fileID: 2100000, guid: a67c588f3b2380e4aa548fda3fd941c9, type: 2}
   headPrefab: {fileID: 919132149155446097, guid: d57b900f1513d5d4f8969b97081e4ba7,
     type: 3}
-  upperNeckLength: 0.1
-  upperNeckWidth: 0.05
-  lowerNeckWidth: 0.08
-  atlasLength: 0.1
-  torsoDepth: 0.12
-  torsoWidth: 0.05
-  ribLength: 0.2
-  waist: 0.08
-  bellyLength: 0.15
-  shoulderWidth: 0.1
-  shoulderSize: 0.08
-  armLength: 0.3
-  elbowSize: 0.04
-  forearmLength: 0.25
-  wristSize: 0.025
-  upperHipWidth: 0.05
-  upperHipRadius: 0.14
-  lowerHipRadius: 0.15
-  hipLength: 0.09
-  hipOutRotation: 20
-  thighLength: 0.4
-  kneeRadius: 0.05
-  upperCalfLength: 0.1
-  calfRadius: 0.06
-  lowerCalfLength: 0.25
-  ankleRadius: 0.03
-  skinColor: {r: 0.65882355, g: 0.49411765, b: 0.4862745, a: 0}
+  bodySettings:
+    upperNeckLength: 0.1
+    upperNeckWidth: 0.05
+    lowerNeckWidth: 0.08
+    atlasLength: 0.1
+    torsoDepth: 0.12
+    torsoWidth: 0.05
+    ribLength: 0.2
+    waist: 0.08
+    bellyLength: 0.15
+    shoulderWidth: 0.1
+    shoulderSize: 0.08
+    armLength: 0.3
+    elbowSize: 0.04
+    forearmLength: 0.25
+    wristSize: 0.025
+    upperHipWidth: 0.05
+    upperHipRadius: 0.14
+    lowerHipRadius: 0.15
+    hipLength: 0.09
+    hipOutRotation: 20
+    thighLength: 0.4
+    kneeRadius: 0.05
+    upperCalfLength: 0.1
+    calfRadius: 0.06
+    lowerCalfLength: 0.25
+    ankleRadius: 0.03
+    skinColor: {r: 0.65882355, g: 0.49411765, b: 0.4862745, a: 0}
+    basicInGameObject: {fileID: 2100000, guid: b4f431e14d9a55b4eb0e5b2f7d1aff2b, type: 2}

@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class HumanoidBodyCreator : BodyCreator
+[System.Serializable]
+public struct HumanBodySettings
 {
-    public Material basicInGameObject;
-    public GameObject headPrefab;
-
     public float upperNeckLength;
     public float upperNeckWidth;
     public float lowerNeckWidth;
@@ -37,6 +35,34 @@ public class HumanoidBodyCreator : BodyCreator
     public float ankleRadius;
 
     public Color skinColor;
+    public Material basicInGameObject;
+
+    public HumanBodyCoverageSettings coverSettings;
+}
+
+[System.Serializable]
+public struct HumanBodyCoverageSettings
+{
+    public Color color;
+    public bool upperNeck;
+    public bool lowerNeck;
+    public bool shoulders;
+    public bool elbows;
+    public bool wrists;
+    public bool chest;
+    public bool waist;
+    public bool hips;
+    public bool butt;
+    public bool knees;
+    public bool calves;
+    public bool ankles;
+}
+
+public class HumanoidBodyCreator : BodyCreator
+{
+    public GameObject headPrefab;
+
+    public HumanBodySettings bodySettings;
 
     GameObject head;
     GeneratedLimb neck;
@@ -91,12 +117,12 @@ public class HumanoidBodyCreator : BodyCreator
             neck = go.AddComponent<GeneratedLimb>();
             neck.transform.localRotation = Quaternion.LookRotation(Vector3.up, -Vector3.forward);
         }
-        neck.length = upperNeckLength;
-        neck.startRadius = lowerNeckWidth;
-        neck.endRadius = upperNeckWidth;
-        neck.mat = new Material(basicInGameObject);
-        neck.startColor = skinColor;
-        neck.endColor = skinColor;
+        neck.length = bodySettings.upperNeckLength;
+        neck.startRadius = bodySettings.lowerNeckWidth;
+        neck.endRadius = bodySettings.upperNeckWidth;
+        neck.mat = new Material(bodySettings.basicInGameObject);
+        neck.startColor = bodySettings.coverSettings.lowerNeck ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        neck.endColor = bodySettings.coverSettings.upperNeck ? bodySettings.coverSettings.color : bodySettings.skinColor;
         neck.Initialize();
         return neck;
     }
@@ -116,7 +142,11 @@ public class HumanoidBodyCreator : BodyCreator
             MeshRenderer[] renderers = head.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)
             {
-                renderer.sharedMaterial = basicInGameObject;
+                renderer.sharedMaterial = bodySettings.basicInGameObject;
+                Material thisOnesMat = new Material(renderer.material);
+                thisOnesMat.SetColor("_MainColor", bodySettings.skinColor);
+                thisOnesMat.SetColor("_TransitionColor", bodySettings.skinColor);
+                renderer.material = thisOnesMat;
             }
         }
        
@@ -137,8 +167,8 @@ public class HumanoidBodyCreator : BodyCreator
             leftArm.transform.localRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
         }
 
-        leftArm.transform.localPosition = Vector3.down * atlasLength - Vector3.right * torsoWidth;
-        leftArm.Initialize(this, false);
+        leftArm.transform.localPosition = Vector3.down * bodySettings.atlasLength - Vector3.right * bodySettings.torsoWidth;
+        leftArm.Initialize(bodySettings, false);
 
         if(rightArm == null)
         {
@@ -149,8 +179,8 @@ public class HumanoidBodyCreator : BodyCreator
             rightArm.transform.localRotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
         }
 
-        rightArm.transform.localPosition = Vector3.down * atlasLength + Vector3.right * torsoWidth;
-        rightArm.Initialize(this, true);
+        rightArm.transform.localPosition = Vector3.down * bodySettings.atlasLength + Vector3.right * bodySettings.torsoWidth;
+        rightArm.Initialize(bodySettings, true);
     }
 
     void CreateLegs(Transform leftHip, Transform rightHip)
@@ -161,9 +191,9 @@ public class HumanoidBodyCreator : BodyCreator
             go.layer = gameObject.layer;
             go.transform.SetParent(leftHip.transform, false);
             leftLeg = go.AddComponent<HumanLeg>();
-            leftLeg.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
+            leftLeg.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(bodySettings.hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
         }
-        leftLeg.Initialize(this, false);
+        leftLeg.Initialize(bodySettings, false);
 
         if(rightLeg == null)
         {
@@ -171,9 +201,9 @@ public class HumanoidBodyCreator : BodyCreator
             go.layer = gameObject.layer;
             go.transform.SetParent(rightHip.transform, false);
             rightLeg = go.AddComponent<HumanLeg>();
-            rightLeg.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
+            rightLeg.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-bodySettings.hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
         }
-        rightLeg.Initialize(this, true);
+        rightLeg.Initialize(bodySettings, true);
     }
 
     void CreateTorso(out Transform leftHip, out Transform rightHip)
@@ -186,6 +216,6 @@ public class HumanoidBodyCreator : BodyCreator
             atlas.SetParent(transform, false);
             torso = go.AddComponent<HumanTorso>();
         }
-        (leftHip, rightHip) = torso.Initialize(this);
+        (leftHip, rightHip) = torso.Initialize(bodySettings);
     }
 }

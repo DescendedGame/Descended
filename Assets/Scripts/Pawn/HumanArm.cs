@@ -21,7 +21,7 @@ public class HumanArm : BodyLinkage
     GeneratedLimb armLimb;
     GeneratedLimb forearmLimb;
 
-    public void Initialize(HumanoidBodyCreator creator, bool isRight)
+    public void Initialize(HumanBodySettings bodySettings, bool isRight)
     {
 
         if(shoulderLimb == null)
@@ -29,12 +29,12 @@ public class HumanArm : BodyLinkage
             shoulderLimb = gameObject.AddComponent<GeneratedLimb>();
             shoulder = transform;
         }
-        shoulderLimb.length = creator.shoulderWidth;
-        shoulderLimb.startRadius = creator.torsoDepth;
-        shoulderLimb.endRadius = creator.shoulderSize;
-        shoulderLimb.mat = new Material(creator.basicInGameObject);
-        shoulderLimb.startColor = creator.skinColor;
-        shoulderLimb.endColor = creator.skinColor;
+        shoulderLimb.length = bodySettings.shoulderWidth;
+        shoulderLimb.startRadius = bodySettings.torsoDepth;
+        shoulderLimb.endRadius = bodySettings.shoulderSize;
+        shoulderLimb.mat = new Material(bodySettings.basicInGameObject);
+        shoulderLimb.startColor = bodySettings.coverSettings.chest ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        shoulderLimb.endColor = bodySettings.coverSettings.shoulders ? bodySettings.coverSettings.color : bodySettings.skinColor;
         shoulderLimb.Initialize();
 
         if(armLimb == null)
@@ -60,20 +60,20 @@ public class HumanArm : BodyLinkage
             forearmLimb.snapToParent = true;
             forearm = forearmLimb.transform;
         }
-        armLimb.length = creator.armLength;
-        armLimb.startRadius = creator.shoulderSize;
-        armLimb.endRadius = creator.elbowSize;
-        armLimb.mat = new Material(creator.basicInGameObject);
-        armLimb.startColor = creator.skinColor;
-        armLimb.endColor = creator.skinColor;
+        armLimb.length = bodySettings.armLength;
+        armLimb.startRadius = bodySettings.shoulderSize;
+        armLimb.endRadius = bodySettings.elbowSize;
+        armLimb.mat = new Material(bodySettings.basicInGameObject);
+        armLimb.startColor = bodySettings.coverSettings.shoulders ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        armLimb.endColor = bodySettings.coverSettings.elbows ? bodySettings.coverSettings.color : bodySettings.skinColor;
         armLimb.Initialize();
 
-        forearmLimb.length = creator.forearmLength;
-        forearmLimb.startRadius = creator.elbowSize;
-        forearmLimb.endRadius = creator.wristSize;
-        forearmLimb.mat = new Material(creator.basicInGameObject);
-        forearmLimb.startColor = creator.skinColor;
-        forearmLimb.endColor = creator.skinColor;
+        forearmLimb.length = bodySettings.forearmLength;
+        forearmLimb.startRadius = bodySettings.elbowSize;
+        forearmLimb.endRadius = bodySettings.wristSize;
+        forearmLimb.mat = new Material(bodySettings.basicInGameObject);
+        forearmLimb.startColor = bodySettings.coverSettings.elbows ? bodySettings.coverSettings.color : bodySettings.skinColor;
+        forearmLimb.endColor = bodySettings.coverSettings.wrists ? bodySettings.coverSettings.color : bodySettings.skinColor;
         forearmLimb.Initialize();
 
         if (isRight)
