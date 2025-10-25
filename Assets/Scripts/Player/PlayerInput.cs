@@ -86,8 +86,6 @@ public class PlayerInput : Brain
         if (Input.GetKeyDown(k_4)) commands.selected = 3;
         if (Input.GetKeyDown(k_5)) commands.selected = 4;
 
-        Debug.Log(m_properties.tools.Length);
-        Debug.Log(commands.selected);
         if ((byte)(m_properties.tools.Length - 1) < commands.selected)
         {
             commands.selected = (byte)(m_properties.tools.Length - 1);

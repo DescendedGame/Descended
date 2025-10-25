@@ -4,6 +4,7 @@ public class HumanoidBodyCreator : BodyCreator
 {
     public Material basicInGameObject;
     public GameObject headPrefab;
+
     public float upperNeckLength;
     public float upperNeckWidth;
     public float lowerNeckWidth;
@@ -37,6 +38,20 @@ public class HumanoidBodyCreator : BodyCreator
 
     public Color skinColor;
 
+    GameObject head;
+    GeneratedLimb neck;
+
+    Transform atlas;
+    HumanTorso torso;
+
+
+    HumanArm leftArm;
+    HumanArm rightArm;
+
+    HumanLeg leftLeg;
+    HumanLeg rightLeg;
+
+
     enum LowerBodyType
     {
         Human,
@@ -45,10 +60,16 @@ public class HumanoidBodyCreator : BodyCreator
         Pentapus,
     }
 
-    public override void CreateBody(out Transform atlas, out Transform cameraTransform)
+    public override void RecalculateBody()
     {
-        CreateTorso(out atlas, out Transform leftHip, out Transform rightHip);
-        CreateArms(atlas);
+        CreateBody(out Transform atlasTransform, out Transform cameraTransform);
+    }
+
+    public override void CreateBody(out Transform atlasTransform, out Transform cameraTransform)
+    {
+        CreateTorso(out Transform leftHip, out Transform rightHip);
+        atlasTransform = atlas;
+        CreateArms();
         CreateLegs(leftHip, rightHip);
         cameraTransform = CreateNeckAndHead();
         cameraTransform.parent.gameObject.AddComponent<HumanNeck>().Initialize(cameraTransform, atlas);
@@ -62,104 +83,109 @@ public class HumanoidBodyCreator : BodyCreator
 
     GeneratedLimb CreateUpperNeck()
     {
-        GameObject go = new GameObject("Neck");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(transform, false);
-        GeneratedLimb upperNeck = go.AddComponent<GeneratedLimb>();
-        upperNeck.transform.localRotation = Quaternion.LookRotation(Vector3.up, -Vector3.forward);
-        upperNeck.length = upperNeckLength;
-        upperNeck.startRadius = lowerNeckWidth;
-        upperNeck.endRadius = upperNeckWidth;
-        upperNeck.mat = new Material(basicInGameObject);
-        upperNeck.startColor = skinColor;
-        upperNeck.endColor = skinColor;
-        upperNeck.Initialize();
-        return upperNeck;
+        if(neck == null)
+        {
+            GameObject go = new GameObject("Neck");
+            go.layer = gameObject.layer;
+            go.transform.SetParent(transform, false);
+            neck = go.AddComponent<GeneratedLimb>();
+            neck.transform.localRotation = Quaternion.LookRotation(Vector3.up, -Vector3.forward);
+        }
+        neck.length = upperNeckLength;
+        neck.startRadius = lowerNeckWidth;
+        neck.endRadius = upperNeckWidth;
+        neck.mat = new Material(basicInGameObject);
+        neck.startColor = skinColor;
+        neck.endColor = skinColor;
+        neck.Initialize();
+        return neck;
     }
 
     Transform CreateHead(GeneratedLimb upperNeck)
     {
-        GameObject head = Instantiate(headPrefab);
-        head.layer = gameObject.layer;
-        head.transform.SetParent(upperNeck.transform, false);
-        head.transform.localPosition = Vector3.forward * upperNeck.length;
-        head.transform.localRotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
-        MeshRenderer[] renderers = head.GetComponentsInChildren<MeshRenderer>();
-
-        foreach (MeshRenderer renderer in renderers)
+        if(head == null)
         {
-            renderer.sharedMaterial = basicInGameObject;
+            head = Instantiate(headPrefab);
+            head.layer = gameObject.layer;
+            foreach (Transform child in head.transform)
+            {
+                child.gameObject.layer = gameObject.layer;
+            }
+            head.transform.SetParent(upperNeck.transform, false);
+            head.transform.localRotation = Quaternion.LookRotation(-Vector3.up, Vector3.forward);
+            MeshRenderer[] renderers = head.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                renderer.sharedMaterial = basicInGameObject;
+            }
         }
+       
+        head.transform.localPosition = Vector3.forward * upperNeck.length;
 
         return head.transform;
     }
 
 
-    void CreateArms(Transform atlas)
+    void CreateArms()
     {
-        GameObject go = new GameObject("LeftShoulder");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(atlas.transform, false);
-        go.transform.localPosition = Vector3.down * atlasLength - Vector3.right * torsoWidth;
-        go.transform.localRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
-        HumanArm leftArm = go.AddComponent<HumanArm>();
-        leftArm.Initialize(false, shoulderWidth, torsoDepth, shoulderSize, basicInGameObject, skinColor, armLength, elbowSize, forearmLength, wristSize);
+        if(leftArm == null)
+        {
+            GameObject go = new GameObject("LeftShoulder");
+            go.layer = gameObject.layer;
+            go.transform.SetParent(atlas, false);
+            leftArm = go.AddComponent<HumanArm>();
+            leftArm.transform.localRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
+        }
 
-        go = new GameObject("RightShoulder");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(atlas.transform, false);
-        go.transform.localPosition = Vector3.down * atlasLength + Vector3.right * torsoWidth;
-        go.transform.localRotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
-        HumanArm rightArm = go.AddComponent<HumanArm>();
-        rightArm.Initialize(true, shoulderWidth, torsoDepth, shoulderSize, basicInGameObject, skinColor, armLength, elbowSize, forearmLength, wristSize);
+        leftArm.transform.localPosition = Vector3.down * atlasLength - Vector3.right * torsoWidth;
+        leftArm.Initialize(this, false);
+
+        if(rightArm == null)
+        {
+            GameObject go = new GameObject("RightShoulder");
+            go.layer = gameObject.layer;
+            go.transform.SetParent(atlas, false);
+            rightArm = go.AddComponent<HumanArm>();
+            rightArm.transform.localRotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
+        }
+
+        rightArm.transform.localPosition = Vector3.down * atlasLength + Vector3.right * torsoWidth;
+        rightArm.Initialize(this, true);
     }
 
     void CreateLegs(Transform leftHip, Transform rightHip)
     {
-        //Legs
-        //------------------------------------------------------------------------------
-        GameObject go = new GameObject("LeftThigh");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(leftHip.transform, false);
-        go.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
-        HumanLeg leftLeg = go.AddComponent<HumanLeg>();
-        leftLeg.Initialize(false, thighLength, lowerHipRadius, kneeRadius, upperCalfLength, calfRadius, lowerCalfLength, ankleRadius, basicInGameObject, skinColor);
+        if(leftLeg == null)
+        {
+            GameObject go = new GameObject("LeftThigh");
+            go.layer = gameObject.layer;
+            go.transform.SetParent(leftHip.transform, false);
+            leftLeg = go.AddComponent<HumanLeg>();
+            leftLeg.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
+        }
+        leftLeg.Initialize(this, false);
 
-        go = new GameObject("RightThigh");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(rightHip.transform, false);
-        go.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
-        HumanLeg rightLeg = go.AddComponent<HumanLeg>();
-        rightLeg.Initialize(true, thighLength, lowerHipRadius, kneeRadius, upperCalfLength, calfRadius, lowerCalfLength, ankleRadius, basicInGameObject, skinColor);
-        //------------------------------------------------------------------------------
+        if(rightLeg == null)
+        {
+            GameObject go = new GameObject("RightThigh");
+            go.layer = gameObject.layer;
+            go.transform.SetParent(rightHip.transform, false);
+            rightLeg = go.AddComponent<HumanLeg>();
+            rightLeg.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
+        }
+        rightLeg.Initialize(this, true);
     }
 
-    void CreateTorso(out Transform atlasTransform, out Transform leftHip, out Transform rightHip)
+    void CreateTorso(out Transform leftHip, out Transform rightHip)
     {
-        //Torso
-        //-----------------------------------------------------
-        GameObject go = new GameObject("Atlas");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(transform, false);
-        HumanTorso atlas = go.AddComponent<HumanTorso>();
-        atlasTransform = atlas.transform;
-
-        (leftHip, rightHip) = atlas.Initialize(atlasLength, lowerNeckWidth, torsoDepth, torsoWidth, ribLength, bellyLength, waist, upperHipWidth, hipLength, hipOutRotation, upperHipRadius, lowerHipRadius, basicInGameObject, skinColor); ;
-        ////------------------------------------------------------
-
-        ////Arms
-        ////----------------------------------------------------------------------------
-        
-        ////----------------------------------------------------------------------------
-
-        //GameObject middleTorso = new GameObject("MiddleTorso");
-        //middleTorso.layer = gameObject.layer;
-        //middleTorso.transform.SetParent(atlas.transform, false);
-        //middleTorso.transform.localRotation = Quaternion.LookRotation(Vector3.up, Vector3.back);
-        //middleTorso.transform.localPosition = Vector3.forward * (atlasLength + ribLength);
-        //GameObject lowerTorso = new GameObject("LowerTorso");
-        //lowerTorso.layer = gameObject.layer;
-        //lowerTorso.transform.SetParent(middleTorso.transform, false);
-        //lowerTorso.transform.localPosition = Vector3.down * (bellyLength);
+        if(atlas == null)
+        {
+            GameObject go = new GameObject("Atlas");
+            go.layer = gameObject.layer;
+            atlas = go.transform;
+            atlas.SetParent(transform, false);
+            torso = go.AddComponent<HumanTorso>();
+        }
+        (leftHip, rightHip) = torso.Initialize(this);
     }
 }

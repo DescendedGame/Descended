@@ -1,4 +1,4 @@
-using Codice.CM.Client.Differences;
+using UnityEngine;
 
 /// <summary>
 /// The default state used for basic movement and whatnot.
@@ -28,7 +28,7 @@ public class IdlePawnState : PawnState
         }
 
         UpdateRotation();
-
+        
         // Move all body parts idly
         for(int i = 0; i < m_properties.bodyParts.Length; i++)
         {

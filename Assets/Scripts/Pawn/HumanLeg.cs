@@ -20,54 +20,67 @@ public class HumanLeg : BodyLinkage
     Quaternion initialCalfRotation;
     Quaternion initialFootRotation;
 
-    public void Initialize(bool isRight, float thighLength, float lowerHipRadius, 
-        float kneeRadius, float upperCalfLength, float calfRadius, float lowerCalfLength, float ankleRadius, Material basicInGameObject, Color skinColor)
+    GeneratedLimb thighLimb;
+    GeneratedLimb upperCalfLimb;
+    GeneratedLimb lowerCalfLimb;
+
+    public void Initialize(HumanoidBodyCreator creator, bool isRight)
     {
-        initialThighRotation = transform.localRotation;
-        GeneratedLimb t_thigh = gameObject.AddComponent<GeneratedLimb>();
-        t_thigh.snapToParent = true;
-        t_thigh.length = thighLength;
-        t_thigh.startRadius = lowerHipRadius;
-        t_thigh.endRadius = kneeRadius;
-        t_thigh.mat = new Material(basicInGameObject);
-        t_thigh.startColor = skinColor;
-        t_thigh.endColor = skinColor;
-        t_thigh.Initialize();
-        thigh = t_thigh.transform;
 
-        this.isRight = isRight;
-        string rightOrLeft;
-        if (isRight)
-            rightOrLeft = "Right";
-        else
-            rightOrLeft = "Left";
+        if(thighLimb == null)
+        {
+            initialThighRotation = transform.localRotation;
+            thighLimb = gameObject.AddComponent<GeneratedLimb>();
+            thighLimb.snapToParent = true;
+            thigh = transform;
+        }
+        thighLimb.length = creator.thighLength;
+        thighLimb.startRadius = creator.lowerHipRadius;
+        thighLimb.endRadius = creator.kneeRadius;
+        thighLimb.mat = new Material(creator.basicInGameObject);
+        thighLimb.startColor = creator.skinColor;
+        thighLimb.endColor = creator.skinColor;
+        thighLimb.Initialize();
 
-        GameObject go = new GameObject(rightOrLeft + "UpperCalf");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(t_thigh.transform, false);
-        GeneratedLimb t_upperCalf = go.AddComponent<GeneratedLimb>();
-        t_upperCalf.snapToParent = true;
-        t_upperCalf.length = upperCalfLength;
-        t_upperCalf.startRadius = kneeRadius;
-        t_upperCalf.endRadius = calfRadius;
-        t_upperCalf.mat = new Material(basicInGameObject);
-        t_upperCalf.startColor = skinColor;
-        t_upperCalf.endColor = skinColor;
-        t_upperCalf.Initialize();
-        calf = t_upperCalf.transform;
+        if(upperCalfLimb == null)
+        {
+            this.isRight = isRight;
+            string rightOrLeft;
+            if (isRight)
+                rightOrLeft = "Right";
+            else
+                rightOrLeft = "Left";
+            GameObject go = new GameObject(rightOrLeft + "UpperCalf");
+            calf = go.transform;
+            go.layer = gameObject.layer;
+            go.transform.SetParent(thigh, false);
+            upperCalfLimb = go.AddComponent<GeneratedLimb>();
+            upperCalfLimb.snapToParent = true;
 
-        go = new GameObject(rightOrLeft + "LowerCalf");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(t_upperCalf.transform, false);
-        GeneratedLimb t_lowerCalf = go.AddComponent<GeneratedLimb>();
-        t_lowerCalf.snapToParent = true;
-        t_lowerCalf.length = lowerCalfLength;
-        t_lowerCalf.startRadius = calfRadius;
-        t_lowerCalf.endRadius = ankleRadius;
-        t_lowerCalf.mat = new Material(basicInGameObject);
-        t_lowerCalf.startColor = skinColor;
-        t_lowerCalf.endColor = skinColor;
-        t_lowerCalf.Initialize();
+            go = new GameObject(rightOrLeft + "LowerCalf");
+            go.layer = gameObject.layer;
+            go.transform.SetParent(upperCalfLimb.transform, false);
+            lowerCalfLimb = go.AddComponent<GeneratedLimb>();
+            lowerCalfLimb.snapToParent = true;
+        }
+
+
+        upperCalfLimb.length = creator.upperCalfLength;
+        upperCalfLimb.startRadius = creator.kneeRadius;
+        upperCalfLimb.endRadius = creator.calfRadius;
+        upperCalfLimb.mat = new Material(creator.basicInGameObject);
+        upperCalfLimb.startColor = creator.skinColor;
+        upperCalfLimb.endColor = creator.skinColor;
+        upperCalfLimb.Initialize();
+
+
+        lowerCalfLimb.length = creator.lowerCalfLength;
+        lowerCalfLimb.startRadius = creator.calfRadius;
+        lowerCalfLimb.endRadius = creator.ankleRadius;
+        lowerCalfLimb.mat = new Material(creator.basicInGameObject);
+        lowerCalfLimb.startColor = creator.skinColor;
+        lowerCalfLimb.endColor = creator.skinColor;
+        lowerCalfLimb.Initialize();
     }
 
     private void Awake()

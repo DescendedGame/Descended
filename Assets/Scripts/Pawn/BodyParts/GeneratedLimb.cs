@@ -20,13 +20,9 @@ public class GeneratedLimb : MonoBehaviour
     public Color endColor;
     public Material mat;
 
-    LimbInitializer m_initializer;
-
-    MeshRenderer armRenderer;
+    MeshRenderer limbRenderer;
     MeshFilter limbFilter;
     Mesh limbMesh;
-
-    int[] stitchSeams;
 
     [SerializeField] bool initialized = false;
 
@@ -37,22 +33,29 @@ public class GeneratedLimb : MonoBehaviour
         CreateMesh();
     }
 
-    void SetUpComponents()
-    {
-        if (armRenderer == null) armRenderer = gameObject.GetComponent<MeshRenderer>();
-        if (limbFilter == null) limbFilter = gameObject.GetComponent<MeshFilter>();
-        if (armRenderer == null) armRenderer = gameObject.AddComponent<MeshRenderer>();
-        if (limbFilter == null) limbFilter = gameObject.AddComponent<MeshFilter>();
-        if (limbMesh == null) limbMesh = new Mesh();
-    }
-
     void SetInitialState()
     {
         if (target != null)
         {
             length = Vector3.Distance(transform.position, target.position);
             transform.rotation = Quaternion.LookRotation(target.position - transform.position, transform.parent.up + target.up);
+            GeneratedLimb targetLimb = target.GetComponent<GeneratedLimb>();
+            if(targetLimb != null)
+            {
+                endRadius = targetLimb.startRadius;
+            }
         }
+
+        if (snapToParent)
+        {
+            GeneratedLimb prevLimbPart = transform.parent?.GetComponent<GeneratedLimb>();
+            if (prevLimbPart != null)
+            {
+                startRadius = prevLimbPart.endRadius;
+                transform.localPosition = prevLimbPart.LastPoint - startRadius * Vector3.forward;
+            }
+        }
+
         if (startRadius < 0.001f) startRadius = 0.001f;
         if (endRadius < 0.001f) endRadius = 0.001f;
         if (length < 0.001f) length = 0.001f;
@@ -60,42 +63,13 @@ public class GeneratedLimb : MonoBehaviour
         prevEndRadius = endRadius;
         prevLength = length;
 
-        if (snapToParent)
-        {
-            GeneratedLimb prevLimbPart = transform.parent?.GetComponent<GeneratedLimb>();
-            if (prevLimbPart != null)
-            {
-                transform.localPosition = prevLimbPart.LastPoint - startRadius * Vector3.forward;
-            }
-        }
     }
 
-    float CalculateAngle()
+    void SetUpComponents()
     {
-        float kat1 = startRadius - endRadius;
-        float l2 = Mathf.Sqrt(length * length - kat1 * kat1);
-
-        float sinValue = kat1 / l2;
-        return Mathf.Asin(sinValue) * Mathf.Rad2Deg;
-    }
-
-    public void GetVertexAtIndex(out Vector3[] vertices, out Vector3[] normals, out Vector2[] uvs, Transform transformSpace)
-    {
-        vertices = new Vector3[stitchSeams.Length];
-        normals = new Vector3[stitchSeams.Length];
-        uvs = new Vector2[stitchSeams.Length];
-
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            Vector3 point = limbFilter.sharedMesh.vertices[stitchSeams[i]];
-            if(point.y < 0)
-                point = new Vector3(point.x, point.y *0.5f, point.z*0.5f);
-            point = transform.TransformPoint(point);
-            vertices[i] = transformSpace.InverseTransformPoint(point);
-            normals[i] = transformSpace.InverseTransformDirection(transform.TransformDirection(limbFilter.sharedMesh.normals[stitchSeams[i]]));
-            uvs[i] = limbFilter.sharedMesh.uv[stitchSeams[i]];
-        }
-
+        if (limbRenderer == null) limbRenderer = gameObject.AddComponent<MeshRenderer>();
+        if (limbFilter == null) limbFilter = gameObject.AddComponent<MeshFilter>();
+        if (limbMesh == null) limbMesh = new Mesh();
     }
 
     void CreateMesh()
@@ -120,12 +94,9 @@ public class GeneratedLimb : MonoBehaviour
         int[] tris = new int[(12 * 3 * 2)/*top and bottom*/+ (verts.Length - 2 - 12) * 6/*all 12 fillers*/];
         int segmentCount = upperSegments + lowerSegments;
 
-        List<int> debugIndices = new List<int>();
-
         int current = 0;
 
         verts[current] = Vector3.back * startRadius;
-        debugIndices.Add(current);
         FirstPoint = verts[current];
         uvs[current] = Vector2.zero;
         normals[current] = Vector3.back;
@@ -138,8 +109,6 @@ public class GeneratedLimb : MonoBehaviour
         {
             for (int j = 0; j < 12; j++)
             {
-                if (rotatingAngle % 180 == 0)
-                    debugIndices.Add(current);
                 verts[current] = Quaternion.AngleAxis(rotatingAngle, Vector3.forward) * (Quaternion.AngleAxis(sphereAngle, Vector3.right) * (Vector3.back * startRadius));
                 normals[current] = Quaternion.AngleAxis(rotatingAngle, Vector3.forward) * (Quaternion.AngleAxis(sphereAngle, Vector3.right) * Vector3.back);
                 uvs[current] = new Vector2(rotatingAngle / 360, 0);
@@ -155,8 +124,6 @@ public class GeneratedLimb : MonoBehaviour
         {
             for (int j = 0; j < 12; j++)
             {
-                if (rotatingAngle % 180 == 0)
-                    debugIndices.Add(current);
                 verts[current] = Quaternion.AngleAxis(rotatingAngle, Vector3.forward) * (Quaternion.AngleAxis(sphereAngle, Vector3.right) * (Vector3.back * endRadius)) + Vector3.forward * length;
                 normals[current] = Quaternion.AngleAxis(rotatingAngle, Vector3.forward) * (Quaternion.AngleAxis(sphereAngle, Vector3.right) * Vector3.back);
                 uvs[current] = new Vector2(rotatingAngle / 360, 1);
@@ -167,7 +134,6 @@ public class GeneratedLimb : MonoBehaviour
         }
         verts[current] = Vector3.forward * endRadius + Vector3.forward * length;
         LastPoint = verts[current];
-        debugIndices.Add(current);
         uvs[current] = new Vector2(1, 1);
         normals[current] = Vector3.forward;
 
@@ -233,12 +199,20 @@ public class GeneratedLimb : MonoBehaviour
         Material thisOnesMat = new Material(mat);
         thisOnesMat.SetColor("_MainColor", startColor);
         thisOnesMat.SetColor("_TransitionColor", endColor);
-        armRenderer.material = thisOnesMat;
-        armRenderer.material = thisOnesMat;
-
-        stitchSeams = debugIndices.ToArray();
+        limbRenderer.material = thisOnesMat;
+        limbRenderer.material = thisOnesMat;
 
         initialized = true;
+    }
+
+    /// <returns>The slope from start to end in degrees</returns>
+    float CalculateAngle()
+    {
+        float kat1 = startRadius - endRadius;
+        float l2 = Mathf.Sqrt(length * length - kat1 * kat1);
+
+        float sinValue = kat1 / l2;
+        return Mathf.Asin(sinValue) * Mathf.Rad2Deg;
     }
 
     public void UpdateVertices()
@@ -348,32 +322,17 @@ public class GeneratedLimb : MonoBehaviour
 
     }
 
-    public void Initialize(LimbInitializer initializer)
-    {
-        m_initializer = initializer;
-        SetInitialState();
-        SetUpComponents();
-        CreateMesh();
-    }
-
     private void Update()
     {
-        if (prevLength != length || prevStartRadius != startRadius || prevEndRadius != endRadius)
-        {
-            m_initializer = transform.root.GetComponent<LimbInitializer>();
-            m_initializer?.Initialize();
-        }
         if (target != null && initialized)
         {
             UpdateVertices();
         }
-        //if (gameObject.name.Contains("Stuff"))
-        //{
-        //    foreach (int index in stitchSeams)
-        //    {
-        //        Debug.DrawRay(transform.TransformPoint(limbFilter.sharedMesh.vertices[index]),
-        //            transform.TransformDirection(limbFilter.sharedMesh.normals[index]), Color.white);
-        //    }
-        //}
+        else if ((prevLength != length) || prevStartRadius != startRadius || prevEndRadius != endRadius)
+        {
+            HumanoidBodyCreator creator = transform.root.GetComponent<HumanoidBodyCreator>();
+            creator?.RecalculateBody();
+        }
+        
     }
 }

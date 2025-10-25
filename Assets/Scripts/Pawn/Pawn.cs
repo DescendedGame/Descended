@@ -67,6 +67,7 @@ public class Pawn : Attackable
         while (true)
         {
             PawnStateType nextState = currentState.Update();
+
             if (nextState == currentState.stateType) break;
 
             SetState(nextState);

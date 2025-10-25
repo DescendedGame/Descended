@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [ExecuteInEditMode]
 public class BodyStitcher : MonoBehaviour
@@ -15,10 +14,10 @@ public class BodyStitcher : MonoBehaviour
     public Material mat;
 
     public Transform rightStart;
-    public Transform rightEnd;
+    public Vector3 rightEndPosition;
 
     public Transform leftStart;
-    public Transform leftEnd;
+    public Vector3 leftEndPosition;
 
     public void Initialize()
     {
@@ -32,18 +31,16 @@ public class BodyStitcher : MonoBehaviour
         Vector2[] rightUvs = new Vector2[13];
         rightStart = rightSide.transform;
 
-        if(rightSide.target == null && rightEnd == null)
+        if(rightSide.target == null)
         {
-            rightEnd = new GameObject("RightEndCheat").transform;
-            rightEnd.SetParent(rightStart, false);
-            rightEnd.localPosition = new Vector3(0, 0, rightSide.length);
+            rightEndPosition = rightSide.transform.position + rightSide.length * rightSide.transform.forward;
         }
-        else if (leftSide.target != null)
+        else
         {
-            rightEnd = rightSide.target;
+            rightEndPosition = rightSide.target.position;
         }
 
-        Vector3 rightStartToEnd = rightEnd.position - rightStart.position;
+        Vector3 rightStartToEnd = rightEndPosition - rightStart.position;
         rightStartToEnd = transform.InverseTransformVector(rightStartToEnd);
 
         Vector3[] leftVertices = new Vector3[13];
@@ -51,18 +48,16 @@ public class BodyStitcher : MonoBehaviour
         Vector2[] leftUvs = new Vector2[13];
         leftStart = leftSide.transform;
         
-        if (leftSide.target == null && leftEnd == null)
+        if (leftSide.target == null)
         {
-            leftEnd = new GameObject("LeftEndCheat").transform;
-            leftEnd.SetParent(leftStart, false);
-            leftEnd.localPosition = new Vector3(0, 0, leftSide.length);
+            leftEndPosition = leftSide.transform.position + leftSide.length * leftSide.transform.forward;
         }
-        else if(leftSide.target != null)
+        else
         {
-            leftEnd = leftSide.target;
+            leftEndPosition = leftSide.target.position;
         }
 
-        Vector3 leftStartToEnd = leftEnd.position - leftStart.position;
+        Vector3 leftStartToEnd = leftEndPosition - leftStart.position;
         leftStartToEnd = transform.InverseTransformVector(leftStartToEnd);
 
         float rightAngle = CalculateAngle(rightSide.startRadius, rightSide.endRadius, rightSide.length);
@@ -97,22 +92,19 @@ public class BodyStitcher : MonoBehaviour
             leftUvs[i] = Vector2.one;
         }
 
-        rotationVector = transform.InverseTransformVector(leftEnd.position - rightEnd.position);
+        rotationVector = transform.InverseTransformVector(leftEndPosition - rightEndPosition);
         rightDegreeInterval = (90 - rightAngle) / 4;
         leftDegreeInterval = (90 - leftAngle) / 4;
         for (int i = 9; i < 13; i++)
         {
             rightNormals[i] = Quaternion.AngleAxis(-rightDegreeInterval * (i-9), rotationVector) * Quaternion.AngleAxis(rightAngle, rotationVector) * Vector3.Cross(rotationVector, rightStartToEnd).normalized;
-            rightVertices[i] = transform.InverseTransformPoint(rightEnd.position) + rightNormals[i] * rightSide.endRadius;
+            rightVertices[i] = transform.InverseTransformPoint(rightEndPosition) + rightNormals[i] * rightSide.endRadius;
             rightUvs[i] = Vector2.one;
 
             leftNormals[i] = Quaternion.AngleAxis(-leftDegreeInterval * (i - 9), rotationVector) * Quaternion.AngleAxis(leftAngle, rotationVector) * Vector3.Cross(rotationVector, rightStartToEnd).normalized;
-            leftVertices[i] = transform.InverseTransformPoint(leftEnd.position) + leftNormals[i] * leftSide.endRadius;
+            leftVertices[i] = transform.InverseTransformPoint(leftEndPosition) + leftNormals[i] * leftSide.endRadius;
             leftUvs[i] = Vector2.one;
         }
-
-
-        //leftSide.GetVertexAtIndex(out leftVertices, out leftNormals, out leftUvs, transform);
 
         int segments = rightVertices.Length;
 

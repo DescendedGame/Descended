@@ -24,7 +24,7 @@ public class LimbInitializer : MonoBehaviour
         GeneratedLimb generator = current.GetComponent<GeneratedLimb>();
         if (generator!= null)
         {
-            generator.Initialize(this);
+            generator.Initialize();
         }
         for(int i = 0; i < current.childCount; i++)
         {

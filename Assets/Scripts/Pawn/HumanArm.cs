@@ -17,56 +17,64 @@ public class HumanArm : BodyLinkage
     Quaternion initialArmRotation;
     Quaternion initialForearmRotation;
 
+    GeneratedLimb shoulderLimb;
+    GeneratedLimb armLimb;
+    GeneratedLimb forearmLimb;
 
-    public void Initialize(bool isRight, float shoulderWidth, float torsoDepth, float shoulderSize, Material basicInGameObject, Color skinColor, float armLength, float elbowSize
-        ,float forearmLength, float wristSize)
+    public void Initialize(HumanoidBodyCreator creator, bool isRight)
     {
 
+        if(shoulderLimb == null)
+        {
+            shoulderLimb = gameObject.AddComponent<GeneratedLimb>();
+            shoulder = transform;
+        }
+        shoulderLimb.length = creator.shoulderWidth;
+        shoulderLimb.startRadius = creator.torsoDepth;
+        shoulderLimb.endRadius = creator.shoulderSize;
+        shoulderLimb.mat = new Material(creator.basicInGameObject);
+        shoulderLimb.startColor = creator.skinColor;
+        shoulderLimb.endColor = creator.skinColor;
+        shoulderLimb.Initialize();
 
-        GeneratedLimb t_shoulder = gameObject.AddComponent<GeneratedLimb>();
-        t_shoulder.length = shoulderWidth;
-        t_shoulder.startRadius = torsoDepth;
-        t_shoulder.endRadius = shoulderSize;
-        t_shoulder.mat = new Material(basicInGameObject);
-        t_shoulder.startColor = skinColor;
-        t_shoulder.endColor = skinColor;
-        t_shoulder.Initialize();
-        shoulder = t_shoulder.transform;
+        if(armLimb == null)
+        {
+            this.isRight = isRight;
+            string rightOrLeft;
+            if (isRight)
+                rightOrLeft = "Right";
+            else
+                rightOrLeft = "Left";
 
-        this.isRight = isRight;
-        string rightOrLeft;
-        if (isRight)
-            rightOrLeft = "Right";
-        else
-            rightOrLeft = "Left";
+            GameObject go = new GameObject(rightOrLeft + "Arm");
+            go.layer = gameObject.layer;
+            go.transform.SetParent(shoulder, false);
+            armLimb = go.AddComponent<GeneratedLimb>();
+            armLimb.snapToParent = true;
+            arm = armLimb.transform;
 
-        GameObject go = new GameObject(rightOrLeft+"Arm");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(t_shoulder.transform, false);
-        GeneratedLimb t_arm = go.AddComponent<GeneratedLimb>();
-        t_arm.snapToParent = true;
-        t_arm.length = armLength;
-        t_arm.startRadius = shoulderSize;
-        t_arm.endRadius = elbowSize;
-        t_arm.mat = new Material(basicInGameObject);
-        t_arm.startColor = skinColor;
-        t_arm.endColor = skinColor;
-        t_arm.Initialize();
-        arm = t_arm.transform;
+            go = new GameObject(rightOrLeft + "Forearm");
+            go.layer = gameObject.layer;
+            go.transform.SetParent(armLimb.transform, false);
+            forearmLimb = go.AddComponent<GeneratedLimb>();
+            forearmLimb.snapToParent = true;
+            forearm = forearmLimb.transform;
+        }
+        armLimb.length = creator.armLength;
+        armLimb.startRadius = creator.shoulderSize;
+        armLimb.endRadius = creator.elbowSize;
+        armLimb.mat = new Material(creator.basicInGameObject);
+        armLimb.startColor = creator.skinColor;
+        armLimb.endColor = creator.skinColor;
+        armLimb.Initialize();
 
-        go = new GameObject(rightOrLeft+"Forearm");
-        go.layer = gameObject.layer;
-        go.transform.SetParent(t_arm.transform, false);
-        GeneratedLimb t_forearm = go.AddComponent<GeneratedLimb>();
-        t_forearm.snapToParent = true;
-        t_forearm.length = forearmLength;
-        t_forearm.startRadius = elbowSize;
-        t_forearm.endRadius = wristSize;
-        t_forearm.mat = new Material(basicInGameObject);
-        t_forearm.startColor = skinColor;
-        t_forearm.endColor = skinColor;
-        t_forearm.Initialize();
-        forearm = t_forearm.transform;
+        forearmLimb.length = creator.forearmLength;
+        forearmLimb.startRadius = creator.elbowSize;
+        forearmLimb.endRadius = creator.wristSize;
+        forearmLimb.mat = new Material(creator.basicInGameObject);
+        forearmLimb.startColor = creator.skinColor;
+        forearmLimb.endColor = creator.skinColor;
+        forearmLimb.Initialize();
 
         if (isRight)
             initialShoulderRotation = Quaternion.LookRotation(Vector3.right, Vector3.forward);
@@ -89,7 +97,7 @@ public class HumanArm : BodyLinkage
             arm.localRotation = Quaternion.RotateTowards(arm.localRotation, Quaternion.AngleAxis(15 * WaveVariables.sinTimeRushQuarter + 45, Vector3.up) * 
                 Quaternion.AngleAxis(-20 * WaveVariables.sinTime, Vector3.forward), Time.deltaTime * 360);
 
-        forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(/*10 * Mathf.Sin(-Time.time) */-90, Vector3.right), Time.deltaTime * 360);
+        forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.right), Time.deltaTime * 360);
 
     }
 
