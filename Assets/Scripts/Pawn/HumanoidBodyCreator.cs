@@ -1,8 +1,55 @@
 using UnityEngine;
 
 [System.Serializable]
+public struct HumanHeadSettings
+{
+    //head
+    public float skullSize;
+
+    public float jawWidth;
+    public float jawHeight;
+    public float jawDepth;
+
+    public float cheekboneWidth;
+    public float cheekboneHeight;
+    public float cheekSize;
+
+    public float chinLength;
+    public float chinWidth;
+
+    //eyes
+    public float eyeHeight;
+    public float eyeDistance;
+    public float eyeDepth;
+    public float eyeSize;
+
+    //brows
+    public float outerBrow;
+    public float innerBrow;
+    public float browDistance;
+    public float browDepth;
+
+    //mouth
+    public float mouthWidth;
+    public float mouthHeight;
+    public float lipSize;
+
+    //nose
+    public float noseWidth;
+    public float noseHeight;
+    public float noseDepth;
+
+    //ears
+    public float earRotation;
+    public float earHeight;
+    public float earSize;
+}
+
+[System.Serializable]
 public struct HumanBodySettings
 {
+    public HumanHeadSettings headSettings;
+
     public float upperNeckLength;
     public float upperNeckWidth;
     public float lowerNeckWidth;
@@ -60,11 +107,13 @@ public struct HumanBodyCoverageSettings
 
 public class HumanoidBodyCreator : BodyCreator
 {
-    public GameObject headPrefab;
+    [SerializeField] GameObject headPrefab;
 
     public HumanBodySettings bodySettings;
 
     GameObject head;
+    HumanHeadCreator headCreator;
+
     GeneratedLimb neck;
 
     Transform atlas;
@@ -86,6 +135,11 @@ public class HumanoidBodyCreator : BodyCreator
         Pentapus,
     }
 
+    public void CreateHead()
+    {
+        headCreator.CreateHead(bodySettings.headSettings);
+    }
+
     public override void RecalculateBody()
     {
         CreateBody(out Transform atlasTransform, out Transform cameraTransform);
@@ -104,7 +158,7 @@ public class HumanoidBodyCreator : BodyCreator
 
     Transform CreateNeckAndHead()
     {
-        return CreateHead(CreateUpperNeck());
+        return PlaceHead(CreateUpperNeck());
     }
 
     GeneratedLimb CreateUpperNeck()
@@ -127,11 +181,12 @@ public class HumanoidBodyCreator : BodyCreator
         return neck;
     }
 
-    Transform CreateHead(GeneratedLimb upperNeck)
+    Transform PlaceHead(GeneratedLimb upperNeck)
     {
         if(head == null)
         {
             head = Instantiate(headPrefab);
+            headCreator = head.AddComponent<HumanHeadCreator>();
             head.layer = gameObject.layer;
             foreach (Transform child in head.transform)
             {
@@ -148,6 +203,7 @@ public class HumanoidBodyCreator : BodyCreator
                 thisOnesMat.SetColor("_TransitionColor", bodySettings.skinColor);
                 renderer.material = thisOnesMat;
             }
+            CreateHead();
         }
        
         head.transform.localPosition = Vector3.forward * upperNeck.length;

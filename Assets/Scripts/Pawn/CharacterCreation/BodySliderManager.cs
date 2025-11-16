@@ -5,15 +5,15 @@ using TMPro;
 public class BodySliderManager : MonoBehaviour
 {
     HumanoidBodyCreator bodyCreator;
-    [SerializeField] GameObject bodySliderPrefab;
-    [SerializeField] GameObject bodyTogglePrefab;
+    [SerializeField] GameObject customizationSliderPrefab;
+    [SerializeField] GameObject customizationTogglePrefab;
     Slider[] bodySliders = new Slider[26];
     Toggle[] bodyToggles = new Toggle[12];
     void Awake()
     {
         for(int i = 0; i < bodySliders.Length; i++)
         {
-            GameObject bodySlider = Instantiate(bodySliderPrefab, transform.GetChild(0));
+            GameObject bodySlider = Instantiate(customizationSliderPrefab, transform.GetChild(0));
             bodySliders[i] = bodySlider.GetComponent<Slider>();
             bodySliders[i].onValueChanged.AddListener(OnSliderChanged);
         }
@@ -47,7 +47,7 @@ public class BodySliderManager : MonoBehaviour
 
         for (int i = 0; i < bodyToggles.Length; i++)
         {
-            GameObject bodyToggle = Instantiate(bodyTogglePrefab, transform.GetChild(1));
+            GameObject bodyToggle = Instantiate(customizationTogglePrefab, transform.GetChild(1));
             bodyToggles[i] = bodyToggle.GetComponent<Toggle>();
             bodyToggles[i].onValueChanged.AddListener(OnToggleChanged);
         }
@@ -65,7 +65,7 @@ public class BodySliderManager : MonoBehaviour
         bodyToggles[11].GetComponentInChildren<Text>().text = "ankles";
     }
 
-    float FifthSpan(float midValue, float slideValue)
+    float HalfSpan(float midValue, float slideValue)
     {
         return Mathf.Lerp(midValue * 0.5f, midValue * 1.5f, slideValue);
     }
@@ -78,36 +78,36 @@ public class BodySliderManager : MonoBehaviour
             bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
             if (bodyCreator == null) return;
         }
-        bodyCreator.bodySettings.upperNeckLength = FifthSpan(0.1f, bodySliders[0].value);
-        bodyCreator.bodySettings.upperNeckWidth = FifthSpan(0.05f, bodySliders[1].value);
-        bodyCreator.bodySettings.lowerNeckWidth = FifthSpan(0.08f, bodySliders[2].value);
+        bodyCreator.bodySettings.upperNeckLength = HalfSpan(0.1f, bodySliders[0].value);
+        bodyCreator.bodySettings.upperNeckWidth = HalfSpan(0.05f, bodySliders[1].value);
+        bodyCreator.bodySettings.lowerNeckWidth = HalfSpan(0.08f, bodySliders[2].value);
 
-        bodyCreator.bodySettings.atlasLength = FifthSpan(0.1f, bodySliders[3].value);
-        bodyCreator.bodySettings.torsoDepth = FifthSpan(0.12f, bodySliders[4].value);
+        bodyCreator.bodySettings.atlasLength = HalfSpan(0.1f, bodySliders[3].value);
+        bodyCreator.bodySettings.torsoDepth = HalfSpan(0.12f, bodySliders[4].value);
 
-        bodyCreator.bodySettings.torsoWidth = FifthSpan(0.05f, bodySliders[5].value);
-        bodyCreator.bodySettings.ribLength = FifthSpan(0.2f, bodySliders[6].value);
-        bodyCreator.bodySettings.waist = FifthSpan(0.08f, bodySliders[7].value);
-        bodyCreator.bodySettings.bellyLength = FifthSpan(0.15f, bodySliders[8].value);
-        bodyCreator.bodySettings.shoulderWidth = FifthSpan(0.1f, bodySliders[9].value);
-        bodyCreator.bodySettings.shoulderSize = FifthSpan(0.08f, bodySliders[10].value);
-        bodyCreator.bodySettings.armLength = FifthSpan(0.3f, bodySliders[11].value);
-        bodyCreator.bodySettings.elbowSize = FifthSpan(0.04f, bodySliders[12].value);
-        bodyCreator.bodySettings.forearmLength = FifthSpan(0.25f, bodySliders[13].value);
-        bodyCreator.bodySettings.wristSize = FifthSpan(0.025f, bodySliders[14].value);
+        bodyCreator.bodySettings.torsoWidth = HalfSpan(0.05f, bodySliders[5].value);
+        bodyCreator.bodySettings.ribLength = HalfSpan(0.2f, bodySliders[6].value);
+        bodyCreator.bodySettings.waist = HalfSpan(0.08f, bodySliders[7].value);
+        bodyCreator.bodySettings.bellyLength = HalfSpan(0.15f, bodySliders[8].value);
+        bodyCreator.bodySettings.shoulderWidth = HalfSpan(0.1f, bodySliders[9].value);
+        bodyCreator.bodySettings.shoulderSize = HalfSpan(0.08f, bodySliders[10].value);
+        bodyCreator.bodySettings.armLength = HalfSpan(0.3f, bodySliders[11].value);
+        bodyCreator.bodySettings.elbowSize = HalfSpan(0.04f, bodySliders[12].value);
+        bodyCreator.bodySettings.forearmLength = HalfSpan(0.25f, bodySliders[13].value);
+        bodyCreator.bodySettings.wristSize = HalfSpan(0.025f, bodySliders[14].value);
 
-        bodyCreator.bodySettings.upperHipWidth = FifthSpan(0.05f, bodySliders[15].value);
-        bodyCreator.bodySettings.upperHipRadius = FifthSpan(0.14f, bodySliders[16].value);
-        bodyCreator.bodySettings.lowerHipRadius = FifthSpan(0.15f, bodySliders[17].value);
-        bodyCreator.bodySettings.hipLength = FifthSpan(0.09f, bodySliders[18].value);
-        bodyCreator.bodySettings.hipOutRotation = FifthSpan(20, bodySliders[19].value);
+        bodyCreator.bodySettings.upperHipWidth = HalfSpan(0.05f, bodySliders[15].value);
+        bodyCreator.bodySettings.upperHipRadius = HalfSpan(0.14f, bodySliders[16].value);
+        bodyCreator.bodySettings.lowerHipRadius = HalfSpan(0.15f, bodySliders[17].value);
+        bodyCreator.bodySettings.hipLength = HalfSpan(0.09f, bodySliders[18].value);
+        bodyCreator.bodySettings.hipOutRotation = HalfSpan(20, bodySliders[19].value);
 
-        bodyCreator.bodySettings.thighLength = FifthSpan(0.4f, bodySliders[20].value);
-        bodyCreator.bodySettings.kneeRadius = FifthSpan(0.05f, bodySliders[21].value);
-        bodyCreator.bodySettings.upperCalfLength = FifthSpan(0.1f, bodySliders[22].value);
-        bodyCreator.bodySettings.calfRadius = FifthSpan(0.06f, bodySliders[23].value);
-        bodyCreator.bodySettings.lowerCalfLength = FifthSpan(0.25f, bodySliders[24].value);
-        bodyCreator.bodySettings.ankleRadius = FifthSpan(0.03f, bodySliders[25].value);
+        bodyCreator.bodySettings.thighLength = HalfSpan(0.4f, bodySliders[20].value);
+        bodyCreator.bodySettings.kneeRadius = HalfSpan(0.05f, bodySliders[21].value);
+        bodyCreator.bodySettings.upperCalfLength = HalfSpan(0.1f, bodySliders[22].value);
+        bodyCreator.bodySettings.calfRadius = HalfSpan(0.06f, bodySliders[23].value);
+        bodyCreator.bodySettings.lowerCalfLength = HalfSpan(0.25f, bodySliders[24].value);
+        bodyCreator.bodySettings.ankleRadius = HalfSpan(0.03f, bodySliders[25].value);
 
         bodyCreator.RecalculateBody();
     }

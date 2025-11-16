@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class HeadCustomizationRegions : MonoBehaviour
+[CreateAssetMenu(fileName = "HumanHeadRegions", menuName = "Scriptable Objects/HumanHeadRegions")]
+public class HumanHeadRegions : ScriptableObject
 {
     public Vector3[] brow;
     public Vector3[] cheek;

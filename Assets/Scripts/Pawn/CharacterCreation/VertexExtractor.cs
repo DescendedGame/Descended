@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class VertexExtractor : MonoBehaviour
 {
-    public bool button;
+    public HumanHeadRegions headRegions;
     public GameObject brow;
     public GameObject cheek;
     public GameObject cheekBone;
@@ -22,20 +22,19 @@ public class VertexExtractor : MonoBehaviour
 
     void Awake()
     {
-        HeadCustomizationRegions dataHolder = new GameObject().AddComponent<HeadCustomizationRegions>();
-        dataHolder.brow = ExtractVertices(brow);
-        dataHolder.cheek = ExtractVertices(cheek);
-        dataHolder.cheekBone = ExtractVertices(cheekBone);
-        dataHolder.chinTip = ExtractVertices(chinTip);
-        dataHolder.earSquare = ExtractVertices(earSquare);
-        dataHolder.eyeHole = ExtractVertices(eyeHole);
-        dataHolder.jawLine = ExtractVertices(jawLine);
-        dataHolder.lowerLip = ExtractVertices(lowerLip);
-        dataHolder.mouth = ExtractVertices(mouth);
-        dataHolder.nose = ExtractVertices(nose);
-        dataHolder.noseTip = ExtractVertices(noseTip);
-        dataHolder.scalp = ExtractVertices(scalp);
-        dataHolder.upperLip = ExtractVertices(upperLip);
+        headRegions.brow = ExtractVertices(brow);
+        headRegions.cheek = ExtractVertices(cheek);
+        headRegions.cheekBone = ExtractVertices(cheekBone);
+        headRegions.chinTip = ExtractVertices(chinTip);
+        headRegions.earSquare = ExtractVertices(earSquare);
+        headRegions.eyeHole = ExtractVertices(eyeHole);
+        headRegions.jawLine = ExtractVertices(jawLine);
+        headRegions.lowerLip = ExtractVertices(lowerLip);
+        headRegions.mouth = ExtractVertices(mouth);
+        headRegions.nose = ExtractVertices(nose);
+        headRegions.noseTip = ExtractVertices(noseTip);
+        headRegions.scalp = ExtractVertices(scalp);
+        headRegions.upperLip = ExtractVertices(upperLip);
     }
 
     Vector3[] ExtractVertices(GameObject targetObj)

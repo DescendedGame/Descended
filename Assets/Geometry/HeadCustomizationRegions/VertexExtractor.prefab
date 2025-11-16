@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8696f33a047c4243a049a374b3a8d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: 0
+  headRegions: {fileID: 11400000, guid: a4d443a807c2db945a69897f1145d132, type: 2}
   brow: {fileID: 919132149155446097, guid: b1988b6c561fe2c4faacb136b65aead7, type: 3}
   cheek: {fileID: 919132149155446097, guid: f78aac76d426b984db984b0936f186c6, type: 3}
   cheekBone: {fileID: 919132149155446097, guid: f87d36b8dcff6944ca8806688fc70ce1,

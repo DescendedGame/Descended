@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 8083146831606713927}
   - component: {fileID: 5340753574832769565}
   m_Layer: 5
-  m_Name: BodySlider
+  m_Name: CustomizationSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

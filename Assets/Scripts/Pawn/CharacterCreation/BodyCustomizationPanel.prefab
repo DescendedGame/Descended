@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 5920574732068886726}
   - component: {fileID: 7963615405031532995}
   m_Layer: 5
-  m_Name: BodySliderPanel
+  m_Name: BodyCustomizationPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1567a06475678db49878034b439269f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodySliderPrefab: {fileID: 3512503313021173396, guid: fb416fc800ba309408ca022e8f97fec1,
+  customizationSliderPrefab: {fileID: 3512503313021173396, guid: fb416fc800ba309408ca022e8f97fec1,
     type: 3}
-  bodyTogglePrefab: {fileID: 1982490515816653717, guid: 0cae3497409edd94b967c1f8a0badffc,
+  customizationTogglePrefab: {fileID: 1982490515816653717, guid: 0cae3497409edd94b967c1f8a0badffc,
     type: 3}
 --- !u!1 &8775107705662095031
 GameObject:

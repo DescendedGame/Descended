@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3194378907467578440
+--- !u!1 &2857009804164990737
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7903612885530874054}
-  - component: {fileID: 6749846639220525696}
+  - component: {fileID: 1691929931143065841}
+  - component: {fileID: 8361086613350068966}
   m_Layer: 0
   m_Name: HeadCustomizationRegions
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7903612885530874054
+--- !u!4 &1691929931143065841
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3194378907467578440}
+  m_GameObject: {fileID: 2857009804164990737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6749846639220525696
+--- !u!114 &8361086613350068966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3194378907467578440}
+  m_GameObject: {fileID: 2857009804164990737}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b615a1a236934143a3cd409a2999323, type: 3}
@@ -89,9 +89,10 @@ MonoBehaviour:
   - {x: 0.010848, y: 0.059314, z: 0.15441}
   - {x: 0.010858, y: 0.076006, z: 0.144859}
   - {x: 0.007641, y: 0.059395, z: 0.177776}
-  - {x: 0.01217, y: 0.04384, z: 0.156948}
+  - {x: -0.0122, y: 0.043853, z: 0.156931}
   - {x: 0, y: 0.021043, z: 0.144176}
   - {x: 0.01427, y: 0.029079, z: 0.14973}
+  - {x: 0.0122, y: 0.043853, z: 0.156931}
   noseTip:
   - {x: 0.00733, y: 0.038036, z: 0.186214}
   - {x: 0, y: 0.038036, z: 0.186214}
@@ -111,7 +112,7 @@ MonoBehaviour:
   - {x: 0.076776, y: 0.144517, z: 0.067717}
   - {x: 0.049572, y: 0.192015, z: 0.092344}
   - {x: 0, y: 0.081878, z: -0.052895}
-  - {x: 0.073108, y: 0.140244, z: 0.000594}
+  - {x: 0.073108, y: 0.140244, z: 0.000595}
   - {x: 0.074924, y: 0.155151, z: 0.022804}
   - {x: 0.064064, y: 0.120814, z: -0.022744}
   - {x: 0.071387, y: 0.165937, z: 0.047682}
