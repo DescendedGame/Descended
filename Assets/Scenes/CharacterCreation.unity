@@ -119,6 +119,43 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!84 &858638959
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 921
+  m_Height: 474
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 90
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1001 &874860582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,6 +229,136 @@ PrefabInstance:
       propertyPath: bodySettings.coverSettings.butt
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.earSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.eyeSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.lipSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.eyeDepth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.jawDepth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.jawWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.browDepth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.cheekSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.chinWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.earHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.eyeHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.innerBrow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.jawHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.noseDepth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.noseWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.outerBrow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.skullSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.chinLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.mouthWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.noseHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.earRotation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.eyeDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.mouthHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.browDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.cheekboneWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
+        type: 3}
+      propertyPath: bodySettings.headSettings.cheekboneHeight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -214,7 +381,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 2006591634}
+      objectReference: {fileID: 858638959}
     - target: {fileID: 5628315036079614060, guid: e5ac6ae2f0f98bc4fb088fa229e89e48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -269,7 +436,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1828302067}
+      objectReference: {fileID: 1262310294}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -378,6 +545,43 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!84 &1262310294
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 921
+  m_Height: 474
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1488976085
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,43 +724,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8022209877777301345}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1828302067
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 1070
-  m_Height: 642
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1970355591
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,43 +833,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &2006591634
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 1070
-  m_Height: 642
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 90
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1001 &2077617513
 PrefabInstance:
   m_ObjectHideFlags: 0

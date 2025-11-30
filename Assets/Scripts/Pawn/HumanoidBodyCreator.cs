@@ -186,7 +186,7 @@ public class HumanoidBodyCreator : BodyCreator
         if(head == null)
         {
             head = Instantiate(headPrefab);
-            headCreator = head.AddComponent<HumanHeadCreator>();
+            headCreator = head.GetComponent<HumanHeadCreator>();
             head.layer = gameObject.layer;
             foreach (Transform child in head.transform)
             {

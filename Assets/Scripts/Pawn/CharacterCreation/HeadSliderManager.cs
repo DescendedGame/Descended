@@ -78,7 +78,7 @@ public class HeadSliderManager : MonoBehaviour
             bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
             if (bodyCreator == null) return;
         }
-        bodyCreator.bodySettings.headSettings.skullSize = HalfSpan(0.1f, bodySliders[0].value);
+        bodyCreator.bodySettings.headSettings.skullSize = HalfSpan(1f, bodySliders[0].value);
         bodyCreator.bodySettings.headSettings.jawWidth = HalfSpan(0.05f, bodySliders[1].value);
         bodyCreator.bodySettings.headSettings.jawHeight = HalfSpan(0.08f, bodySliders[2].value);
         bodyCreator.bodySettings.headSettings.jawDepth = HalfSpan(0.1f, bodySliders[3].value);

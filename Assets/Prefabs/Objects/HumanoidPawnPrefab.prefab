@@ -95,9 +95,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3ce99756ffe2d439770eafbfd82e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headPrefab: {fileID: 919132149155446097, guid: d57b900f1513d5d4f8969b97081e4ba7,
+  headPrefab: {fileID: 1202985670427727566, guid: c73b3165cee402e41bcd22b421e9504c,
     type: 3}
   bodySettings:
+    headSettings:
+      skullSize: 1
+      jawWidth: 1
+      jawHeight: 1
+      jawDepth: 1
+      cheekboneWidth: 1
+      cheekboneHeight: 1
+      cheekSize: 1
+      chinLength: 1
+      chinWidth: 1
+      eyeHeight: 1
+      eyeDistance: 1
+      eyeDepth: 1
+      eyeSize: 1
+      outerBrow: 1
+      innerBrow: 1
+      browDistance: 1
+      browDepth: 1
+      mouthWidth: 1
+      mouthHeight: 1
+      lipSize: 1
+      noseWidth: 1
+      noseHeight: 1
+      noseDepth: 1
+      earRotation: 1
+      earHeight: 1
+      earSize: 1
     upperNeckLength: 0.1
     upperNeckWidth: 0.05
     lowerNeckWidth: 0.08
@@ -126,3 +153,17 @@ MonoBehaviour:
     ankleRadius: 0.03
     skinColor: {r: 0.65882355, g: 0.49411765, b: 0.4862745, a: 0}
     basicInGameObject: {fileID: 2100000, guid: b4f431e14d9a55b4eb0e5b2f7d1aff2b, type: 2}
+    coverSettings:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      upperNeck: 0
+      lowerNeck: 0
+      shoulders: 0
+      elbows: 0
+      wrists: 0
+      chest: 0
+      waist: 0
+      hips: 0
+      butt: 0
+      knees: 0
+      calves: 0
+      ankles: 0
