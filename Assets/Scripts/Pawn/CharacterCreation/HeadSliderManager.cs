@@ -7,43 +7,74 @@ public class HeadSliderManager : MonoBehaviour
     HumanoidBodyCreator bodyCreator;
     [SerializeField] GameObject customizationSliderPrefab;
     [SerializeField] GameObject customizationTogglePrefab;
-    Slider[] bodySliders = new Slider[26];
+    Slider[] headSliders = new Slider[26];
     Toggle[] bodyToggles = new Toggle[12];
+
+    public Vector2 skullSizeSpan = new Vector2(0.9f, 1.1f);
+    public Vector2 jawWidthSpan = new Vector2(0.05f, 0);
+    public Vector2 jawHeightSpan = new Vector2(0.08f, 0);
+    public Vector2 jawDepthSpan = new Vector2(0.1f, 0);
+
+    public Vector2 cheekboneWidthSpan = new Vector2(0, 0);
+    public Vector2 cheekboneHeightSpan = new Vector2(0, 0);
+    public Vector2 cheekSizeSpan = new Vector2(0, 0);
+    public Vector2 chinLengthSpan = new Vector2(0, 0);
+    public Vector2 chinWidthSpan = new Vector2(0.15f, 0);
+    public Vector2 eyeHeightSpan = new Vector2(0.1f, 0);
+    public Vector2 eyeDistanceSpan = new Vector2(0.08f, 10);
+    public Vector2 eyeDepthSpan = new Vector2(0.3f, 11);
+    public Vector2 eyeSizeSpan = new Vector2(0.04f, 12);
+    public Vector2 outerBrowSpan = new Vector2(0.25f, 13);
+    public Vector2 innerBrowSpan = new Vector2(0.025f, 14);
+
+    public Vector2 browDistanceSpan = new Vector2(-0.02f, 0.02f);
+    public Vector2 browDepthSpan = new Vector2(-0.02f, 0.02f);
+    public Vector2 mouthWidthSpan = new Vector2(0.15f, 17);
+    public Vector2 mouthHeightSpan = new Vector2(0.09f, 18);
+    public Vector2 lipSizeSpan = new Vector2(20, 19);
+
+    public Vector2 noseWidthSpan = new Vector2(0.4f, 20);
+    public Vector2 noseHeightSpan = new Vector2(0.05f, 21);
+    public Vector2 noseDepthSpan = new Vector2(0.1f, 22);
+    public Vector2 earRotationSpan = new Vector2(0.06f, 23);
+    public Vector2 earHeightSpan = new Vector2(0.25f, 24);
+    public Vector2 earSizeSpan = new Vector2(0.03f, 25);
+
     void Awake()
     {
-        for(int i = 0; i < bodySliders.Length; i++)
+        for(int i = 0; i < headSliders.Length; i++)
         {
             GameObject bodySlider = Instantiate(customizationSliderPrefab, transform.GetChild(0));
-            bodySliders[i] = bodySlider.GetComponent<Slider>();
-            bodySliders[i].onValueChanged.AddListener(OnSliderChanged);
+            headSliders[i] = bodySlider.GetComponent<Slider>();
+            headSliders[i].onValueChanged.AddListener(OnSliderChanged);
         }
 
-        bodySliders[0].GetComponentInChildren<TMP_Text>().text = "skull size";
-        bodySliders[1].GetComponentInChildren<TMP_Text>().text = "jaw width";
-        bodySliders[2].GetComponentInChildren<TMP_Text>().text = "jaw height";
-        bodySliders[3].GetComponentInChildren<TMP_Text>().text = "jaw depth";
-        bodySliders[4].GetComponentInChildren<TMP_Text>().text = "cheekbone width";
-        bodySliders[5].GetComponentInChildren<TMP_Text>().text = "cheekbone height";
-        bodySliders[6].GetComponentInChildren<TMP_Text>().text = "cheeck size";
-        bodySliders[7].GetComponentInChildren<TMP_Text>().text = "chin length";
-        bodySliders[8].GetComponentInChildren<TMP_Text>().text = "chin width";
-        bodySliders[9].GetComponentInChildren<TMP_Text>().text = "eye height";
-        bodySliders[10].GetComponentInChildren<TMP_Text>().text = "eye distance";
-        bodySliders[11].GetComponentInChildren<TMP_Text>().text = "eye depth";
-        bodySliders[12].GetComponentInChildren<TMP_Text>().text = "eye size";
-        bodySliders[13].GetComponentInChildren<TMP_Text>().text = "outer brow";
-        bodySliders[14].GetComponentInChildren<TMP_Text>().text = "inner brow";
-        bodySliders[15].GetComponentInChildren<TMP_Text>().text = "brow distance";
-        bodySliders[16].GetComponentInChildren<TMP_Text>().text = "brow depth";
-        bodySliders[17].GetComponentInChildren<TMP_Text>().text = "mouth width";
-        bodySliders[18].GetComponentInChildren<TMP_Text>().text = "mouth height";
-        bodySliders[19].GetComponentInChildren<TMP_Text>().text = "lip size";
-        bodySliders[20].GetComponentInChildren<TMP_Text>().text = "nose width";
-        bodySliders[21].GetComponentInChildren<TMP_Text>().text = "nose height";
-        bodySliders[22].GetComponentInChildren<TMP_Text>().text = "nose depth";
-        bodySliders[23].GetComponentInChildren<TMP_Text>().text = "ear rotation";
-        bodySliders[24].GetComponentInChildren<TMP_Text>().text = "ear height";
-        bodySliders[25].GetComponentInChildren<TMP_Text>().text = "ear size";
+        headSliders[0].GetComponentInChildren<TMP_Text>().text = "skull size";
+        headSliders[1].GetComponentInChildren<TMP_Text>().text = "jaw width";
+        headSliders[2].GetComponentInChildren<TMP_Text>().text = "jaw height";
+        headSliders[3].GetComponentInChildren<TMP_Text>().text = "jaw depth";
+        headSliders[4].GetComponentInChildren<TMP_Text>().text = "cheekbone width";
+        headSliders[5].GetComponentInChildren<TMP_Text>().text = "cheekbone height";
+        headSliders[6].GetComponentInChildren<TMP_Text>().text = "cheeck size";
+        headSliders[7].GetComponentInChildren<TMP_Text>().text = "chin length";
+        headSliders[8].GetComponentInChildren<TMP_Text>().text = "chin width";
+        headSliders[9].GetComponentInChildren<TMP_Text>().text = "eye height";
+        headSliders[10].GetComponentInChildren<TMP_Text>().text = "eye distance";
+        headSliders[11].GetComponentInChildren<TMP_Text>().text = "eye depth";
+        headSliders[12].GetComponentInChildren<TMP_Text>().text = "eye size";
+        headSliders[13].GetComponentInChildren<TMP_Text>().text = "outer brow";
+        headSliders[14].GetComponentInChildren<TMP_Text>().text = "inner brow";
+        headSliders[15].GetComponentInChildren<TMP_Text>().text = "brow distance";
+        headSliders[16].GetComponentInChildren<TMP_Text>().text = "brow depth";
+        headSliders[17].GetComponentInChildren<TMP_Text>().text = "mouth width";
+        headSliders[18].GetComponentInChildren<TMP_Text>().text = "mouth height";
+        headSliders[19].GetComponentInChildren<TMP_Text>().text = "lip size";
+        headSliders[20].GetComponentInChildren<TMP_Text>().text = "nose width";
+        headSliders[21].GetComponentInChildren<TMP_Text>().text = "nose height";
+        headSliders[22].GetComponentInChildren<TMP_Text>().text = "nose depth";
+        headSliders[23].GetComponentInChildren<TMP_Text>().text = "ear rotation";
+        headSliders[24].GetComponentInChildren<TMP_Text>().text = "ear height";
+        headSliders[25].GetComponentInChildren<TMP_Text>().text = "ear size";
 
         /*for (int i = 0; i < bodyToggles.Length; i++)
         {
@@ -78,35 +109,35 @@ public class HeadSliderManager : MonoBehaviour
             bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
             if (bodyCreator == null) return;
         }
-        bodyCreator.bodySettings.headSettings.skullSize = HalfSpan(1f, bodySliders[0].value);
-        bodyCreator.bodySettings.headSettings.jawWidth = HalfSpan(0.05f, bodySliders[1].value);
-        bodyCreator.bodySettings.headSettings.jawHeight = HalfSpan(0.08f, bodySliders[2].value);
-        bodyCreator.bodySettings.headSettings.jawDepth = HalfSpan(0.1f, bodySliders[3].value);
+        bodyCreator.bodySettings.headSettings.skullSize = HalfSpan(1f, headSliders[0].value);
+        bodyCreator.bodySettings.headSettings.jawWidth = Mathf.Lerp(jawWidthSpan.x, jawWidthSpan.y, headSliders[1].value);
+        bodyCreator.bodySettings.headSettings.jawHeight = Mathf.Lerp(jawHeightSpan.x, jawHeightSpan.y, headSliders[2].value);
+        bodyCreator.bodySettings.headSettings.jawDepth = Mathf.Lerp(jawDepthSpan.x, jawDepthSpan.y, headSliders[3].value);
 
-        bodyCreator.bodySettings.headSettings.cheekboneWidth = HalfSpan(0.12f, bodySliders[4].value);
-        bodyCreator.bodySettings.headSettings.cheekboneHeight = HalfSpan(0.05f, bodySliders[5].value);
-        bodyCreator.bodySettings.headSettings.cheekSize = HalfSpan(0.2f, bodySliders[6].value);
-        bodyCreator.bodySettings.headSettings.chinLength = HalfSpan(0.08f, bodySliders[7].value);
-        bodyCreator.bodySettings.headSettings.chinWidth = HalfSpan(0.15f, bodySliders[8].value);
-        bodyCreator.bodySettings.headSettings.eyeHeight = HalfSpan(0.1f, bodySliders[9].value);
-        bodyCreator.bodySettings.headSettings.eyeDistance = HalfSpan(0.08f, bodySliders[10].value);
-        bodyCreator.bodySettings.headSettings.eyeDepth = HalfSpan(0.3f, bodySliders[11].value);
-        bodyCreator.bodySettings.headSettings.eyeSize = HalfSpan(0.04f, bodySliders[12].value);
-        bodyCreator.bodySettings.headSettings.outerBrow = HalfSpan(0.25f, bodySliders[13].value);
-        bodyCreator.bodySettings.headSettings.innerBrow = HalfSpan(0.025f, bodySliders[14].value);
+        bodyCreator.bodySettings.headSettings.cheekboneWidth = Mathf.Lerp(cheekboneWidthSpan.x, cheekboneWidthSpan.y, headSliders[4].value);
+        bodyCreator.bodySettings.headSettings.cheekboneHeight = Mathf.Lerp(cheekboneHeightSpan.x, cheekboneHeightSpan.y, headSliders[5].value);
+        bodyCreator.bodySettings.headSettings.cheekSize = Mathf.Lerp(cheekSizeSpan.x, cheekSizeSpan.y, headSliders[6].value);
+        bodyCreator.bodySettings.headSettings.chinLength = Mathf.Lerp(chinLengthSpan.x, chinLengthSpan.y, headSliders[7].value);
+        bodyCreator.bodySettings.headSettings.chinWidth = Mathf.Lerp(chinWidthSpan.x, chinWidthSpan.y, headSliders[8].value);
+        bodyCreator.bodySettings.headSettings.eyeHeight = Mathf.Lerp(eyeHeightSpan.x, eyeHeightSpan.y, headSliders[9].value);
+        bodyCreator.bodySettings.headSettings.eyeDistance = Mathf.Lerp(eyeDepthSpan.x, eyeDistanceSpan.y, headSliders[10].value);
+        bodyCreator.bodySettings.headSettings.eyeDepth = Mathf.Lerp(eyeDepthSpan.x, eyeDepthSpan.y, headSliders[11].value);
+        bodyCreator.bodySettings.headSettings.eyeSize = Mathf.Lerp(eyeSizeSpan.x, eyeSizeSpan.y, headSliders[12].value);
+        bodyCreator.bodySettings.headSettings.outerBrow = Mathf.Lerp(outerBrowSpan.x, outerBrowSpan.y, headSliders[13].value);
+        bodyCreator.bodySettings.headSettings.innerBrow = Mathf.Lerp(innerBrowSpan.x, innerBrowSpan.y, headSliders[14].value);
 
-        bodyCreator.bodySettings.headSettings.browDistance = HalfSpan(0.05f, bodySliders[15].value);
-        bodyCreator.bodySettings.headSettings.browDepth = HalfSpan(0.14f, bodySliders[16].value);
-        bodyCreator.bodySettings.headSettings.mouthWidth = HalfSpan(0.15f, bodySliders[17].value);
-        bodyCreator.bodySettings.headSettings.mouthHeight = HalfSpan(0.09f, bodySliders[18].value);
-        bodyCreator.bodySettings.headSettings.lipSize = HalfSpan(20, bodySliders[19].value);
+        bodyCreator.bodySettings.headSettings.browDistance = Mathf.Lerp(browDistanceSpan.x, browDistanceSpan.y, headSliders[15].value);
+        bodyCreator.bodySettings.headSettings.browDepth = Mathf.Lerp(browDepthSpan.x, browDepthSpan.y, headSliders[16].value);
+        bodyCreator.bodySettings.headSettings.mouthWidth = Mathf.Lerp(mouthWidthSpan.x, mouthWidthSpan.y, headSliders[17].value);
+        bodyCreator.bodySettings.headSettings.mouthHeight = Mathf.Lerp(mouthHeightSpan.x, mouthHeightSpan.y, headSliders[18].value);
+        bodyCreator.bodySettings.headSettings.lipSize = Mathf.Lerp(lipSizeSpan.x, lipSizeSpan.y, headSliders[19].value);
 
-        bodyCreator.bodySettings.headSettings.noseWidth = HalfSpan(0.4f, bodySliders[20].value);
-        bodyCreator.bodySettings.headSettings.noseHeight = HalfSpan(0.05f, bodySliders[21].value);
-        bodyCreator.bodySettings.headSettings.noseDepth = HalfSpan(0.1f, bodySliders[22].value);
-        bodyCreator.bodySettings.headSettings.earRotation = HalfSpan(0.06f, bodySliders[23].value);
-        bodyCreator.bodySettings.headSettings.earHeight = HalfSpan(0.25f, bodySliders[24].value);
-        bodyCreator.bodySettings.headSettings.earSize = HalfSpan(0.03f, bodySliders[25].value);
+        bodyCreator.bodySettings.headSettings.noseWidth = Mathf.Lerp(noseWidthSpan.x, noseWidthSpan.y, headSliders[20].value);
+        bodyCreator.bodySettings.headSettings.noseHeight = Mathf.Lerp(noseHeightSpan.x, noseHeightSpan.y, headSliders[21].value);
+        bodyCreator.bodySettings.headSettings.noseDepth = Mathf.Lerp(noseDepthSpan.x, noseDepthSpan.y, headSliders[22].value);
+        bodyCreator.bodySettings.headSettings.earRotation = Mathf.Lerp(earRotationSpan.x, earRotationSpan.y, headSliders[23].value);
+        bodyCreator.bodySettings.headSettings.earHeight = Mathf.Lerp(earHeightSpan.x, earHeightSpan.y, headSliders[24].value);
+        bodyCreator.bodySettings.headSettings.earSize = Mathf.Lerp(earSizeSpan.x, earSizeSpan.y, headSliders[25].value);
 
         bodyCreator.CreateHead();
     }

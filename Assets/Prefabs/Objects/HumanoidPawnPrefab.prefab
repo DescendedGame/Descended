@@ -100,31 +100,31 @@ MonoBehaviour:
   bodySettings:
     headSettings:
       skullSize: 1
-      jawWidth: 1
-      jawHeight: 1
-      jawDepth: 1
-      cheekboneWidth: 1
-      cheekboneHeight: 1
-      cheekSize: 1
-      chinLength: 1
-      chinWidth: 1
-      eyeHeight: 1
-      eyeDistance: 1
-      eyeDepth: 1
-      eyeSize: 1
-      outerBrow: 1
-      innerBrow: 1
-      browDistance: 1
-      browDepth: 1
-      mouthWidth: 1
-      mouthHeight: 1
-      lipSize: 1
-      noseWidth: 1
-      noseHeight: 1
-      noseDepth: 1
-      earRotation: 1
-      earHeight: 1
-      earSize: 1
+      jawWidth: 0
+      jawHeight: 0
+      jawDepth: 0
+      cheekboneWidth: 0
+      cheekboneHeight: 0
+      cheekSize: 0
+      chinLength: 0
+      chinWidth: 0
+      eyeHeight: 0
+      eyeDistance: 0
+      eyeDepth: 0
+      eyeSize: 0
+      outerBrow: 0
+      innerBrow: 0
+      browDistance: 0
+      browDepth: 0
+      mouthWidth: 0
+      mouthHeight: 0
+      lipSize: 0
+      noseWidth: 0
+      noseHeight: 0
+      noseDepth: 0
+      earRotation: 0
+      earHeight: 0
+      earSize: 0
     upperNeckLength: 0.1
     upperNeckWidth: 0.05
     lowerNeckWidth: 0.08
@@ -163,7 +163,7 @@ MonoBehaviour:
       chest: 0
       waist: 0
       hips: 0
-      butt: 0
+      butt: 1
       knees: 0
       calves: 0
       ankles: 0

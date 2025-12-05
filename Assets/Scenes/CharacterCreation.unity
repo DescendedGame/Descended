@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!84 &297509925
+--- !u!84 &615741632
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_IsAlphaChannelOptional: 0
   serializedVersion: 6
-  m_Width: 1137
+  m_Width: 1032
   m_Height: 624
   m_AntiAliasing: 1
   m_MipCount: -1
@@ -230,183 +230,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.coverSettings.butt
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.earSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.eyeSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.lipSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.eyeDepth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.jawDepth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.jawWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.browDepth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.cheekSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.chinWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.earHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.eyeHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.innerBrow
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.jawHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.noseDepth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.noseWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.outerBrow
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.skullSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.chinLength
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.mouthWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.noseHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.earRotation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.eyeDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.mouthHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.browDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.cheekboneWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8291043835757031114, guid: 9a5602d814f130e4fa28db93ec383784,
-        type: 3}
-      propertyPath: bodySettings.headSettings.cheekboneHeight
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a5602d814f130e4fa28db93ec383784, type: 3}
---- !u!84 &886902017
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 1137
-  m_Height: 624
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 90
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1001 &972752935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -424,7 +252,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 886902017}
+      objectReference: {fileID: 2133571238}
     - target: {fileID: 5628315036079614060, guid: e5ac6ae2f0f98bc4fb088fa229e89e48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -479,7 +307,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 297509925}
+      objectReference: {fileID: 615741632}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1024,6 +852,251 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: earSizeSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: earSizeSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: eyeSizeSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: eyeSizeSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: lipSizeSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: lipSizeSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: eyeDepthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: eyeDepthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: jawDepthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: jawDepthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: jawWidthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: jawWidthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: cheekSizeSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: cheekSizeSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: chinWidthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: chinWidthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: earHeightSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: earHeightSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: eyeHeightSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: eyeHeightSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: innerBrowSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: innerBrowSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: jawHeightSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: jawHeightSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: noseDepthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: noseDepthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: noseWidthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: noseWidthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: outerBrowSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: outerBrowSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: skullSizeSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: chinLengthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: chinLengthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: mouthWidthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: mouthWidthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: noseHeightSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: noseHeightSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: earRotationSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: earRotationSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: eyeDistanceSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: eyeDistanceSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: mouthHeightSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: mouthHeightSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: browDistanceSpan.x
+      value: -0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: browDistanceSpan.y
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: cheekboneWidthSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: cheekboneWidthSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: cheekboneHeightSpan.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350502973971554073, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
+        type: 3}
+      propertyPath: cheekboneHeightSpan.y
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 7205162242217492690, guid: 24a0fe74e0eddc04cbedd1a9070e323c,
         type: 3}
       propertyPath: m_Name
@@ -1040,6 +1113,43 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2077617513}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &2133571238
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 1032
+  m_Height: 624
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 90
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1001 &8022209877777301345
 PrefabInstance:
   m_ObjectHideFlags: 0

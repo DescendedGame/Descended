@@ -31,7 +31,7 @@ public class CharacterCreationCameraMovement : MonoBehaviour
             if (pivot.position.y >= 3) pivot.position = Vector3.up * 3;
         }
 
-        cameraDistance -= Input.mouseScrollDelta.y;
+        cameraDistance -= Input.mouseScrollDelta.y /10;
         cameraDistance = Mathf.Clamp(cameraDistance, 0.75f, 5);
         cameraTransform.localPosition = new Vector3(0, 0, cameraDistance);
 
