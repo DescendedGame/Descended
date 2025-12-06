@@ -209,7 +209,7 @@ public class GeneratedLimb : MonoBehaviour
     float CalculateAngle()
     {
         float kat1 = startRadius - endRadius;
-        float l2 = Mathf.Sqrt(length * length - kat1 * kat1);
+        float l2 = Mathf.Sqrt(length * length + kat1 * kat1);
 
         float sinValue = kat1 / l2;
         return Mathf.Asin(sinValue) * Mathf.Rad2Deg;

@@ -196,7 +196,7 @@ public class HumanHeadCreator : MonoBehaviour
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + settings.browDistance,
+                updatedPositions[vertex].x + (updatedPositions[vertex].x != 0 ? settings.browDistance : 0),
                 updatedPositions[vertex].y,
                 updatedPositions[vertex].z + settings.browDepth
             );
@@ -220,7 +220,7 @@ public class HumanHeadCreator : MonoBehaviour
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + settings.mouthWidth,
+                updatedPositions[vertex].x + (updatedPositions[vertex].x != 0 ? settings.mouthWidth:0),
                 updatedPositions[vertex].y + settings.mouthHeight,
                 updatedPositions[vertex].z + settings.lipSize
             );
@@ -286,7 +286,7 @@ public class HumanHeadCreator : MonoBehaviour
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + settings.noseWidth,
+                updatedPositions[vertex].x + (updatedPositions[vertex].x != 0 ? settings.noseWidth:0),
                 updatedPositions[vertex].y + settings.noseHeight,
                 updatedPositions[vertex].z + settings.noseDepth
             );
@@ -305,7 +305,7 @@ public class HumanHeadCreator : MonoBehaviour
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + settings.noseWidth,
+                updatedPositions[vertex].x + (updatedPositions[vertex].x != 0 ? settings.noseWidth : 0),
                 updatedPositions[vertex].y + settings.noseHeight,
                 updatedPositions[vertex].z + settings.noseDepth
             );
