@@ -18,7 +18,7 @@ public class Pawn : Attackable
     /// <summary>
     /// Contains all the pawn's states. Pass the wanted state type to get a reference to a specific state.
     /// </summary>
-    [SerializeField] Dictionary<PawnStateType, PawnState> m_lookUpState = new Dictionary<PawnStateType, PawnState>();
+    Dictionary<PawnStateType, PawnState> m_lookUpState = new Dictionary<PawnStateType, PawnState>();
 
     protected override void Awake()
     {
@@ -57,7 +57,7 @@ public class Pawn : Attackable
         }
     }
 
-    protected virtual void LateUpdate()
+    protected virtual void Update()
     {
         // All pawns trigger small bioluminescent things around them when they move.
         //var emission = m_glitter.emission;

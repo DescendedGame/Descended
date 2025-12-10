@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 [System.Serializable]
@@ -273,5 +274,28 @@ public class HumanoidBodyCreator : BodyCreator
             torso = go.AddComponent<HumanTorso>();
         }
         (leftHip, rightHip) = torso.Initialize(bodySettings);
+    }
+
+    public void SaveBody(string name)
+    {
+        string jsonData = JsonUtility.ToJson(bodySettings);
+        if (Application.isEditor)
+        {
+            Directory.CreateDirectory("Assets/saves/avatars");
+            System.IO.File.Delete("Assets/saves/avatars/" + name + ".json");
+            System.IO.File.WriteAllText("Assets/saves/avatars/" + name + ".json", jsonData);
+        }
+        else
+        {
+            Directory.CreateDirectory(Application.dataPath + "/saves/avatars");
+            System.IO.File.Delete(Application.dataPath + "/saves/avatars/" + name + ".json");
+            System.IO.File.WriteAllText(Application.dataPath + "/saves/avatars/" + name + ".json", jsonData);
+        }
+    }
+
+    public void LoadBody(string name)
+    {
+        string myString = File.ReadAllText("Assets/saves/avatars/" + name + ".json");
+        bodySettings = (HumanBodySettings)JsonUtility.FromJson(myString, typeof(HumanBodySettings));
     }
 }
