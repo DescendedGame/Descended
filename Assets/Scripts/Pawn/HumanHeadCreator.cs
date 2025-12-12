@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class HumanHeadCreator : MonoBehaviour
 {
@@ -12,6 +10,14 @@ public class HumanHeadCreator : MonoBehaviour
 
     Dictionary<Vector3, Vector3> updatedPositions = new Dictionary<Vector3, Vector3>();
 
+    [SerializeField] GameObject eyeLid;
+    [SerializeField] GameObject eyeWhite;
+    [SerializeField] GameObject eyeIris;
+    [SerializeField] GameObject eyePupil;
+
+    GameObject leftEye;
+    GameObject rightEye;
+
     private void Awake()
     {
         allFilters = GetComponentsInChildren<MeshFilter>();
@@ -20,6 +26,25 @@ public class HumanHeadCreator : MonoBehaviour
         {
             originalVertices[i] = allFilters[i].mesh.vertices;
         }
+
+        leftEye = new GameObject("LeftEye");
+        leftEye.transform.SetParent(transform, false);
+        leftEye.transform.localPosition = new Vector3(-0.0389840007f, 0.0870779976f, 0.129999995f);
+
+        rightEye = new GameObject("RightEye");
+        rightEye.transform.SetParent(transform, false);
+        rightEye.transform.localPosition = new Vector3(0.0389840007f, 0.0870779976f, 0.129999995f);
+
+        Instantiate(eyeLid, leftEye.transform);
+        Instantiate(eyeWhite, leftEye.transform);
+        Instantiate(eyeIris, leftEye.transform);
+        Instantiate(eyePupil, leftEye.transform);
+
+        Instantiate(eyeLid, rightEye.transform);
+        Instantiate(eyeWhite, rightEye.transform);
+        Instantiate(eyeIris, rightEye.transform);
+        Instantiate(eyePupil, rightEye.transform);
+
     }
 
     public void CreateHead(HumanHeadSettings settings)

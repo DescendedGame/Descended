@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d57b900f1513d5d4f8969b97081e4ba7,
         type: 3}
       propertyPath: m_Name
-      value: DescendedHumanHead
+      value: HumanHead
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -91,3 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headRegions: {fileID: 11400000, guid: a4d443a807c2db945a69897f1145d132, type: 2}
+  eyeLid: {fileID: 919132149155446097, guid: 423736e93c68e9e4e88b4f29e15ea086, type: 3}
+  eyeWhite: {fileID: 919132149155446097, guid: 0ebb3e10989a47c4c8ff14ada3820abb, type: 3}
+  eyeIris: {fileID: 919132149155446097, guid: 7f704f375ad69c84d8face9cceb92521, type: 3}
+  eyePupil: {fileID: 919132149155446097, guid: 01f5238400717ee4dbce6c8c013b704f, type: 3}
