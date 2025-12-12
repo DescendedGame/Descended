@@ -39,6 +39,7 @@ public class VertexExtractor : MonoBehaviour
 
     Vector3[] ExtractVertices(GameObject targetObj)
     {
+        if (!targetObj) return new Vector3[0];
         string objPath = AssetDatabase.GetAssetPath(targetObj);
         string[] lines = File.ReadAllLines(objPath);
         List<Vector3> vertices = new List<Vector3>();

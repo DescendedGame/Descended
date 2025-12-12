@@ -28,23 +28,37 @@ public class HumanHeadCreator : MonoBehaviour
         }
 
         leftEye = new GameObject("LeftEye");
+        leftEye.layer = gameObject.layer;
         leftEye.transform.SetParent(transform, false);
         leftEye.transform.localPosition = new Vector3(-0.0389840007f, 0.0870779976f, 0.129999995f);
 
         rightEye = new GameObject("RightEye");
+        rightEye.layer = gameObject.layer;
         rightEye.transform.SetParent(transform, false);
         rightEye.transform.localPosition = new Vector3(0.0389840007f, 0.0870779976f, 0.129999995f);
 
-        Instantiate(eyeLid, leftEye.transform);
-        Instantiate(eyeWhite, leftEye.transform);
-        Instantiate(eyeIris, leftEye.transform);
-        Instantiate(eyePupil, leftEye.transform);
+        SetGameLayerRecursive(Instantiate(eyeLid, leftEye.transform),gameObject.layer);
+        SetGameLayerRecursive(Instantiate(eyeWhite, leftEye.transform), gameObject.layer);
+        SetGameLayerRecursive(Instantiate(eyeIris, leftEye.transform), gameObject.layer);
+        SetGameLayerRecursive(Instantiate(eyePupil, leftEye.transform), gameObject.layer);
 
-        Instantiate(eyeLid, rightEye.transform);
-        Instantiate(eyeWhite, rightEye.transform);
-        Instantiate(eyeIris, rightEye.transform);
-        Instantiate(eyePupil, rightEye.transform);
+        SetGameLayerRecursive(Instantiate(eyeLid, rightEye.transform), gameObject.layer);
+        SetGameLayerRecursive(Instantiate(eyeWhite, rightEye.transform), gameObject.layer);
+        SetGameLayerRecursive(Instantiate(eyeIris, rightEye.transform), gameObject.layer);
+        SetGameLayerRecursive(Instantiate(eyePupil, rightEye.transform), gameObject.layer);
+    }
 
+    private void SetGameLayerRecursive(GameObject gameObject, int layer)
+    {
+        gameObject.layer = layer;
+        foreach (Transform child in gameObject.transform)
+        {
+            child.gameObject.layer = layer;
+
+            Transform _HasChildren = child.GetComponentInChildren<Transform>();
+            if (_HasChildren != null)
+                SetGameLayerRecursive(child.gameObject, layer);
+        }
     }
 
     public void CreateHead(HumanHeadSettings settings)
