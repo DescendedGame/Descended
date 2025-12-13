@@ -111,94 +111,91 @@ public class HumanHeadCreator : MonoBehaviour
         foreach (Vector3 vertex in headRegions.scalp)
         {
             updatedPositions[vertex] = updatedPositions[vertex] * settings.skullSize;
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = updatedPositions[mirroredVertex] * settings.skullSize;
-            }
         }
     }
 
     void CalculateJaw(HumanHeadSettings settings)
     {
-        foreach (Vector3 vertex in headRegions.jawLine)
+        foreach (Vector3 vertex in headRegions.jawTop)
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + settings.jawWidth,
+                updatedPositions[vertex].x + Sign(vertex.x)*settings.jawWidth,
                 updatedPositions[vertex].y + settings.jawHeight,
                 updatedPositions[vertex].z + settings.jawDepth
             );
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x - settings.jawWidth,
-                    updatedPositions[mirroredVertex].y + settings.jawHeight,
-                    updatedPositions[mirroredVertex].z + settings.jawDepth
-                );
-            }
+        }
+        foreach (Vector3 vertex in headRegions.jawCorner)
+        {
+            updatedPositions[vertex] = new Vector3
+            (
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.jawWidth,
+                updatedPositions[vertex].y + settings.jawHeight,
+                updatedPositions[vertex].z + settings.jawDepth
+            );
         }
     }
 
     void CalculateCheekBones(HumanHeadSettings settings)
     {
-        foreach (Vector3 vertex in headRegions.cheekBone)
+        foreach (Vector3 vertex in headRegions.cheekBoneRear)
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + settings.cheekboneWidth,
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekboneWidth,
                 updatedPositions[vertex].y + settings.cheekboneHeight,
                 updatedPositions[vertex].z
             );
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x - settings.cheekboneWidth,
-                    updatedPositions[mirroredVertex].y + settings.cheekboneHeight,
-                    updatedPositions[mirroredVertex].z
-                );
-            }
+        }
+        foreach (Vector3 vertex in headRegions.cheekBoneMiddle)
+        {
+            updatedPositions[vertex] = new Vector3
+            (
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekboneWidth,
+                updatedPositions[vertex].y + settings.cheekboneHeight,
+                updatedPositions[vertex].z
+            );
+        }
+        foreach (Vector3 vertex in headRegions.cheekBoneFront)
+        {
+            updatedPositions[vertex] = new Vector3
+            (
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekboneWidth,
+                updatedPositions[vertex].y + settings.cheekboneHeight,
+                updatedPositions[vertex].z
+            );
         }
     }
 
     void CalculateCheek(HumanHeadSettings settings)
     {
-        foreach (Vector3 vertex in headRegions.cheek)
+        foreach (Vector3 vertex in headRegions.cheekUpper)
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + settings.cheekSize,
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekSize,
                 updatedPositions[vertex].y,
                 updatedPositions[vertex].z + settings.cheekSize
             );
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x - settings.cheekSize,
-                    updatedPositions[mirroredVertex].y,
-                    updatedPositions[mirroredVertex].z + settings.cheekSize
-                );
-            }
+        }
+        foreach (Vector3 vertex in headRegions.cheekLower)
+        {
+            updatedPositions[vertex] = new Vector3
+            (
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekSize,
+                updatedPositions[vertex].y,
+                updatedPositions[vertex].z + settings.cheekSize
+            );
         }
     }
 
     void CalculateChin(HumanHeadSettings settings)
     {
-        foreach (Vector3 vertex in headRegions.chinTip)
+        foreach (Vector3 vertex in headRegions.chin)
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x,
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.chinWidth,
                 updatedPositions[vertex].y - settings.chinLength,
                 updatedPositions[vertex].z + settings.chinLength
             );
@@ -211,45 +208,41 @@ public class HumanHeadCreator : MonoBehaviour
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + settings.eyeDistance,
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.eyeDistance,
                 updatedPositions[vertex].y + settings.eyeHeight,
                 updatedPositions[vertex].z + settings.eyeDepth
             );
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x - settings.eyeDistance,
-                    updatedPositions[mirroredVertex].y + settings.eyeHeight,
-                    updatedPositions[mirroredVertex].z + settings.eyeDepth
-                );
-            }
         }
     }
 
     void CalculateBrow(HumanHeadSettings settings)
     {
-        foreach (Vector3 vertex in headRegions.brow)
+        foreach (Vector3 vertex in headRegions.browMiddle)
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + (updatedPositions[vertex].x != 0 ? settings.browDistance : 0),
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.browDistance,
                 updatedPositions[vertex].y,
                 updatedPositions[vertex].z + settings.browDepth
             );
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x - settings.browDistance,
-                    updatedPositions[mirroredVertex].y,
-                    updatedPositions[mirroredVertex].z + settings.browDepth
-                );
-            }
+        }
+        foreach (Vector3 vertex in headRegions.browInner)
+        {
+            updatedPositions[vertex] = new Vector3
+            (
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.browDistance,
+                updatedPositions[vertex].y,
+                updatedPositions[vertex].z + settings.browDepth
+            );
+        }
+        foreach (Vector3 vertex in headRegions.browOuter)
+        {
+            updatedPositions[vertex] = new Vector3
+            (
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.browDistance,
+                updatedPositions[vertex].y,
+                updatedPositions[vertex].z + settings.browDepth
+            );
         }
     }
 
@@ -259,21 +252,10 @@ public class HumanHeadCreator : MonoBehaviour
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + (updatedPositions[vertex].x != 0 ? settings.mouthWidth:0),
+                updatedPositions[vertex].x + Sign(vertex.x)*settings.mouthWidth,
                 updatedPositions[vertex].y + settings.mouthHeight,
                 updatedPositions[vertex].z + settings.lipSize
             );
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x - settings.mouthWidth,
-                    updatedPositions[mirroredVertex].y + settings.mouthHeight,
-                    updatedPositions[mirroredVertex].z + settings.lipSize
-                );
-            }
         }
     }
 
@@ -325,40 +307,19 @@ public class HumanHeadCreator : MonoBehaviour
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + (updatedPositions[vertex].x != 0 ? settings.noseWidth:0),
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.noseWidth,
                 updatedPositions[vertex].y + settings.noseHeight,
                 updatedPositions[vertex].z + settings.noseDepth
             );
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x - settings.noseWidth,
-                    updatedPositions[mirroredVertex].y + settings.noseHeight,
-                    updatedPositions[mirroredVertex].z + settings.noseDepth
-                );
-            }
         }
         foreach (Vector3 vertex in headRegions.noseTip)
         {
             updatedPositions[vertex] = new Vector3
             (
-                updatedPositions[vertex].x + (updatedPositions[vertex].x != 0 ? settings.noseWidth : 0),
+                updatedPositions[vertex].x + Sign(vertex.x) * settings.noseWidth,
                 updatedPositions[vertex].y + settings.noseHeight,
                 updatedPositions[vertex].z + settings.noseDepth
             );
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x - settings.noseWidth,
-                    updatedPositions[mirroredVertex].y + settings.noseHeight,
-                    updatedPositions[mirroredVertex].z + settings.noseDepth
-                );
-            }
         }
     }
 
@@ -372,17 +333,11 @@ public class HumanHeadCreator : MonoBehaviour
                 updatedPositions[vertex].y + settings.earHeight,
                 updatedPositions[vertex].z
             );
-
-            if (vertex.x != 0)
-            {
-                Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-                updatedPositions[mirroredVertex] = new Vector3
-                (
-                    updatedPositions[mirroredVertex].x,
-                    updatedPositions[mirroredVertex].y + settings.earHeight,
-                    updatedPositions[mirroredVertex].z
-                );
-            }
         }
+    }
+
+    float Sign(float value)
+    {
+        return value == 0 ? 0 : Mathf.Sign(value);
     }
 }

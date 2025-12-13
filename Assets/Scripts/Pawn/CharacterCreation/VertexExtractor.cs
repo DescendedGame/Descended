@@ -3,38 +3,58 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class VertexExtractor : MonoBehaviour
 {
+    public bool trigger;
+
     public HumanHeadRegions headRegions;
-    public GameObject brow;
-    public GameObject cheek;
-    public GameObject cheekBone;
-    public GameObject chinTip;
-    public GameObject earSquare;
+    public GameObject scalp;
+    public GameObject browMiddle;
+    public GameObject browInner;
+    public GameObject browOuter;
+    public GameObject temple;
     public GameObject eyeHole;
-    public GameObject jawLine;
-    public GameObject lowerLip;
-    public GameObject mouth;
     public GameObject nose;
     public GameObject noseTip;
-    public GameObject scalp;
+    public GameObject cheekBoneRear;
+    public GameObject cheekBoneMiddle;
+    public GameObject cheekBoneFront;
+    public GameObject cheekUpper;
+    public GameObject cheekLower;
+    public GameObject earSquare;
+    public GameObject jawTop;
+    public GameObject jawCorner;
+    public GameObject mouth;
     public GameObject upperLip;
+    public GameObject lowerLip;
+    public GameObject chin;
 
-    void Awake()
+    void Update()
     {
-        headRegions.brow = ExtractVertices(brow);
-        headRegions.cheek = ExtractVertices(cheek);
-        headRegions.cheekBone = ExtractVertices(cheekBone);
-        headRegions.chinTip = ExtractVertices(chinTip);
-        headRegions.earSquare = ExtractVertices(earSquare);
-        headRegions.eyeHole = ExtractVertices(eyeHole);
-        headRegions.jawLine = ExtractVertices(jawLine);
-        headRegions.lowerLip = ExtractVertices(lowerLip);
-        headRegions.mouth = ExtractVertices(mouth);
-        headRegions.nose = ExtractVertices(nose);
-        headRegions.noseTip = ExtractVertices(noseTip);
-        headRegions.scalp = ExtractVertices(scalp);
-        headRegions.upperLip = ExtractVertices(upperLip);
+        if(trigger)
+        {
+            headRegions.scalp = ExtractVertices(scalp);
+            headRegions.browMiddle = ExtractVertices(browMiddle);
+            headRegions.browInner = ExtractVertices(browInner);
+            headRegions.browOuter = ExtractVertices(browOuter);
+            headRegions.eyeHole = ExtractVertices(eyeHole);
+            headRegions.nose = ExtractVertices(nose);
+            headRegions.noseTip = ExtractVertices(noseTip);
+            headRegions.cheekBoneRear = ExtractVertices(cheekBoneRear);
+            headRegions.cheekBoneMiddle = ExtractVertices(cheekBoneMiddle);
+            headRegions.cheekBoneFront = ExtractVertices(cheekBoneFront);
+            headRegions.cheekUpper = ExtractVertices(cheekUpper);
+            headRegions.cheekLower = ExtractVertices(cheekLower);
+            headRegions.earSquare = ExtractVertices(earSquare);
+            headRegions.jawTop = ExtractVertices(jawTop);
+            headRegions.jawCorner = ExtractVertices(jawCorner);
+            headRegions.mouth = ExtractVertices(mouth);
+            headRegions.upperLip = ExtractVertices(upperLip);
+            headRegions.lowerLip = ExtractVertices(lowerLip);
+            headRegions.chin = ExtractVertices(chin);
+            trigger = false;
+        }
     }
 
     Vector3[] ExtractVertices(GameObject targetObj)
@@ -46,7 +66,6 @@ public class VertexExtractor : MonoBehaviour
 
         foreach (string line in lines)
         {
-            Debug.Log(line);
             if (line.StartsWith("v "))
             {
                 string[] parts = line.Split(' ');

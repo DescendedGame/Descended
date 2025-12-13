@@ -19,31 +19,43 @@ public class HeadRegionDebug : MonoBehaviour
             Color[] colors = new Color[newMesh.vertices.Length];
             for (int i = 0; i < colors.Length; i++)
             {
-                if (regions.brow.Contains(newMesh.vertices[i]) || regions.brow.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1,1,1))))
+                if (regions.scalp.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.cheek.Contains(newMesh.vertices[i]) || regions.cheek.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.browMiddle.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.cheekBone.Contains(newMesh.vertices[i]) || regions.cheekBone.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.browInner.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.chinTip.Contains(newMesh.vertices[i]) || regions.chinTip.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.browOuter.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.earSquare.Contains(newMesh.vertices[i]) || regions.earSquare.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.eyeHole.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.eyeHole.Contains(newMesh.vertices[i]) || regions.eyeHole.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.nose.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.jawLine.Contains(newMesh.vertices[i]) || regions.jawLine.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.noseTip.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.lowerLip.Contains(newMesh.vertices[i]) || regions.lowerLip.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.cheekBoneRear.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.mouth.Contains(newMesh.vertices[i]) || regions.mouth.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.cheekBoneMiddle.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.nose.Contains(newMesh.vertices[i]) || regions.nose.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.cheekBoneFront.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.noseTip.Contains(newMesh.vertices[i]) || regions.noseTip.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.cheekUpper.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.scalp.Contains(newMesh.vertices[i]) || regions.scalp.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.cheekLower.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
-                if (regions.upperLip.Contains(newMesh.vertices[i]) || regions.upperLip.Contains(Vector3.Scale(newMesh.vertices[i], new Vector3(-1, 1, 1))))
+                if (regions.earSquare.Contains(newMesh.vertices[i]))
+                    colors[i] = Color.red;
+                if (regions.jawTop.Contains(newMesh.vertices[i]))
+                    colors[i] = Color.red;
+                if (regions.jawCorner.Contains(newMesh.vertices[i]))
+                    colors[i] = Color.red;
+                if (regions.mouth.Contains(newMesh.vertices[i]))
+                    colors[i] = Color.red;
+                if (regions.upperLip.Contains(newMesh.vertices[i]))
+                    colors[i] = Color.red;
+                if (regions.lowerLip.Contains(newMesh.vertices[i]))
+                    colors[i] = Color.red;
+                if (regions.chin.Contains(newMesh.vertices[i]))
                     colors[i] = Color.red;
 
             }
