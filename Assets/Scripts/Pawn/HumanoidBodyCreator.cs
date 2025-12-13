@@ -44,6 +44,13 @@ public struct HumanHeadSettings
     public float earRotation;
     public float earHeight;
     public float earSize;
+
+    //additions
+    public int hairStyle;
+    public int browStyle;
+    public int sideBeardStyle;
+    public int stacheStyle;
+    public int beardStyle;
 }
 
 [System.Serializable]

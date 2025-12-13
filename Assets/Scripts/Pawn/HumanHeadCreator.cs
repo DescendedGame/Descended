@@ -18,6 +18,36 @@ public class HumanHeadCreator : MonoBehaviour
     GameObject leftEye;
     GameObject rightEye;
 
+    GameObject hair;
+    [SerializeField] GameObject hair1;
+    [SerializeField] GameObject hair2;
+    [SerializeField] GameObject hair3;
+    [SerializeField] GameObject hair4;
+
+    GameObject brows;
+    [SerializeField] GameObject brows1;
+    [SerializeField] GameObject brows2;
+    [SerializeField] GameObject brows3;
+    [SerializeField] GameObject brows4;
+
+    GameObject sideBeard;
+    [SerializeField] GameObject sideBeard1;
+    [SerializeField] GameObject sideBeard2;
+    [SerializeField] GameObject sideBeard3;
+    [SerializeField] GameObject sideBeard4;
+
+    GameObject stache;
+    [SerializeField] GameObject stache1;
+    [SerializeField] GameObject stache2;
+    [SerializeField] GameObject stache3;
+    [SerializeField] GameObject stache4;
+
+    GameObject beard;
+    [SerializeField] GameObject beard1;
+    [SerializeField] GameObject beard2;
+    [SerializeField] GameObject beard3;
+    [SerializeField] GameObject beard4;
+
     private void Awake()
     {
         allFilters = GetComponentsInChildren<MeshFilter>();
