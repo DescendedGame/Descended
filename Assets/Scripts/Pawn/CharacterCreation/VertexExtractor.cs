@@ -38,6 +38,7 @@ public class VertexExtractor : MonoBehaviour
             headRegions.browMiddle = ExtractVertices(browMiddle);
             headRegions.browInner = ExtractVertices(browInner);
             headRegions.browOuter = ExtractVertices(browOuter);
+            headRegions.temple = ExtractVertices(temple);
             headRegions.eyeHole = ExtractVertices(eyeHole);
             headRegions.nose = ExtractVertices(nose);
             headRegions.noseTip = ExtractVertices(noseTip);

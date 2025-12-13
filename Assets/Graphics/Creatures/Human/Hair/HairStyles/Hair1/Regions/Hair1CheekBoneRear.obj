@@ -1,0 +1,9 @@
+# Blender 4.1.1
+# www.blender.org
+g Hair1CheekBoneRear_Hair1CheekBoneRear
+v 0.074939 0.078100 0.093935
+v -0.074939 0.078100 0.093935
+v -0.077334 0.075456 0.076855
+v 0.077334 0.075456 0.076855
+l 1 4
+l 2 3

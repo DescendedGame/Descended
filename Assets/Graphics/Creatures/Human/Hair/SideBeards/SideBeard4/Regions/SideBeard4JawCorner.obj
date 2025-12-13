@@ -1,0 +1,9 @@
+# Blender 4.1.1
+# www.blender.org
+g SideBeard4JawCorner_SideBeard4JawCorner
+v -0.057418 -0.017019 0.050840
+v 0.057418 -0.017019 0.050840
+v -0.069437 -0.026221 0.065704
+v 0.069437 -0.026221 0.065704
+l 1 3
+l 2 4

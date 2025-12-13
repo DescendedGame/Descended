@@ -1,0 +1,9 @@
+# Blender 4.1.1
+# www.blender.org
+g SideBeard3CheekBoneRear_SideBeard3CheekBoneRear
+v -0.077834 0.075543 0.081139
+v 0.077834 0.075543 0.081139
+v -0.078469 0.080624 0.068696
+v 0.078469 0.080624 0.068696
+l 2 4
+l 1 3

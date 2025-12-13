@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1280374026449624483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4486658333555595787}
+  - component: {fileID: 2285802788339948631}
+  m_Layer: 0
+  m_Name: Stache3VertexExtractor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4486658333555595787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280374026449624483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.10987704, y: 0.086446725, z: -0.043243855}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2285802788339948631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280374026449624483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8696f33a047c4243a049a374b3a8d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 0
+  headRegions: {fileID: 11400000, guid: d7fb731fba7dd7b4ebe198ed7da88c36, type: 2}
+  scalp: {fileID: 0}
+  browMiddle: {fileID: 0}
+  browInner: {fileID: 0}
+  browOuter: {fileID: 0}
+  temple: {fileID: 0}
+  eyeHole: {fileID: 0}
+  nose: {fileID: 0}
+  noseTip: {fileID: 0}
+  cheekBoneRear: {fileID: 0}
+  cheekBoneMiddle: {fileID: 0}
+  cheekBoneFront: {fileID: 0}
+  cheekUpper: {fileID: 0}
+  cheekLower: {fileID: 0}
+  earSquare: {fileID: 0}
+  jawTop: {fileID: 0}
+  jawCorner: {fileID: 0}
+  mouth: {fileID: 919132149155446097, guid: 74a5f3eb42198bc4286521bd29c8a58a, type: 3}
+  upperLip: {fileID: 0}
+  lowerLip: {fileID: 0}
+  chin: {fileID: 0}
