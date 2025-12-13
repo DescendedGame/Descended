@@ -3,13 +3,6 @@ using UnityEngine;
 
 public class HumanHeadCreator : MonoBehaviour
 {
-    [SerializeField] HumanHeadRegions headRegions;
-
-    Vector3[][] originalVertices;
-    MeshFilter[] allFilters;
-
-    Dictionary<Vector3, Vector3> updatedPositions = new Dictionary<Vector3, Vector3>();
-
     [SerializeField] GameObject eyeLid;
     [SerializeField] GameObject eyeWhite;
     [SerializeField] GameObject eyeIris;
@@ -48,15 +41,12 @@ public class HumanHeadCreator : MonoBehaviour
     [SerializeField] GameObject beard3;
     [SerializeField] GameObject beard4;
 
+    HumanHeadSettings settings;
+
+    PlasticMesh[] plasticMeshes;
+
     private void Awake()
     {
-        allFilters = GetComponentsInChildren<MeshFilter>();
-        originalVertices = new Vector3[allFilters.Length][];
-        for (int i = 0; i < allFilters.Length; i++)
-        {
-            originalVertices[i] = allFilters[i].mesh.vertices;
-        }
-
         leftEye = new GameObject("LeftEye");
         leftEye.layer = gameObject.layer;
         leftEye.transform.SetParent(transform, false);
@@ -91,279 +81,143 @@ public class HumanHeadCreator : MonoBehaviour
         }
     }
 
-    public void CreateHead(HumanHeadSettings settings)
+    public void CreateHead(HumanHeadSettings headSettings)
     {
-        updatedPositions.Clear();
+        plasticMeshes = GetComponentsInChildren<PlasticMesh>();
+        settings = headSettings;
 
-        foreach (Vector3[] vertices in originalVertices)
+        foreach(PlasticMesh plasticMesh in plasticMeshes)
         {
-            foreach (Vector3 vertex in vertices)
-            {
-                updatedPositions[vertex] = vertex;
-            }
-        }
+            plasticMesh.ResetPositions();
 
-        CalculateScalp(settings);
-        CalculateJaw(settings);
-        CalculateCheekBones(settings);
-        CalculateCheek(settings);
-        CalculateChin(settings);
-        CalculateEyes(settings);
-        CalculateBrow(settings);
-        CalculateMouth(settings);
-        CalculateLips(settings);
-        CalculateNose(settings);
-        CalculateEars(settings);
+            plasticMesh.TransformVertexGroup("scalp", CalculateScalp);
+            plasticMesh.TransformVertexGroup("browMiddle", CalculateBrow);
+            plasticMesh.TransformVertexGroup("browInner", CalculateBrow);
+            plasticMesh.TransformVertexGroup("browOuter", CalculateBrow);
+            plasticMesh.TransformVertexGroup("temple", CalculateBrow);
+            plasticMesh.TransformVertexGroup("eyeHole", CalculateEyes);
+            plasticMesh.TransformVertexGroup("nose", CalculateNose);
+            plasticMesh.TransformVertexGroup("noseTip", CalculateNose);
+            plasticMesh.TransformVertexGroup("cheekBoneRear", CalculateCheekBones);
+            plasticMesh.TransformVertexGroup("cheekBoneMiddle", CalculateCheekBones);
+            plasticMesh.TransformVertexGroup("cheekBoneFront", CalculateCheekBones);
+            plasticMesh.TransformVertexGroup("cheekUpper", CalculateCheek);
+            plasticMesh.TransformVertexGroup("cheekLower", CalculateCheek);
+            plasticMesh.TransformVertexGroup("earSquare", CalculateEars);
+            plasticMesh.TransformVertexGroup("jawTop", CalculateJaw);
+            plasticMesh.TransformVertexGroup("jawCorner", CalculateJaw);
+            plasticMesh.TransformVertexGroup("mouth", CalculateMouth);
+            plasticMesh.TransformVertexGroup("upperLip", CalculateLips);
+            plasticMesh.TransformVertexGroup("lowerLip", CalculateLips);
+            plasticMesh.TransformVertexGroup("chin", CalculateChin);
 
-        for (int i = 0; i < allFilters.Length; i++)
-        {
-            Vector3[] vertices = new Vector3[originalVertices[i].Length];
-            for (int j = 0; j < vertices.Length; j++)
-            {
-                vertices[j] = originalVertices[i][j];
-            }
-
-            for (int j = 0; j < vertices.Length; j++)
-            {
-                if (updatedPositions.ContainsKey(vertices[j]))
-                {
-                    vertices[j] = updatedPositions[vertices[j]];
-                }
-            }
-            allFilters[i].mesh.vertices = vertices;
-            allFilters[i].mesh.RecalculateBounds();
-            allFilters[i].mesh.RecalculateNormals();
+            plasticMesh.RecalculateMesh();
         }
     }
 
-    void CalculateScalp(HumanHeadSettings settings)
+    Vector3 CalculateScalp(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.scalp)
-        {
-            updatedPositions[vertex] = updatedPositions[vertex] * settings.skullSize;
-        }
+        return vertex * settings.skullSize;
     }
 
-    void CalculateJaw(HumanHeadSettings settings)
+    Vector3 CalculateBrow(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.jawTop)
-        {
-            updatedPositions[vertex] = new Vector3
+        return new Vector3
             (
-                updatedPositions[vertex].x + Sign(vertex.x)*settings.jawWidth,
-                updatedPositions[vertex].y + settings.jawHeight,
-                updatedPositions[vertex].z + settings.jawDepth
+                vertex.x + Sign(vertex.x) * settings.browDistance,
+                vertex.y,
+                vertex.z + settings.browDepth
             );
-        }
-        foreach (Vector3 vertex in headRegions.jawCorner)
-        {
-            updatedPositions[vertex] = new Vector3
-            (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.jawWidth,
-                updatedPositions[vertex].y + settings.jawHeight,
-                updatedPositions[vertex].z + settings.jawDepth
-            );
-        }
     }
 
-    void CalculateCheekBones(HumanHeadSettings settings)
+    Vector3 CalculateEyes(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.cheekBoneRear)
-        {
-            updatedPositions[vertex] = new Vector3
+         return new Vector3
             (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekboneWidth,
-                updatedPositions[vertex].y + settings.cheekboneHeight,
-                updatedPositions[vertex].z
+                vertex.x + Sign(vertex.x) * settings.eyeDistance,
+                vertex.y + settings.eyeHeight,
+                vertex.z + settings.eyeDepth
             );
-        }
-        foreach (Vector3 vertex in headRegions.cheekBoneMiddle)
-        {
-            updatedPositions[vertex] = new Vector3
-            (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekboneWidth,
-                updatedPositions[vertex].y + settings.cheekboneHeight,
-                updatedPositions[vertex].z
-            );
-        }
-        foreach (Vector3 vertex in headRegions.cheekBoneFront)
-        {
-            updatedPositions[vertex] = new Vector3
-            (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekboneWidth,
-                updatedPositions[vertex].y + settings.cheekboneHeight,
-                updatedPositions[vertex].z
-            );
-        }
     }
 
-    void CalculateCheek(HumanHeadSettings settings)
+    Vector3 CalculateNose(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.cheekUpper)
-        {
-            updatedPositions[vertex] = new Vector3
+        return new Vector3
             (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekSize,
-                updatedPositions[vertex].y,
-                updatedPositions[vertex].z + settings.cheekSize
+                vertex.x + Sign(vertex.x) * settings.noseWidth,
+                vertex.y + settings.noseHeight,
+                vertex.z + settings.noseDepth
             );
-        }
-        foreach (Vector3 vertex in headRegions.cheekLower)
-        {
-            updatedPositions[vertex] = new Vector3
-            (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.cheekSize,
-                updatedPositions[vertex].y,
-                updatedPositions[vertex].z + settings.cheekSize
-            );
-        }
     }
 
-    void CalculateChin(HumanHeadSettings settings)
+    Vector3 CalculateCheekBones(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.chin)
-        {
-            updatedPositions[vertex] = new Vector3
+        return new Vector3
             (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.chinWidth,
-                updatedPositions[vertex].y - settings.chinLength,
-                updatedPositions[vertex].z + settings.chinLength
+                vertex.x + Sign(vertex.x) * settings.cheekboneWidth,
+                vertex.y + settings.cheekboneHeight,
+                vertex.z
             );
-        }
     }
 
-    void CalculateEyes(HumanHeadSettings settings)
+    Vector3 CalculateCheek(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.eyeHole)
-        {
-            updatedPositions[vertex] = new Vector3
+        return new Vector3
             (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.eyeDistance,
-                updatedPositions[vertex].y + settings.eyeHeight,
-                updatedPositions[vertex].z + settings.eyeDepth
+                vertex.x + Sign(vertex.x) * settings.cheekSize,
+                vertex.y,
+                vertex.z + settings.cheekSize
             );
-        }
     }
 
-    void CalculateBrow(HumanHeadSettings settings)
+    Vector3 CalculateEars(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.browMiddle)
-        {
-            updatedPositions[vertex] = new Vector3
+        return new Vector3
             (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.browDistance,
-                updatedPositions[vertex].y,
-                updatedPositions[vertex].z + settings.browDepth
+                vertex.x,
+                vertex.y + settings.earHeight,
+                vertex.z
             );
-        }
-        foreach (Vector3 vertex in headRegions.browInner)
-        {
-            updatedPositions[vertex] = new Vector3
-            (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.browDistance,
-                updatedPositions[vertex].y,
-                updatedPositions[vertex].z + settings.browDepth
-            );
-        }
-        foreach (Vector3 vertex in headRegions.browOuter)
-        {
-            updatedPositions[vertex] = new Vector3
-            (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.browDistance,
-                updatedPositions[vertex].y,
-                updatedPositions[vertex].z + settings.browDepth
-            );
-        }
     }
 
-    void CalculateMouth(HumanHeadSettings settings)
+    Vector3 CalculateJaw(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.mouth)
-        {
-            updatedPositions[vertex] = new Vector3
+        return new Vector3
             (
-                updatedPositions[vertex].x + Sign(vertex.x)*settings.mouthWidth,
-                updatedPositions[vertex].y + settings.mouthHeight,
-                updatedPositions[vertex].z + settings.lipSize
+                vertex.x + Sign(vertex.x)*settings.jawWidth,
+                vertex.y + settings.jawHeight,
+                vertex.z + settings.jawDepth
             );
-        }
     }
 
-    void CalculateLips(HumanHeadSettings settings)
+    Vector3 CalculateMouth(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.upperLip)
-        {
-            //updatedPositions[vertex] = new Vector3
-            //(
-            //    updatedPositions[vertex].x + settings.mouthWidth,
-            //    updatedPositions[vertex].y + settings.mouthHeight,
-            //    updatedPositions[vertex].z + settings.lipSize);
-
-            //if (vertex.x != 0)
-            //{
-            //    Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-            //    updatedPositions[mirroredVertex] = new Vector3
-            //    (
-            //        updatedPositions[mirroredVertex].x - settings.mouthWidth,
-            //        updatedPositions[mirroredVertex].y + settings.mouthHeight,
-            //        updatedPositions[mirroredVertex].z + settings.lipSize
-            //    );
-            //}
-        }
-        foreach (Vector3 vertex in headRegions.lowerLip)
-        {
-            //updatedPositions[vertex] = new Vector3
-            //(
-            //    updatedPositions[vertex].x + settings.mouthWidth,
-            //    updatedPositions[vertex].y + settings.mouthHeight,
-            //    updatedPositions[vertex].z + settings.lipSize);
-
-            //if (vertex.x != 0)
-            //{
-            //    Vector3 mirroredVertex = new Vector3(-vertex.x, vertex.y, vertex.z);
-            //    updatedPositions[mirroredVertex] = new Vector3
-            //    (
-            //        updatedPositions[mirroredVertex].x - settings.mouthWidth,
-            //        updatedPositions[mirroredVertex].y + settings.mouthHeight,
-            //        updatedPositions[mirroredVertex].z + settings.lipSize
-            //    );
-            //}
-        }
+        return new Vector3
+            (
+                vertex.x + Sign(vertex.x) * settings.mouthWidth,
+                vertex.y + settings.mouthHeight,
+                vertex.z + settings.lipSize
+            );
     }
 
-    void CalculateNose(HumanHeadSettings settings)
+    Vector3 CalculateLips(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.nose)
-        {
-            updatedPositions[vertex] = new Vector3
+            return new Vector3
             (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.noseWidth,
-                updatedPositions[vertex].y + settings.noseHeight,
-                updatedPositions[vertex].z + settings.noseDepth
+                vertex.x + settings.mouthWidth,
+                vertex.y + settings.mouthHeight,
+                vertex.z + settings.lipSize
             );
-        }
-        foreach (Vector3 vertex in headRegions.noseTip)
-        {
-            updatedPositions[vertex] = new Vector3
-            (
-                updatedPositions[vertex].x + Sign(vertex.x) * settings.noseWidth,
-                updatedPositions[vertex].y + settings.noseHeight,
-                updatedPositions[vertex].z + settings.noseDepth
-            );
-        }
     }
 
-    void CalculateEars(HumanHeadSettings settings)
+    Vector3 CalculateChin(Vector3 vertex)
     {
-        foreach (Vector3 vertex in headRegions.earSquare)
-        {
-            updatedPositions[vertex] = new Vector3
+        return new Vector3
             (
-                updatedPositions[vertex].x,
-                updatedPositions[vertex].y + settings.earHeight,
-                updatedPositions[vertex].z
+                vertex.x + Sign(vertex.x) * settings.chinWidth,
+                vertex.y - settings.chinLength,
+                vertex.z + settings.chinLength
             );
-        }
     }
 
     float Sign(float value)

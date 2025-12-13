@@ -101,6 +101,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8131302604083675390}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d57b900f1513d5d4f8969b97081e4ba7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2028378145581837396}
   m_SourcePrefab: {fileID: 100100000, guid: d57b900f1513d5d4f8969b97081e4ba7, type: 3}
 --- !u!1 &1202985670427727566 stripped
 GameObject:
@@ -125,3 +129,36 @@ MonoBehaviour:
   eyeWhite: {fileID: 919132149155446097, guid: 0ebb3e10989a47c4c8ff14ada3820abb, type: 3}
   eyeIris: {fileID: 919132149155446097, guid: 7f704f375ad69c84d8face9cceb92521, type: 3}
   eyePupil: {fileID: 919132149155446097, guid: 01f5238400717ee4dbce6c8c013b704f, type: 3}
+  hair1: {fileID: 0}
+  hair2: {fileID: 0}
+  hair3: {fileID: 0}
+  hair4: {fileID: 0}
+  brows1: {fileID: 0}
+  brows2: {fileID: 0}
+  brows3: {fileID: 0}
+  brows4: {fileID: 0}
+  sideBeard1: {fileID: 0}
+  sideBeard2: {fileID: 0}
+  sideBeard3: {fileID: 0}
+  sideBeard4: {fileID: 0}
+  stache1: {fileID: 0}
+  stache2: {fileID: 0}
+  stache3: {fileID: 0}
+  stache4: {fileID: 0}
+  beard1: {fileID: 0}
+  beard2: {fileID: 0}
+  beard3: {fileID: 0}
+  beard4: {fileID: 0}
+--- !u!114 &2028378145581837396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202985670427727566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db308cc7a0f154248910946df9881c83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regions: {fileID: 11400000, guid: a4d443a807c2db945a69897f1145d132, type: 2}
