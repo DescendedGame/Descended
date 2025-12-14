@@ -180,7 +180,7 @@ public class BodySliderManager : MonoBehaviour
 
     void OnToggleChanged(bool value)
     {
-
+        AssignToggleValues();
         bodyCreator?.RecalculateBody();
     }
 

@@ -9,6 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/StartUp.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: b83587f2a5308684c9337ecfee85313e
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 4266d75f7aeb7ec429440a82df8bbf78
+  - enabled: 1
+    path: Assets/Scenes/CharacterCreation.unity
+    guid: 67e49dee5dfe12541ab579e79eb1d773
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

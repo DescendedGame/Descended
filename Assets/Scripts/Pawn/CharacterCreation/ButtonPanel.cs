@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonPanel : MonoBehaviour
@@ -17,8 +18,10 @@ public class ButtonPanel : MonoBehaviour
     [SerializeField] HeadSliderManager headSliderManager;
     [SerializeField] BodySliderManager bodySliderManager;
     [SerializeField] ColorMixer colorMixer;
+    [SerializeField] InputField nameEntry;
 
     HumanoidBodyCreator bodyCreator;
+
 
     private void Awake()
     {
@@ -44,6 +47,7 @@ public class ButtonPanel : MonoBehaviour
 
         done = Instantiate(characterCreationButtonPrefab, transform.GetChild(0)).GetComponent<Button>();
         done.GetComponentInChildren<TMP_Text>().text = "Finish";
+        done.onClick.AddListener(Done);
     }
 
     void RandomizeAll()
@@ -103,4 +107,14 @@ public class ButtonPanel : MonoBehaviour
         bodyCreator.RecalculateBody();
     }
 
+    void Done()
+    {
+        if (bodyCreator == null)
+        {
+            bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
+            if (bodyCreator == null) return;
+        }
+        bodyCreator.SaveBody(nameEntry.text);
+        SceneManager.LoadScene("Lobby");
+    }
 }

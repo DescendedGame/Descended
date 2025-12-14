@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -79,3 +80,4 @@ public class VertexExtractor : MonoBehaviour
         return vertices.ToArray();
     }
 }
+#endif

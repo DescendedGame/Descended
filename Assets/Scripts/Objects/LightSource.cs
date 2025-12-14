@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LightSource : MonoBehaviour
@@ -13,6 +11,7 @@ public class LightSource : MonoBehaviour
 
     private void OnValidate()
     {
+        if (gameObject.scene.name == null) return;
         m_light_source.color = m_color;
         if (Application.isPlaying) m_light_orb.material.SetColor("Luminescence", m_color);
         m_light_source.range = m_luminance;

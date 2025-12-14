@@ -8,9 +8,15 @@ public class DescendedInitializer : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Initialize()
     {
-        var go = new GameObject();
-        go.AddComponent<WaveVariables>();
-        go.name = "WaveVariables";
-        DontDestroyOnLoad(go);
+        var go1 = new GameObject();
+        go1.AddComponent<WaveVariables>();
+        go1.name = "WaveVariables";
+        DontDestroyOnLoad(go1);
+
+        var go2 = new GameObject();
+        go2.AddComponent<LocalPlayerData>();
+        go2.name = "LocalPlayerData";
+        DontDestroyOnLoad(go2);
+
     }
 }
