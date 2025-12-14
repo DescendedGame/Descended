@@ -10,16 +10,23 @@ public class PlasticMesh : MonoBehaviour
     public delegate Vector3 VertexTransformation(Vector3 vertex);
     MeshFilter[] filters;
     Vector3[][] originalVertices;
+    bool initialized = false;
 
     private void Awake()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        if (initialized) return;
         filters = GetComponentsInChildren<MeshFilter>();
         originalVertices = new Vector3[filters.Length][];
 
-        for(int i = 0; i < filters.Length; i++)
+        for (int i = 0; i < filters.Length; i++)
         {
             originalVertices[i] = new Vector3[filters[i].mesh.vertices.Length];
-            for(int j = 0; j< originalVertices[i].Length; j++)
+            for (int j = 0; j < originalVertices[i].Length; j++)
             {
                 originalVertices[i][j] = filters[i].mesh.vertices[j];
             }
@@ -47,6 +54,7 @@ public class PlasticMesh : MonoBehaviour
         regionByName["chin"] = regions.chin;
 
         ResetPositions();
+        initialized = true;
     }
 
     public void ResetPositions()

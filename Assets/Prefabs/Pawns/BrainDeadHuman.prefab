@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 3738586299702573578, guid: 378e618d03a8b9b41adf0c148d055ad6,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1951533335
+      value: 3170234839
       objectReference: {fileID: 0}
     - target: {fileID: 5977621647889798969, guid: 378e618d03a8b9b41adf0c148d055ad6,
         type: 3}
@@ -67,6 +67,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.hairColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.hairColor.b
+      value: 0.06888572
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.hairColor.g
+      value: 0.18050642
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.hairColor.r
+      value: 0.33962262
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.coverSettings.color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.headSettings.browStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.headSettings.hairStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.headSettings.beardStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.headSettings.stacheStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8205738508129064437, guid: 378e618d03a8b9b41adf0c148d055ad6,
+        type: 3}
+      propertyPath: bodySettings.headSettings.sideBeardStyle
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

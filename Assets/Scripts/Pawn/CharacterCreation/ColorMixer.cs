@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.Port;
 
 public class ColorMixer : MonoBehaviour
 {
@@ -14,8 +15,6 @@ public class ColorMixer : MonoBehaviour
     public Material[] targetMaterials;
 
     HumanoidBodyCreator bodyCreator;
-
-    Color skinColor;
 
     public string targetColor = "skin";
 
@@ -36,17 +35,81 @@ public class ColorMixer : MonoBehaviour
         targetDropdown.onValueChanged.AddListener(SwitchTarget);
     }
 
-    public void SwitchTarget(int index)
+    private void Start()
     {
-        Debug.Log(targetDropdown.options[index].text);
+        ReadValues();
     }
 
-    public void SetColor(Color color, float opacity)
+    public void SwitchTarget(int index)
+    {
+        ReadValues();
+    }
+
+    public void SetColor(Color color)
     {
         colorSliders[0].SetValueWithoutNotify(color.r);
         colorSliders[1].SetValueWithoutNotify(color.g);
         colorSliders[2].SetValueWithoutNotify(color.b);
-        colorSliders[3].SetValueWithoutNotify(opacity);
+        colorSliders[3].SetValueWithoutNotify(color.a);
+        colorRepresentation.color = color;
+    }
+
+    public void ReadValues()
+    {
+        if (bodyCreator == null)
+        {
+            bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
+            if (bodyCreator == null) return;
+        }
+        switch (targetDropdown.options[targetDropdown.value].text)
+        {
+            case "Skin":
+                SetColor(bodyCreator.bodySettings.skinColor);
+                break;
+
+            case "Hair":
+                SetColor(bodyCreator.bodySettings.hairColor);
+                break;
+
+            case "Eye Lids":
+                SetColor(bodyCreator.bodySettings.headSettings.eyeLidColor);
+                break;
+
+            case "Sclera":
+                SetColor(bodyCreator.bodySettings.headSettings.scleraColor);
+                break;
+
+            case "Iris":
+                SetColor(bodyCreator.bodySettings.headSettings.irisColor);
+                break;
+
+            case "Pupil":
+                SetColor(bodyCreator.bodySettings.headSettings.pupilColor);
+                break;
+
+            case "Makeup":
+                SetColor(bodyCreator.bodySettings.headSettings.makeupColor);
+                break;
+
+            case "Lips":
+                SetColor(bodyCreator.bodySettings.headSettings.lipColor);
+                break;
+
+            case "Cover":
+                SetColor(bodyCreator.bodySettings.coverSettings.color);
+                break;
+
+            default:
+                break;
+        }
+        Color displayColor;
+        if (targetDropdown.options[targetDropdown.value].text != "Skin")
+        {
+            displayColor = Color.Lerp(bodyCreator.bodySettings.skinColor, new Color(colorSliders[0].value, colorSliders[1].value, colorSliders[2].value), colorSliders[3].value);
+
+        }
+        else displayColor = new Color(colorSliders[0].value, colorSliders[1].value, colorSliders[2].value);
+        colorRepresentation.color = displayColor;
     }
 
     public void MixColor(float value)
@@ -56,12 +119,50 @@ public class ColorMixer : MonoBehaviour
             bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
             if (bodyCreator == null) return;
         }
-
-        Color mixedColor = Color.Lerp(bodyCreator.bodySettings.skinColor, new Color(colorSliders[0].value, colorSliders[1].value, colorSliders[2].value), colorSliders[3].value);
-        foreach (Material material in targetMaterials)
+        Color displayColor;
+        if (targetDropdown.options[targetDropdown.value].text != "Skin")
         {
-            material.SetColor("_MainColor", mixedColor);
+            displayColor = Color.Lerp(bodyCreator.bodySettings.skinColor, new Color(colorSliders[0].value, colorSliders[1].value, colorSliders[2].value), colorSliders[3].value);
+
         }
-        colorRepresentation.color = mixedColor;
+        else displayColor = new Color(colorSliders[0].value, colorSliders[1].value, colorSliders[2].value);
+
+        Color mixedColor = new Color(colorSliders[0].value, colorSliders[1].value, colorSliders[2].value, colorSliders[3].value);
+
+        switch (targetDropdown.options[targetDropdown.value].text)
+        {
+            case "Skin":
+                bodyCreator.bodySettings.skinColor = displayColor;
+                break;
+            case "Hair":
+                bodyCreator.bodySettings.hairColor = mixedColor;
+                break;
+            case "Eye Lids":
+                Debug.Log("setting eye lid color");
+                bodyCreator.bodySettings.headSettings.eyeLidColor = mixedColor;
+                break;
+            case "Sclera":
+                bodyCreator.bodySettings.headSettings.scleraColor = mixedColor;
+                break;
+            case "Iris":
+                bodyCreator.bodySettings.headSettings.irisColor = mixedColor;
+                break;
+            case "Pupil":
+                bodyCreator.bodySettings.headSettings.pupilColor = mixedColor;
+                break;
+            case "Makeup":
+                bodyCreator.bodySettings.headSettings.makeupColor = mixedColor;
+                break;
+            case "Lips":
+                bodyCreator.bodySettings.headSettings.lipColor = mixedColor;
+                break;
+            case "Cover":
+                bodyCreator.bodySettings.coverSettings.color = displayColor;
+                break;
+            default:
+                break;
+        }
+        colorRepresentation.color = displayColor;
+        bodyCreator.RecalculateBody();
     }
 }

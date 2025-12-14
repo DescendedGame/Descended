@@ -51,6 +51,15 @@ public struct HumanHeadSettings
     public int sideBeardStyle;
     public int stacheStyle;
     public int beardStyle;
+
+    //colors
+
+    public Color eyeLidColor;
+    public Color scleraColor;
+    public Color irisColor;
+    public Color pupilColor;
+    public Color makeupColor;
+    public Color lipColor;
 }
 
 [System.Serializable]
@@ -90,6 +99,8 @@ public struct HumanBodySettings
     public float ankleRadius;
 
     public Color skinColor;
+    public Color hairColor;
+
     public Material basicInGameObject;
 
     public HumanBodyCoverageSettings coverSettings;
@@ -145,7 +156,7 @@ public class HumanoidBodyCreator : BodyCreator
 
     public void CreateHead()
     {
-        headCreator.CreateHead(bodySettings.headSettings);
+        headCreator.CreateHead(bodySettings);
     }
 
     public override void RecalculateBody()
@@ -211,9 +222,9 @@ public class HumanoidBodyCreator : BodyCreator
                 thisOnesMat.SetColor("_TransitionColor", bodySettings.skinColor);
                 renderer.material = thisOnesMat;
             }
-            CreateHead();
         }
-       
+        CreateHead();
+
         head.transform.localPosition = Vector3.forward * upperNeck.length;
 
         return head.transform;

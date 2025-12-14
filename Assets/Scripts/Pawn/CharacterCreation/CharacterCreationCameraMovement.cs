@@ -8,6 +8,7 @@ public class CharacterCreationCameraMovement : MonoBehaviour
 
     public bool rotatingCamera = false;
     public bool translatingCamera = false;
+    public bool hovering = false;
 
     float cameraDistance = 2;
 
@@ -31,9 +32,13 @@ public class CharacterCreationCameraMovement : MonoBehaviour
             if (pivot.position.y >= 3) pivot.position = Vector3.up * 3;
         }
 
-        cameraDistance -= Input.mouseScrollDelta.y /10;
-        cameraDistance = Mathf.Clamp(cameraDistance, 0.75f, 5);
-        cameraTransform.localPosition = new Vector3(0, 0, cameraDistance);
+        if(hovering)
+        {
+
+            cameraDistance -= Input.mouseScrollDelta.y / 10;
+            cameraDistance = Mathf.Clamp(cameraDistance, 0.7f, 5);
+            cameraTransform.localPosition = new Vector3(0, 0, cameraDistance);
+        }
 
     }
 }

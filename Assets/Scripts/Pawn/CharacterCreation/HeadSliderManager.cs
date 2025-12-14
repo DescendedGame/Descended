@@ -76,24 +76,123 @@ public class HeadSliderManager : MonoBehaviour
         headSliders[24].GetComponentInChildren<TMP_Text>().text = "ear height";
         headSliders[25].GetComponentInChildren<TMP_Text>().text = "ear size";
 
-        /*for (int i = 0; i < bodyToggles.Length; i++)
+    }
+
+    private void Start()
+    {
+        ReadValues();
+    }
+
+    void ReadValues()
+    {
+        if (bodyCreator == null)
         {
-            GameObject bodyToggle = Instantiate(customizationTogglePrefab, transform.GetChild(1));
-            bodyToggles[i] = bodyToggle.GetComponent<Toggle>();
-            bodyToggles[i].onValueChanged.AddListener(OnToggleChanged);
+            bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
+            if (bodyCreator == null) return;
         }
-        bodyToggles[0].GetComponentInChildren<Text>().text = "upper neck";
-        bodyToggles[1].GetComponentInChildren<Text>().text = "lower neck";
-        bodyToggles[2].GetComponentInChildren<Text>().text = "shoulders";
-        bodyToggles[3].GetComponentInChildren<Text>().text = "elbows";
-        bodyToggles[4].GetComponentInChildren<Text>().text = "wrists";
-        bodyToggles[5].GetComponentInChildren<Text>().text = "chest";
-        bodyToggles[6].GetComponentInChildren<Text>().text = "waist";
-        bodyToggles[7].GetComponentInChildren<Text>().text = "hips";
-        bodyToggles[8].GetComponentInChildren<Text>().text = "butt";
-        bodyToggles[9].GetComponentInChildren<Text>().text = "knees";
-        bodyToggles[10].GetComponentInChildren<Text>().text = "calves";
-        bodyToggles[11].GetComponentInChildren<Text>().text = "ankles";*/
+
+        headSliders[0].SetValueWithoutNotify(
+            InverseHalfSpan(1f, bodyCreator.bodySettings.headSettings.skullSize));
+
+        headSliders[1].SetValueWithoutNotify(
+            Mathf.InverseLerp(jawWidthSpan.x, jawWidthSpan.y,
+                bodyCreator.bodySettings.headSettings.jawWidth));
+
+        headSliders[2].SetValueWithoutNotify(
+            Mathf.InverseLerp(jawHeightSpan.x, jawHeightSpan.y,
+                bodyCreator.bodySettings.headSettings.jawHeight));
+
+        headSliders[3].SetValueWithoutNotify(
+            Mathf.InverseLerp(jawDepthSpan.x, jawDepthSpan.y,
+                bodyCreator.bodySettings.headSettings.jawDepth));
+
+        headSliders[4].SetValueWithoutNotify(
+            Mathf.InverseLerp(cheekboneWidthSpan.x, cheekboneWidthSpan.y,
+                bodyCreator.bodySettings.headSettings.cheekboneWidth));
+
+        headSliders[5].SetValueWithoutNotify(
+            Mathf.InverseLerp(cheekboneHeightSpan.x, cheekboneHeightSpan.y,
+                bodyCreator.bodySettings.headSettings.cheekboneHeight));
+
+        headSliders[6].SetValueWithoutNotify(
+            Mathf.InverseLerp(cheekSizeSpan.x, cheekSizeSpan.y,
+                bodyCreator.bodySettings.headSettings.cheekSize));
+
+        headSliders[7].SetValueWithoutNotify(
+            Mathf.InverseLerp(chinLengthSpan.x, chinLengthSpan.y,
+                bodyCreator.bodySettings.headSettings.chinLength));
+
+        headSliders[8].SetValueWithoutNotify(
+            Mathf.InverseLerp(chinWidthSpan.x, chinWidthSpan.y,
+                bodyCreator.bodySettings.headSettings.chinWidth));
+
+        headSliders[9].SetValueWithoutNotify(
+            Mathf.InverseLerp(eyeHeightSpan.x, eyeHeightSpan.y,
+                bodyCreator.bodySettings.headSettings.eyeHeight));
+
+        headSliders[10].SetValueWithoutNotify(
+            Mathf.InverseLerp(eyeDistanceSpan.x, eyeDistanceSpan.y,
+                bodyCreator.bodySettings.headSettings.eyeDistance));
+
+        headSliders[11].SetValueWithoutNotify(
+            Mathf.InverseLerp(eyeDepthSpan.x, eyeDepthSpan.y,
+                bodyCreator.bodySettings.headSettings.eyeDepth));
+
+        headSliders[12].SetValueWithoutNotify(
+            Mathf.InverseLerp(eyeSizeSpan.x, eyeSizeSpan.y,
+                bodyCreator.bodySettings.headSettings.eyeSize));
+
+        headSliders[13].SetValueWithoutNotify(
+            Mathf.InverseLerp(outerBrowSpan.x, outerBrowSpan.y,
+                bodyCreator.bodySettings.headSettings.outerBrow));
+
+        headSliders[14].SetValueWithoutNotify(
+            Mathf.InverseLerp(innerBrowSpan.x, innerBrowSpan.y,
+                bodyCreator.bodySettings.headSettings.innerBrow));
+
+        headSliders[15].SetValueWithoutNotify(
+            Mathf.InverseLerp(browDistanceSpan.x, browDistanceSpan.y,
+                bodyCreator.bodySettings.headSettings.browDistance));
+
+        headSliders[16].SetValueWithoutNotify(
+            Mathf.InverseLerp(browDepthSpan.x, browDepthSpan.y,
+                bodyCreator.bodySettings.headSettings.browDepth));
+
+        headSliders[17].SetValueWithoutNotify(
+            Mathf.InverseLerp(mouthWidthSpan.x, mouthWidthSpan.y,
+                bodyCreator.bodySettings.headSettings.mouthWidth));
+
+        headSliders[18].SetValueWithoutNotify(
+            Mathf.InverseLerp(mouthHeightSpan.x, mouthHeightSpan.y,
+                bodyCreator.bodySettings.headSettings.mouthHeight));
+
+        headSliders[19].SetValueWithoutNotify(
+            Mathf.InverseLerp(lipSizeSpan.x, lipSizeSpan.y,
+                bodyCreator.bodySettings.headSettings.lipSize));
+
+        headSliders[20].SetValueWithoutNotify(
+            Mathf.InverseLerp(noseWidthSpan.x, noseWidthSpan.y,
+                bodyCreator.bodySettings.headSettings.noseWidth));
+
+        headSliders[21].SetValueWithoutNotify(
+            Mathf.InverseLerp(noseHeightSpan.x, noseHeightSpan.y,
+                bodyCreator.bodySettings.headSettings.noseHeight));
+
+        headSliders[22].SetValueWithoutNotify(
+            Mathf.InverseLerp(noseDepthSpan.x, noseDepthSpan.y,
+                bodyCreator.bodySettings.headSettings.noseDepth));
+
+        headSliders[23].SetValueWithoutNotify(
+            Mathf.InverseLerp(earRotationSpan.x, earRotationSpan.y,
+                bodyCreator.bodySettings.headSettings.earRotation));
+
+        headSliders[24].SetValueWithoutNotify(
+            Mathf.InverseLerp(earHeightSpan.x, earHeightSpan.y,
+                bodyCreator.bodySettings.headSettings.earHeight));
+
+        headSliders[25].SetValueWithoutNotify(
+            Mathf.InverseLerp(earSizeSpan.x, earSizeSpan.y,
+                bodyCreator.bodySettings.headSettings.earSize));
     }
 
     float HalfSpan(float midValue, float slideValue)
@@ -101,14 +200,21 @@ public class HeadSliderManager : MonoBehaviour
         return Mathf.Lerp(midValue * 0.5f, midValue * 1.5f, slideValue);
     }
 
+    float InverseHalfSpan(float midValue, float value)
+    {
+        return value / midValue - 0.5f;
+    }
+
 
     void OnSliderChanged(float pValue)
     {
-        if(bodyCreator == null)
-        {
-            bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
-            if (bodyCreator == null) return;
-        }
+        AssignValues();
+
+        bodyCreator?.CreateHead();
+    }
+
+    void AssignValues()
+    {
         bodyCreator.bodySettings.headSettings.skullSize = HalfSpan(1f, headSliders[0].value);
         bodyCreator.bodySettings.headSettings.jawWidth = Mathf.Lerp(jawWidthSpan.x, jawWidthSpan.y, headSliders[1].value);
         bodyCreator.bodySettings.headSettings.jawHeight = Mathf.Lerp(jawHeightSpan.x, jawHeightSpan.y, headSliders[2].value);
@@ -131,36 +237,20 @@ public class HeadSliderManager : MonoBehaviour
         bodyCreator.bodySettings.headSettings.mouthWidth = Mathf.Lerp(mouthWidthSpan.x, mouthWidthSpan.y, headSliders[17].value);
         bodyCreator.bodySettings.headSettings.mouthHeight = Mathf.Lerp(mouthHeightSpan.x, mouthHeightSpan.y, headSliders[18].value);
         bodyCreator.bodySettings.headSettings.lipSize = Mathf.Lerp(lipSizeSpan.x, lipSizeSpan.y, headSliders[19].value);
-
         bodyCreator.bodySettings.headSettings.noseWidth = Mathf.Lerp(noseWidthSpan.x, noseWidthSpan.y, headSliders[20].value);
         bodyCreator.bodySettings.headSettings.noseHeight = Mathf.Lerp(noseHeightSpan.x, noseHeightSpan.y, headSliders[21].value);
         bodyCreator.bodySettings.headSettings.noseDepth = Mathf.Lerp(noseDepthSpan.x, noseDepthSpan.y, headSliders[22].value);
         bodyCreator.bodySettings.headSettings.earRotation = Mathf.Lerp(earRotationSpan.x, earRotationSpan.y, headSliders[23].value);
         bodyCreator.bodySettings.headSettings.earHeight = Mathf.Lerp(earHeightSpan.x, earHeightSpan.y, headSliders[24].value);
         bodyCreator.bodySettings.headSettings.earSize = Mathf.Lerp(earSizeSpan.x, earSizeSpan.y, headSliders[25].value);
-
-        bodyCreator.CreateHead();
     }
-    void OnToggleChanged(bool value)
-    {
-        if (bodyCreator == null)
-        {
-            bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
-            if (bodyCreator == null) return;
-        }
-        bodyCreator.bodySettings.coverSettings.upperNeck = bodyToggles[0].isOn;
-        bodyCreator.bodySettings.coverSettings.lowerNeck = bodyToggles[1].isOn;
-        bodyCreator.bodySettings.coverSettings.shoulders = bodyToggles[2].isOn;
-        bodyCreator.bodySettings.coverSettings.elbows = bodyToggles[3].isOn;
-        bodyCreator.bodySettings.coverSettings.wrists = bodyToggles[4].isOn;
-        bodyCreator.bodySettings.coverSettings.chest = bodyToggles[5].isOn;
-        bodyCreator.bodySettings.coverSettings.waist = bodyToggles[6].isOn;
-        bodyCreator.bodySettings.coverSettings.hips = bodyToggles[7].isOn;
-        bodyCreator.bodySettings.coverSettings.butt = bodyToggles[8].isOn;
-        bodyCreator.bodySettings.coverSettings.knees = bodyToggles[9].isOn;
-        bodyCreator.bodySettings.coverSettings.calves = bodyToggles[10].isOn;
-        bodyCreator.bodySettings.coverSettings.ankles = bodyToggles[11].isOn;
 
-        bodyCreator.RecalculateBody();
+    public void Randomize()
+    {
+        foreach(Slider slider in headSliders)
+        {
+            slider.SetValueWithoutNotify(Random.value);
+        }
+        AssignValues();
     }
 }

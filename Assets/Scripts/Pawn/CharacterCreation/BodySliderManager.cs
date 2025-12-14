@@ -70,14 +70,82 @@ public class BodySliderManager : MonoBehaviour
         return Mathf.Lerp(midValue * 0.5f, midValue * 1.5f, slideValue);
     }
 
-
-    void OnSliderChanged(float pValue)
+    float InverseHalfSpan(float midValue, float value)
     {
-        if(bodyCreator == null)
+        return value / midValue - 0.5f;
+    }
+
+    private void Start()
+    {
+        ReadValues();
+    }
+
+    void ReadValues()
+    {
+        if (bodyCreator == null)
         {
             bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
             if (bodyCreator == null) return;
         }
+        bodySliders[0].SetValueWithoutNotify(InverseHalfSpan(0.1f, bodyCreator.bodySettings.upperNeckLength));
+        bodySliders[1].SetValueWithoutNotify(InverseHalfSpan(0.05f, bodyCreator.bodySettings.upperNeckWidth));
+        bodySliders[2].SetValueWithoutNotify(InverseHalfSpan(0.08f, bodyCreator.bodySettings.lowerNeckWidth));
+
+        bodySliders[3].SetValueWithoutNotify(InverseHalfSpan(0.1f, bodyCreator.bodySettings.atlasLength));
+        bodySliders[4].SetValueWithoutNotify(InverseHalfSpan(0.12f, bodyCreator.bodySettings.torsoDepth));
+
+        bodySliders[5].SetValueWithoutNotify(InverseHalfSpan(0.05f, bodyCreator.bodySettings.torsoWidth));
+        bodySliders[6].SetValueWithoutNotify(InverseHalfSpan(0.2f, bodyCreator.bodySettings.ribLength));
+        bodySliders[7].SetValueWithoutNotify(InverseHalfSpan(0.08f, bodyCreator.bodySettings.waist));
+        bodySliders[8].SetValueWithoutNotify(InverseHalfSpan(0.15f, bodyCreator.bodySettings.bellyLength));
+        bodySliders[9].SetValueWithoutNotify(InverseHalfSpan(0.1f, bodyCreator.bodySettings.shoulderWidth));
+        bodySliders[10].SetValueWithoutNotify(InverseHalfSpan(0.08f, bodyCreator.bodySettings.shoulderSize));
+        bodySliders[11].SetValueWithoutNotify(InverseHalfSpan(0.3f, bodyCreator.bodySettings.armLength));
+        bodySliders[12].SetValueWithoutNotify(InverseHalfSpan(0.04f, bodyCreator.bodySettings.elbowSize));
+        bodySliders[13].SetValueWithoutNotify(InverseHalfSpan(0.25f, bodyCreator.bodySettings.forearmLength));
+        bodySliders[14].SetValueWithoutNotify(InverseHalfSpan(0.025f, bodyCreator.bodySettings.wristSize));
+
+        bodySliders[15].SetValueWithoutNotify(InverseHalfSpan(0.05f, bodyCreator.bodySettings.upperHipWidth));
+        bodySliders[16].SetValueWithoutNotify(InverseHalfSpan(0.14f, bodyCreator.bodySettings.upperHipRadius));
+        bodySliders[17].SetValueWithoutNotify(InverseHalfSpan(0.15f, bodyCreator.bodySettings.lowerHipRadius));
+        bodySliders[18].SetValueWithoutNotify(InverseHalfSpan(0.09f, bodyCreator.bodySettings.hipLength));
+        bodySliders[19].SetValueWithoutNotify(InverseHalfSpan(20f, bodyCreator.bodySettings.hipOutRotation));
+
+        bodySliders[20].SetValueWithoutNotify(InverseHalfSpan(0.4f, bodyCreator.bodySettings.thighLength));
+        bodySliders[21].SetValueWithoutNotify(InverseHalfSpan(0.05f, bodyCreator.bodySettings.kneeRadius));
+        bodySliders[22].SetValueWithoutNotify(InverseHalfSpan(0.1f, bodyCreator.bodySettings.upperCalfLength));
+        bodySliders[23].SetValueWithoutNotify(InverseHalfSpan(0.06f, bodyCreator.bodySettings.calfRadius));
+        bodySliders[24].SetValueWithoutNotify(InverseHalfSpan(0.25f, bodyCreator.bodySettings.lowerCalfLength));
+        bodySliders[25].SetValueWithoutNotify(InverseHalfSpan(0.03f, bodyCreator.bodySettings.ankleRadius));
+
+        bodyToggles[0].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.upperNeck);
+        bodyToggles[1].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.lowerNeck);
+        bodyToggles[2].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.shoulders);
+        bodyToggles[3].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.elbows);
+        bodyToggles[4].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.wrists);
+        bodyToggles[5].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.chest);
+        bodyToggles[6].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.waist);
+        bodyToggles[7].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.hips);
+        bodyToggles[8].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.butt);
+        bodyToggles[9].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.knees);
+        bodyToggles[10].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.calves);
+        bodyToggles[11].SetIsOnWithoutNotify(bodyCreator.bodySettings.coverSettings.ankles);
+    }
+
+    void OnSliderChanged(float pValue)
+    {
+        AssignValues();
+        bodyCreator?.RecalculateBody();
+    }
+
+    void AssignValues()
+    {
+        if (bodyCreator == null)
+        {
+            bodyCreator = FindFirstObjectByType<HumanoidBodyCreator>();
+            if (bodyCreator == null) return;
+        }
+
         bodyCreator.bodySettings.upperNeckLength = HalfSpan(0.1f, bodySliders[0].value);
         bodyCreator.bodySettings.upperNeckWidth = HalfSpan(0.05f, bodySliders[1].value);
         bodyCreator.bodySettings.lowerNeckWidth = HalfSpan(0.08f, bodySliders[2].value);
@@ -108,10 +176,15 @@ public class BodySliderManager : MonoBehaviour
         bodyCreator.bodySettings.calfRadius = HalfSpan(0.06f, bodySliders[23].value);
         bodyCreator.bodySettings.lowerCalfLength = HalfSpan(0.25f, bodySliders[24].value);
         bodyCreator.bodySettings.ankleRadius = HalfSpan(0.03f, bodySliders[25].value);
-
-        bodyCreator.RecalculateBody();
     }
+
     void OnToggleChanged(bool value)
+    {
+
+        bodyCreator?.RecalculateBody();
+    }
+
+    void AssignToggleValues()
     {
         if (bodyCreator == null)
         {
@@ -130,7 +203,19 @@ public class BodySliderManager : MonoBehaviour
         bodyCreator.bodySettings.coverSettings.knees = bodyToggles[9].isOn;
         bodyCreator.bodySettings.coverSettings.calves = bodyToggles[10].isOn;
         bodyCreator.bodySettings.coverSettings.ankles = bodyToggles[11].isOn;
+    }
 
-        bodyCreator.RecalculateBody();
+    public void Randomize()
+    {
+        foreach (Slider slider in bodySliders)
+        {
+            slider.SetValueWithoutNotify(Random.value);
+        }
+        foreach(Toggle toggle in bodyToggles)
+        {
+            toggle.SetIsOnWithoutNotify(Random.value > 0.5f);
+        }
+        AssignValues();
+        AssignToggleValues();
     }
 }

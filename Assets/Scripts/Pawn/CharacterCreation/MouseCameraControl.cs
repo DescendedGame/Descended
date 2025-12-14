@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MouseCameraControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class MouseCameraControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public CharacterCreationCameraMovement movement;
 
@@ -35,5 +35,13 @@ public class MouseCameraControl : MonoBehaviour, IPointerDownHandler, IPointerUp
                 movement.translatingCamera = false;
                 break;
         }
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        movement.hovering = true;
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        movement.hovering = false;
     }
 }
