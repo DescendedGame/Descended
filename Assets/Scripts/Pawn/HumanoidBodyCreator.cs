@@ -9,6 +9,7 @@ public class HumanoidBodyCreator : BodyCreator
     [SerializeField] GameObject headPrefab;
 
     public HumanBodySettings bodySettings;
+    public Material basicInGameMaterial;
 
     GameObject head;
     HumanHeadCreator headCreator;
@@ -34,6 +35,7 @@ public class HumanoidBodyCreator : BodyCreator
         Pentapus,
     }
 
+
     public void CreateHead()
     {
         headCreator.CreateHead(bodySettings);
@@ -46,7 +48,8 @@ public class HumanoidBodyCreator : BodyCreator
 
     public override void CreateBody(out Transform atlasTransform, out Transform cameraTransform)
     {
-        if(FindFirstObjectByType<LocalPlayerData>() && SceneManager.GetActiveScene().name == "Game")
+        bodySettings.basicInGameObject = basicInGameMaterial;
+        if (FindFirstObjectByType<LocalPlayerData>() && SceneManager.GetActiveScene().name == "Game")
         {
             if (FindFirstObjectByType<LocalPlayerData>().settings.basicInGameObject != null)
             {
@@ -186,9 +189,9 @@ public class HumanoidBodyCreator : BodyCreator
         string jsonData = JsonUtility.ToJson(bodySettings);
         if (Application.isEditor)
         {
-            Directory.CreateDirectory("Assets/saves/avatars");
-            System.IO.File.Delete("Assets/saves/avatars/" + name + ".json");
-            System.IO.File.WriteAllText("Assets/saves/avatars/" + name + ".json", jsonData);
+            Directory.CreateDirectory(Application.streamingAssetsPath + "/saves/avatars");
+            System.IO.File.Delete(Application.streamingAssetsPath + "/saves/avatars/" + name + ".json");
+            System.IO.File.WriteAllText(Application.streamingAssetsPath + "/saves/avatars/" + name + ".json", jsonData);
         }
         else
         {
@@ -200,7 +203,8 @@ public class HumanoidBodyCreator : BodyCreator
 
     public void LoadBody(string name)
     {
-        string myString = File.ReadAllText("Assets/saves/avatars/" + name + ".json");
+        string myString = File.ReadAllText(Application.streamingAssetsPath + "/saves/avatars" + name + ".json");
         bodySettings = (HumanBodySettings)JsonUtility.FromJson(myString, typeof(HumanBodySettings));
+        bodySettings.basicInGameObject = basicInGameMaterial;
     }
 }

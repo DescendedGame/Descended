@@ -53,9 +53,9 @@ public class World : MonoBehaviour
         string jsonData = JsonUtility.ToJson(settings);
         if (Application.isEditor)
         {
-            Directory.CreateDirectory("Assets/saves/worlds");
-            System.IO.File.Delete("Assets/saves/worlds/" + worldName + ".json");
-            System.IO.File.WriteAllText("Assets/saves/worlds/" + worldName + ".json", jsonData);
+            Directory.CreateDirectory(Application.streamingAssetsPath + "/saves/worlds");
+            System.IO.File.Delete(Application.streamingAssetsPath + "/saves/worlds/" + worldName + ".json");
+            System.IO.File.WriteAllText(Application.streamingAssetsPath + "/saves/worlds/" + worldName + ".json", jsonData);
         }
         else
         {
@@ -70,7 +70,7 @@ public class World : MonoBehaviour
         string path;
         if (Application.isEditor)
         {
-            path = "Assets/saves/worlds/";
+            path = Application.streamingAssetsPath + "/saves/worlds/";
         }
         else
         {

@@ -179,3 +179,4 @@ MonoBehaviour:
       knees: 0
       calves: 0
       ankles: 0
+  basicInGameMaterial: {fileID: 2100000, guid: b4f431e14d9a55b4eb0e5b2f7d1aff2b, type: 2}

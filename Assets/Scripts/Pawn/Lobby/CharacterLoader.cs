@@ -23,7 +23,7 @@ public class CharacterLoader : MonoBehaviour
         string path;
         if (Application.isEditor)
         {
-            path = "Assets/saves/avatars";
+            path = Application.streamingAssetsPath + "/saves/avatars";
         }
         else
         {
@@ -64,7 +64,7 @@ public class CharacterLoader : MonoBehaviour
         string path;
         if (Application.isEditor)
         {
-            path = "Assets/saves/avatars/";
+            path = Application.streamingAssetsPath + "/saves/avatars/";
         }
         else
         {
@@ -72,7 +72,6 @@ public class CharacterLoader : MonoBehaviour
         }
         string myString = File.ReadAllText(path + name + ".json");
         HumanBodySettings bodySettings = (HumanBodySettings)JsonUtility.FromJson(myString, typeof(HumanBodySettings));
-        bodySettings.basicInGameObject ??= basicInGameObject;
         GameObject body = Instantiate(brainDeadHuman, characterPivot);
         body.GetComponent<HumanoidBodyCreator>().bodySettings = bodySettings;
         body.SetActive(false);
