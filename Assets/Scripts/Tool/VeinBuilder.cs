@@ -24,12 +24,14 @@ public class VeinBuilder : Tool
             target = actionPoint;
             isBuilding = true;
             vein = Instantiate(veinPrefab, target.position + target.forward * creationDistance, Quaternion.LookRotation(-target.forward, target.up)).GetComponent<Vein>();
-            vein.Generate(target.position + target.forward * creationDistance, startSize, startSize, 0, true, Vein.EndType.None, Vein.EndType.None);
+            vein.Generate(target.position + target.forward * creationDistance, startSize, startSize, 0, true, EndType.None, EndType.None);
         }
         else
         {
-            vein.Generate(target.position + target.forward * creationDistance, startSize,endSize, 0, true, Vein.EndType.None, Vein.EndType.None);
-            //vein.Save()
+            vein.Generate(target.position + target.forward * creationDistance, startSize,endSize, 0, true, EndType.None, EndType.None);
+            vein.transform.SetParent(GameObject.Find("World").transform, true);
+            vein.GetComponent<Collider>().enabled = true;
+            GameObject.Find("World").GetComponent<World>().SaveWorld();
             vein = null;
             isBuilding = false;
         }
@@ -59,7 +61,7 @@ public class VeinBuilder : Tool
         if (placeHolderVein == null)
         {
             placeHolderVein = Instantiate(veinPrefab, target.position + target.forward * creationDistance, Quaternion.LookRotation(-target.forward, target.up)).GetComponent<Vein>();
-            placeHolderVein.Generate(target.position + target.forward * creationDistance * 0.1f, 1, 1, 0, true, Vein.EndType.None, Vein.EndType.None);
+            placeHolderVein.Generate(target.position + target.forward * creationDistance * 0.1f, 1, 1, 0, true, EndType.None, EndType.None);
         }
         else
         {
@@ -81,7 +83,7 @@ public class VeinBuilder : Tool
         if (!equipped) return;
         if(vein != null)
         {
-            vein.Generate(target.position + target.forward * creationDistance, startSize, endSize, 0, true, Vein.EndType.None, Vein.EndType.None);
+            vein.Generate(target.position + target.forward * creationDistance, startSize, endSize, 0, true, EndType.None, EndType.None);
         }
         else
         {
@@ -91,7 +93,7 @@ public class VeinBuilder : Tool
             }
             placeHolderVein.transform.position = target.position + target.forward * creationDistance;
             placeHolderVein.transform.rotation = Quaternion.LookRotation(-target.forward, target.up);
-            placeHolderVein.Generate(target.position + target.forward * creationDistance * 0.9f, 1, 1, 0, true, Vein.EndType.None, Vein.EndType.None);
+            placeHolderVein.Generate(target.position + target.forward * creationDistance * 0.9f, 1, 1, 0, true, EndType.None, EndType.None);
         }
     }
 }

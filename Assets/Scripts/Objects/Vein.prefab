@@ -32,7 +32,9 @@ Transform:
   m_LocalPosition: {x: -3.714459, y: 13.960285, z: -4.844082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1757253620037320205}
+  - {fileID: 1449902183540519117}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4501286484444729489
@@ -48,19 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_vein_ends: {fileID: 11400000, guid: 409c31ba2b35222478caa64e8e10ce70, type: 2}
-  settings:
-    start_position: {x: 0, y: 0, z: 0}
-    end_position: {x: 0, y: 0, z: 0}
-    start_rotation: {x: 0, y: 0, z: 0, w: 0}
-    end_rotation: {x: 0, y: 0, z: 0, w: 0}
-    corner_count: 0
-    start_size: 0
-    end_size: 0
-    size_step: 0
-    vein_length: 0
-    is_tunnel: 0
   m_rotation: 0
-  target: {fileID: 0}
+  m_vein_start: {fileID: 1757253620037320205}
+  m_vein_end: {fileID: 1449902183540519117}
 --- !u!23 &9103788755457498718
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -136,3 +128,151 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1001 &2661182250421554976
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7209552413108579786}
+    m_Modifications:
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.8056135
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.530872
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.255079
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569747061646669778, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_Name
+      value: HollowFlatVeinEnd (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0519627937e2a014a98cdc08c57a6707, type: 3}
+--- !u!4 &1449902183540519117 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+    type: 3}
+  m_PrefabInstance: {fileID: 2661182250421554976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2923532878977073632
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7209552413108579786}
+    m_Modifications:
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.8056135
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.530872
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.255079
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569747061646669778, guid: 0519627937e2a014a98cdc08c57a6707,
+        type: 3}
+      propertyPath: m_Name
+      value: HollowFlatVeinEnd
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0519627937e2a014a98cdc08c57a6707, type: 3}
+--- !u!4 &1757253620037320205 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3526737914439237613, guid: 0519627937e2a014a98cdc08c57a6707,
+    type: 3}
+  m_PrefabInstance: {fileID: 2923532878977073632}
+  m_PrefabAsset: {fileID: 0}

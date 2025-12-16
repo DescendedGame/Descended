@@ -1,21 +1,6 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
-public struct VeinSettings
-{
-    public Vector3 start_position;
-    public Vector3 end_position;
-    public Quaternion start_rotation;
-    public Quaternion end_rotation;
-    public int corner_count;
-    public float start_size;
-    public float end_size;
-    public float size_step;
-    public float vein_length;
-    public bool is_tunnel;
-}
-
 //Clean this up!!!
 //Less cluttered, separate functions, choose if hollow or not upon creation, clear parameters for corners and segments and radius and stuff...
 [ExecuteInEditMode]
@@ -23,9 +8,8 @@ public class Vein : MonoBehaviour
 {
     [SerializeField] VeinEnd m_vein_ends;
 
-    public VeinSettings settings;
-
     Vector3 m_end_position;
+    Vector3 m_world_end_position;
     Quaternion m_end_rotation;
     int m_corner_count;
     float m_start_size;
@@ -33,6 +17,8 @@ public class Vein : MonoBehaviour
     float m_size_step;
     float m_vein_length;
     bool m_is_tunnel;
+    EndType m_start_type;
+    EndType m_end_type;
 
     Vector3 m_intersection_point;
 
@@ -47,11 +33,20 @@ public class Vein : MonoBehaviour
 
     Quaternion[] m_joint_rotations;
 
-    Transform m_vein_start = null;
-    Transform m_vein_end = null;
+    [SerializeField] Transform m_vein_start = null;
+    [SerializeField] Transform m_vein_end = null;
+
+    public void GenerateFromSettings(VeinSettings settings)
+    {
+        transform.position = settings.start_position;
+        transform.rotation = settings.start_rotation;
+        Generate(settings.end_position, settings.start_size, settings.end_size, settings.end_rotation, settings.is_tunnel, settings.start_type, settings.end_type);
+        GetComponent<Collider>().enabled = true;
+    }
 
     public void Generate(Vector3 target_position, float start_radius, float end_radius, float rotation, bool is_tunnel, EndType start_type, EndType end_type)
     {
+        m_world_end_position = target_position;
         if (GetComponent<MeshFilter>().sharedMesh == null) GetComponent<MeshFilter>().mesh = new Mesh();
         UpdateVeinMesh(target_position, 12, start_radius, end_radius, rotation, is_tunnel);
         if (m_vein_end == null)
@@ -63,7 +58,7 @@ public class Vein : MonoBehaviour
             m_vein_end.localPosition = m_end_position;
             m_vein_end.localRotation = m_end_rotation;
             m_vein_end.localScale = m_end_size * Vector3.one;
-            if (m_joint_count % 2 == 0) m_vein_end.rotation *= Quaternion.AngleAxis(360 / 24, Vector3.forward);
+            //if (m_joint_count % 2 == 0) m_vein_end.rotation *= Quaternion.AngleAxis(360 / 24, Vector3.forward);
         }
         if (m_vein_start == null)
         {
@@ -73,7 +68,7 @@ public class Vein : MonoBehaviour
         {
             m_vein_start.localPosition = Vector3.zero;
             m_vein_start.localRotation = Quaternion.LookRotation(-Vector3.forward, Vector3.up);
-            m_vein_start.localScale = m_end_size * Vector3.one;
+            m_vein_start.localScale = m_start_size * Vector3.one;
         }
     }
 
@@ -511,12 +506,6 @@ public class Vein : MonoBehaviour
         }
     }
 
-    public enum EndType
-    {
-        Sphere,
-        None,
-    }
-
     public Transform CreateEnd(Vector3 position, Quaternion rotation, float radius, EndType type, bool is_tunnel)
     {
         Transform t_end = GameObject.Instantiate(m_vein_ends.GetEndPrefab(type, is_tunnel), transform).transform;
@@ -542,5 +531,20 @@ public class Vein : MonoBehaviour
         }
 
         return t_end;
+    }
+
+    public VeinSettings GetSettings()
+    {
+        VeinSettings settings = new VeinSettings();
+        settings.start_position = transform.position;
+        settings.end_position = m_world_end_position;
+        settings.start_rotation = transform.rotation;
+        settings.end_rotation = m_rotation;
+        settings.start_size = m_start_size;
+        settings.end_size = m_end_size;
+        settings.is_tunnel = m_is_tunnel;
+        settings.start_type = m_start_type;
+        settings.end_type = m_end_type;
+        return settings;
     }
 }

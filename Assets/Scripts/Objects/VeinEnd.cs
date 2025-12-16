@@ -10,17 +10,17 @@ public class VeinEnd : ScriptableObject
     [SerializeField] GameObject m_solid_wall;
     [SerializeField] GameObject m_hollow_wall;
 
-    public GameObject GetEndPrefab(Vein.EndType type, bool is_tunnel)
+    public GameObject GetEndPrefab(EndType type, bool is_tunnel)
     {
         switch (type)
         {
-            case Vein.EndType.Sphere:
+            case EndType.Sphere:
                 if(is_tunnel)
                 {
                     return m_solid_sphere;
                 }
                 else return m_solid_sphere;
-            case Vein.EndType.None:
+            case EndType.None:
                 if (is_tunnel)
                 {
                     return m_hollow_wall;
