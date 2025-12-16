@@ -19,12 +19,22 @@ public class IdlePawnState : PawnState
         }
 
         // Tool selection
-        m_properties.selectedToolIndex = m_brain.commands.selected;
+        if(m_properties.selectedToolIndex != m_brain.commands.selected)
+        {
+            m_properties.tools[m_properties.selectedToolIndex].Unequip();
+            m_properties.selectedToolIndex = m_brain.commands.selected;
+            m_properties.tools[m_properties.selectedToolIndex].Equip(m_properties.actionPoint);
+        }
 
         // Tool usage can result in a different state!
         if (m_brain.commands.primary)
         {
-            m_properties.selectedTool.StartPrimaryAction(m_properties.actionPoint);
+            m_properties.selectedTool.StartPrimaryAction(m_properties.actionPoint, m_brain.commands);
+        }
+        // Tool usage can result in a different state!
+        if (m_brain.commands.secondaryHold)
+        {
+            m_properties.selectedTool.HoldSecondaryAction(m_properties.actionPoint, m_brain.commands);
         }
 
         UpdateRotation();

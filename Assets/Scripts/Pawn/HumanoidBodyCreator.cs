@@ -49,7 +49,10 @@ public class HumanoidBodyCreator : BodyCreator
     {
         if(FindFirstObjectByType<LocalPlayerData>() && SceneManager.GetActiveScene().name == "Game")
         {
-            bodySettings = FindFirstObjectByType<LocalPlayerData>().settings;
+            if (FindFirstObjectByType<LocalPlayerData>().settings.basicInGameObject != null)
+            {
+                bodySettings = FindFirstObjectByType<LocalPlayerData>().settings;
+            }
         }
         CreateTorso(out Transform leftHip, out Transform rightHip);
         atlasTransform = atlas;

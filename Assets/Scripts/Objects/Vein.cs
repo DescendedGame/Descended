@@ -1,12 +1,29 @@
 using System;
 using UnityEngine;
 
+[System.Serializable]
+public struct VeinSettings
+{
+    public Vector3 start_position;
+    public Vector3 end_position;
+    public Quaternion start_rotation;
+    public Quaternion end_rotation;
+    public int corner_count;
+    public float start_size;
+    public float end_size;
+    public float size_step;
+    public float vein_length;
+    public bool is_tunnel;
+}
+
 //Clean this up!!!
 //Less cluttered, separate functions, choose if hollow or not upon creation, clear parameters for corners and segments and radius and stuff...
 [ExecuteInEditMode]
 public class Vein : MonoBehaviour
 {
     [SerializeField] VeinEnd m_vein_ends;
+
+    public VeinSettings settings;
 
     Vector3 m_end_position;
     Quaternion m_end_rotation;
@@ -27,72 +44,19 @@ public class Vein : MonoBehaviour
     int m_vertex_count;
 
     Vector3[] m_joint_middles;
-    Vector3 m_hypothetical_start_position;
-    Vector3 m_hypothetical_end_position;
-    Quaternion m_hypothetical_start_rotation;
-    Quaternion m_hypothetical_end_rotation;
 
     Quaternion[] m_joint_rotations;
 
     Transform m_vein_start = null;
     Transform m_vein_end = null;
 
-    public Transform target;
-
-    //private void Awake()
-    //{
-    //    Vector2 random_point = Random.insideUnitCircle * Random.value * 20;
-    //    transform.position = new Vector3(random_point.x, 0, random_point.y);
-    //    transform.rotation *= Quaternion.AngleAxis(Random.value*360, Vector3.forward);
-    //    transform.rotation = Quaternion.AngleAxis(-90, Vector3.right) * transform.rotation;
-
-    //    float angleOffset = Random.value * Random.value * 90;
-    //    Vector3 distance = (Random.value * 4 + 1) * Vector3.up * ((20 - random_point.magnitude)/10 + 0.9f);
-    //    Vector3 randomDir = Random.insideUnitCircle.normalized;
-    //    randomDir = new Vector3(randomDir.x,0,randomDir.y);
-    //    distance = Quaternion.AngleAxis(angleOffset, Vector3.Cross(distance,randomDir))*distance;
-
-    //    Vector3 targetPos = transform.position + distance;
-    //    //if (Random.value > 0.5)
-    //    //{
-    //    //    if (Random.value > 0.5)
-    //    //    {
-    //    //        Generate(targetPos, Random.value *2+1, 1 - Random.value * 2, Random.value > 0.5f, EndType.Sphere, EndType.Sphere);
-    //    //    }
-    //    //    else Generate(targetPos, Random.value * 2 + 1, 1 - Random.value * 2, Random.value > 0.5f, EndType.Sphere, EndType.None);
-    //    //}
-    //    //else
-    //    //{
-    //    //    if(Random.value > 0.5)
-    //    //    {
-    //    //        Generate(targetPos, Random.value *2 + 1, 1 - Random.value * 2, Random.value > 0.5f, EndType.None, EndType.None);
-    //    //    }
-    //        //else 
-    //        Generate(targetPos, Random.value * 2 + 1, 1 - Random.value * 2, true, EndType.None, EndType.None);
-    //    //}
-    //}
-
-    private void Awake()
-    {
-        if (GetComponent<MeshFilter>().sharedMesh == null) GetComponent<MeshFilter>().mesh = new Mesh();
-        Generate(target.position, 1, 0.1f, m_rotation, true, EndType.None, EndType.None);
-    }
-
-    private void OnValidate()
-    {
-        if (target == null) return;
-        if (GetComponent<MeshFilter>().sharedMesh == null) GetComponent<MeshFilter>().mesh = new Mesh();
-        Generate(target.position, 1, 0.1f, m_rotation, true, EndType.None, EndType.None);
-    }
-
     public void Generate(Vector3 target_position, float start_radius, float end_radius, float rotation, bool is_tunnel, EndType start_type, EndType end_type)
     {
-        //Debug.Log("target position: " + target_position.magnitude);
+        if (GetComponent<MeshFilter>().sharedMesh == null) GetComponent<MeshFilter>().mesh = new Mesh();
         UpdateVeinMesh(target_position, 12, start_radius, end_radius, rotation, is_tunnel);
         if (m_vein_end == null)
         {
-            //m_vein_end = CreateEnd(m_end_position, m_end_rotation, m_end_size, end_type, m_is_tunnel);
-            //if (m_joint_count % 2 == 0) m_vein_end.rotation *= Quaternion.AngleAxis(360 / 24, Vector3.forward);
+
         }
         else
         {
@@ -103,7 +67,7 @@ public class Vein : MonoBehaviour
         }
         if (m_vein_start == null)
         {
-            //m_vein_start = CreateEnd(Vector3.zero, Quaternion.LookRotation(-Vector3.forward, Vector3.up), m_end_size, start_type, m_is_tunnel);
+
         }
         else
         {
@@ -115,7 +79,6 @@ public class Vein : MonoBehaviour
 
     public void UpdateVeinMesh(Vector3 end_position, int corner_count, float start_size, float end_size, float rotation, bool is_tunnel)
     {
-        //Debug.Log("end_position: " + end_position.magnitude);
         m_corner_count = corner_count;
         m_start_size = start_size;
         m_end_size = end_size;
@@ -160,7 +123,6 @@ public class Vein : MonoBehaviour
                 Vector3 prev_point;
                 if (i == 0)
                 {
-                    //prev_point = m_hypothetical_start_position;
                     prev_point = vertices[index];
                 }
                 else
@@ -172,7 +134,6 @@ public class Vein : MonoBehaviour
                 Vector3 next_point;
                 if (i == m_joint_count - 1)
                 {
-                    //next_point = m_hypothetical_end_position;
                     next_point = vertices[index];
                 }
                 else
@@ -184,9 +145,6 @@ public class Vein : MonoBehaviour
                 normals[index] = (Quaternion.AngleAxis(90, Vector3.Cross(next_point - prev_point, normals[index])) * (next_point - prev_point)).normalized;
 
                 Debug.DrawLine(vertices[index], vertices[index] + normals[index]);
-               
-                //normals[i * 12 + j] = Quaternion.AngleAxis(45, Vector3.Cross(normals[i * 12 + j], m_joint_directions[i])) * normals[i * 12 + j];
-                //normals[i * 12 + j + normals.Length / 2] = Quaternion.AngleAxis(45, Vector3.Cross(normals[i * 12 + j + normals.Length / 2], m_joint_directions[i])) * normals[i * 12 + j + normals.Length / 2];
             }
 
             for (int j = 0; j < 12; j++)
@@ -194,7 +152,6 @@ public class Vein : MonoBehaviour
                 Vector3 prev_point;
                 if (i == 0)
                 {
-                    //prev_point = m_hypothetical_start_position;
                     prev_point = vertices[i * 12 + j];
                 }
                 else
@@ -205,7 +162,6 @@ public class Vein : MonoBehaviour
                 Vector3 next_point;
                 if (i == m_joint_count - 1)
                 {
-                    //next_point = m_hypothetical_end_position;
                     next_point = vertices[i * 12 + j];
                 }
                 else
@@ -217,9 +173,6 @@ public class Vein : MonoBehaviour
                 normals[i * 12 + j] = (Quaternion.AngleAxis(90, Vector3.Cross(next_point - prev_point, normals[i * 12 + j])) * (next_point - prev_point)).normalized;
 
                 Debug.DrawLine(vertices[i * 12 + j], vertices[i * 12 + j] + normals[i * 12 + j]);
-                
-                //normals[i * 12 + j] = Quaternion.AngleAxis(45, Vector3.Cross(normals[i * 12 + j], m_joint_directions[i])) * normals[i * 12 + j];
-                //normals[i * 12 + j + normals.Length / 2] = Quaternion.AngleAxis(45, Vector3.Cross(normals[i * 12 + j + normals.Length / 2], m_joint_directions[i])) * normals[i * 12 + j + normals.Length / 2];
             }
 
 
@@ -235,7 +188,6 @@ public class Vein : MonoBehaviour
     /// <param name="max_segments"></param>
     void PrepareMathematics(Vector3 target, int max_segments)
     {
-        //Debug.Log("target - " + target.magnitude);
         if (Vector3.Angle(transform.forward, target) == 0 || Vector3.Angle(transform.forward, target) == 180)
         {
             m_joint_count = 2;
@@ -243,16 +195,9 @@ public class Vein : MonoBehaviour
             m_joint_middles = new Vector3[m_joint_count];
             m_joint_middles[0] = Vector3.zero;
             m_joint_middles[1] = target;
-            //Debug.Log("THIS IS THE TARGET: " + m_joint_middles[1].magnitude);
-
-            m_hypothetical_start_rotation = Quaternion.identity;
-            m_hypothetical_start_position = -target;
-            m_hypothetical_end_position = target*2;
-            m_hypothetical_end_rotation = Quaternion.identity;
         }
         else
         {
-            //Debug.Log("Else shit");
             Vector2 m_target_to_plane = target;
             //calculate line equation
             float x = m_target_to_plane.magnitude;
@@ -300,9 +245,6 @@ public class Vein : MonoBehaviour
             float incrementing_angle = 0;
             {
                 Vector3 offset_3D = Quaternion.AngleAxis(-m_degree_interval, m_rotation_plane) * (-m_intersection_point);
-
-                m_hypothetical_start_rotation = Quaternion.identity * Quaternion.AngleAxis(-m_degree_interval, m_rotation_plane);
-                m_hypothetical_start_position = m_intersection_point + offset_3D;
             }
             for (int i = 0; i < m_joint_count; i++)
             {
@@ -316,9 +258,6 @@ public class Vein : MonoBehaviour
                 if (i == m_joint_count - 1)
                 {
                     offset_3D = Quaternion.AngleAxis(incrementing_angle, m_rotation_plane) * (-m_intersection_point);
-
-                    m_hypothetical_end_position = m_intersection_point + offset_3D;
-                    m_hypothetical_end_rotation = Quaternion.AngleAxis(incrementing_angle, m_rotation_plane);
                 }
             }
         }
@@ -334,23 +273,16 @@ public class Vein : MonoBehaviour
             m_vertex_count = m_corner_count * m_joint_count;
         }
 
-
-
-        //Debug.Log(" JOINT COUNT MUNS"+(m_joint_count - 1));
         m_vein_length = m_joint_middles[1].magnitude * (m_joint_count - 1);
         float delta_size = Mathf.Abs(m_end_size - m_start_size);
-        //Debug.Log(m_joint_count);
-        //Debug.Log(delta_size+ " dsize");
-        //Debug.Log((double)m_vein_length);
-        //Debug.Log("end before " + m_end_size);
+
         if (delta_size / m_vein_length > 0.2f)
         {
             m_end_size = m_start_size + m_vein_length * Mathf.Sign(m_end_size-m_start_size) * 0.2f;
-            //Debug.Log(m_end_size);
         }
         else
         {
-            //Debug.Log("NO!");
+
         }
 
         m_size_step = (m_end_size - m_start_size) / m_joint_count;
@@ -430,7 +362,7 @@ public class Vein : MonoBehaviour
         for (int i = 0; i < m_joint_count - 1; i++)
         {
 
-            //This stuff is awesome. Requires some additional, complicated work for the edges though
+            //This stuff is awesome. Requires some additional, complicated work for the edges though. Why is it awesome though, Viktor!?
             #region
             //if (i == m_joint_count - 2)
             //{

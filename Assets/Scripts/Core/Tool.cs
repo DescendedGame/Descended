@@ -8,15 +8,46 @@ public class Tool : MonoBehaviour
 {
     [SerializeField] ToolType toolType;
     [SerializeField] protected int manaCost = 0;
+    protected bool equipped = false;
 
     /// <summary>
     /// The primary action of this tool. The return value results in a change of its pawn's state.
     /// </summary>
     /// <param name="actionPoint"> The hand of the user, or mouth, or whatever.</param>
     /// <returns></returns>
-    public virtual PawnStateType StartPrimaryAction(Transform actionPoint)
+    public virtual PawnStateType StartPrimaryAction(Transform actionPoint, Commands commands)
     {
         return PawnStateType.Idle;
+    }
+
+    /// <summary>
+    /// The secondary action of this tool. The return value results in a change of its pawn's state.
+    /// </summary>
+    /// <param name="actionPoint"> The hand of the user, or mouth, or whatever.</param>
+    /// <returns></returns>
+    public virtual PawnStateType StartSecondaryAction(Transform actionPoint, Commands commands)
+    {
+        return PawnStateType.Idle;
+    }
+
+    /// <summary>
+    /// The secondary hold action of this tool. The return value results in a change of its pawn's state.
+    /// </summary>
+    /// <param name="actionPoint"> The hand of the user, or mouth, or whatever.</param>
+    /// <returns></returns>
+    public virtual PawnStateType HoldSecondaryAction(Transform actionPoint, Commands commands)
+    {
+        return PawnStateType.Idle;
+    }
+
+    public virtual void Equip(Transform actionPoint)
+    {
+        equipped = true;
+    }
+
+    public virtual void Unequip()
+    {
+        equipped = false;
     }
 
     public float GetManaCost()
@@ -38,4 +69,5 @@ public enum ToolType
 {
     PressurePistol,
     ChemicalSpray,
+    VeinBuilder,
 }

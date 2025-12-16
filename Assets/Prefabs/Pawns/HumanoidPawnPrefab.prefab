@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 4542639738857407839, guid: 95397fc1850165d488d02d28bf7d9ac7,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2777704361
+      value: 1951533335
       objectReference: {fileID: 0}
     - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
         type: 3}
@@ -130,12 +130,12 @@ MonoBehaviour:
       sideBeardStyle: 0
       stacheStyle: 0
       beardStyle: 0
-      eyeLidColor: {r: 0.043137256, g: 0.03529412, b: 0.28235295, a: 0.31764707}
-      scleraColor: {r: 0.735849, g: 0.6546655, b: 0.6421324, a: 1}
-      irisColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+      eyeLidColor: {r: 0, g: 0, b: 0, a: 0.50491875}
+      scleraColor: {r: 1, g: 1, b: 1, a: 0.57254905}
+      irisColor: {r: 0.6526389, g: 0.28761932, b: 0.27733314, a: 1}
       pupilColor: {r: 0, g: 0, b: 0, a: 1}
-      makeupColor: {r: 0.044285554, g: 0.033374865, b: 0.2830189, a: 0.31764707}
-      lipColor: {r: 1, g: 0, b: 0.49019608, a: 0.5176471}
+      makeupColor: {r: 0, g: 0, b: 0, a: 0.3529412}
+      lipColor: {r: 0.6313726, g: 0.3137255, b: 0.42352942, a: 0.3529412}
     upperNeckLength: 0.1
     upperNeckWidth: 0.05
     lowerNeckWidth: 0.08
@@ -162,19 +162,19 @@ MonoBehaviour:
     calfRadius: 0.06
     lowerCalfLength: 0.25
     ankleRadius: 0.03
-    skinColor: {r: 0.65882355, g: 0.49411765, b: 0.4862745, a: 1}
-    hairColor: {r: 0, g: 0, b: 0, a: 0}
+    skinColor: {r: 0.9126601, g: 0.7091182, b: 0.778253, a: 1}
+    hairColor: {r: 0.8931973, g: 0.6831079, b: 0.351877, a: 0.8620533}
     basicInGameObject: {fileID: 2100000, guid: b4f431e14d9a55b4eb0e5b2f7d1aff2b, type: 2}
     coverSettings:
-      color: {r: 0, g: 0, b: 0, a: 0}
+      color: {r: 0.48015836, g: 0.5229426, b: 0.4998695, a: 1}
       upperNeck: 0
       lowerNeck: 0
-      shoulders: 0
+      shoulders: 1
       elbows: 0
       wrists: 0
-      chest: 0
-      waist: 0
-      hips: 0
+      chest: 1
+      waist: 1
+      hips: 1
       butt: 1
       knees: 0
       calves: 0

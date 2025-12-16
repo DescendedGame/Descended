@@ -9,6 +9,7 @@ public class CharacterLoader : MonoBehaviour
     [SerializeField] GameObject characterCreationButtonPrefab;
     [SerializeField] GameObject brainDeadHuman;
     [SerializeField] Transform characterPivot;
+    [SerializeField] Material basicInGameObject;
 
     public HumanBodySettings selectedSettings;
 
@@ -71,6 +72,7 @@ public class CharacterLoader : MonoBehaviour
         }
         string myString = File.ReadAllText(path + name + ".json");
         HumanBodySettings bodySettings = (HumanBodySettings)JsonUtility.FromJson(myString, typeof(HumanBodySettings));
+        bodySettings.basicInGameObject ??= basicInGameObject;
         GameObject body = Instantiate(brainDeadHuman, characterPivot);
         body.GetComponent<HumanoidBodyCreator>().bodySettings = bodySettings;
         body.SetActive(false);

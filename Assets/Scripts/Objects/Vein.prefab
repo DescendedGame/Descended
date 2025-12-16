@@ -48,6 +48,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_vein_ends: {fileID: 11400000, guid: 409c31ba2b35222478caa64e8e10ce70, type: 2}
+  settings:
+    start_position: {x: 0, y: 0, z: 0}
+    end_position: {x: 0, y: 0, z: 0}
+    start_rotation: {x: 0, y: 0, z: 0, w: 0}
+    end_rotation: {x: 0, y: 0, z: 0, w: 0}
+    corner_count: 0
+    start_size: 0
+    end_size: 0
+    size_step: 0
+    vein_length: 0
+    is_tunnel: 0
   m_rotation: 0
   target: {fileID: 0}
 --- !u!23 &9103788755457498718
@@ -120,7 +131,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30

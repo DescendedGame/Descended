@@ -33,6 +33,8 @@ public class PlayerInput : Brain
         playerCamera.SetActive(true);
         playerCamera.transform.SetParent(m_properties.eyeTransform,false);
         playerCamera.transform.localPosition = new Vector3(0,0.1f,0.1f);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     private void Awake()
     {
