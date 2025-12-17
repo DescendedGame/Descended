@@ -70,4 +70,5 @@ public enum ToolType
     PressurePistol,
     ChemicalSpray,
     VeinBuilder,
+    AlgaePlanter,
 }

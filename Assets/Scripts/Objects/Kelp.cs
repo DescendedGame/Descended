@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Kelp : MonoBehaviour
+public class Kelp : Algae
 {
     float interval = 5;
     float intervalTimer = 0;
@@ -11,8 +11,9 @@ public class Kelp : MonoBehaviour
     Rigidbody[] rigidBodies;
     bool initialized = false;
 
-    public void Initialize()
+    public override void Initialize(Quaternion rotation)
     {
+        base.Initialize(rotation);
         nodes = new Transform[10];
         rigidBodies = new Rigidbody[10];
         for(int i = 0; i < nodes.Length; i++)

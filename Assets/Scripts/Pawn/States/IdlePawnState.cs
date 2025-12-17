@@ -32,6 +32,11 @@ public class IdlePawnState : PawnState
             m_properties.selectedTool.StartPrimaryAction(m_properties.actionPoint, m_brain.commands);
         }
         // Tool usage can result in a different state!
+        if (m_brain.commands.secondary)
+        {
+            m_properties.selectedTool.StartSecondaryAction(m_properties.actionPoint, m_brain.commands);
+        }
+        // Tool usage can result in a different state!
         if (m_brain.commands.secondaryHold)
         {
             m_properties.selectedTool.HoldSecondaryAction(m_properties.actionPoint, m_brain.commands);
