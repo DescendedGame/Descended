@@ -9,8 +9,9 @@ public class Kelp : MonoBehaviour
 
     Transform[] nodes;
     Rigidbody[] rigidBodies;
+    bool initialized = false;
 
-    private void Start()
+    public void Initialize()
     {
         nodes = new Transform[10];
         rigidBodies = new Rigidbody[10];
@@ -20,11 +21,13 @@ public class Kelp : MonoBehaviour
             rigidBodies[i] = nodes[i].GetComponent<Rigidbody>();
             nodes[i].localPosition = (i + 1) * 1f * Vector3.up;
         }
+        initialized = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!initialized) return;
         intervalTimer += Time.deltaTime;
 
         if(intervalTimer > interval)
@@ -57,6 +60,7 @@ public class Kelp : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!initialized) return;
         for (int i = 0; i < nodes.Length; i++)
         {
 

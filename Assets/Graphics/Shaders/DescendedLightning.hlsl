@@ -144,7 +144,7 @@ void VVolFog_float(float Random, float3 WorldPosition, float3 WorldView, float4 
 
         }
         
-        Color += supercolor * ceil(light.distanceAttenuation) * 0.0003;
+        Color += supercolor * ceil(light.distanceAttenuation) * 0.01;
 		
     }
 
@@ -272,7 +272,7 @@ void VVolFogSphere_float(float3 objPos, float Random, float3 WorldPosition, floa
     }
     
 		
-    Color +=supercolor * ceil(light.distanceAttenuation + 0.001) * 0.0003;
+    Color +=supercolor * ceil(light.distanceAttenuation + 0.001) * 0.01;
     
 
 #endif
