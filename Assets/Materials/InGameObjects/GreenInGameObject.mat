@@ -85,6 +85,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Glitter: 0
+    - GlitterRoughness: 0
+    - Grit: 100
     - LuminescenceIntensity: 0
     - MAIN_LIGHT_CALCULATE_SHADOWS: 0
     - MainDiffuse: 1.4
@@ -96,6 +99,8 @@ Material:
     - RandomNormals: 0.2
     - RandomPorosity: 0.08
     - RandomRoughness: 0
+    - RandomSpecular: 0
+    - RandomSpecularNormals: 0
     - SHADOWS_SHADOWMASK: 0
     - SHADOW_MASK: 0
     - _ADDITIONAL_LIGHT_SHADOWS: 1
@@ -118,6 +123,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Grit: 100
     - _MAIN_LIGHT_SHADOW_CASCADE: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
@@ -125,6 +131,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RandomSpecular: 0
+    - _RandomSpecularNormals: 0
     - _ReceiveShadows: 1
     - _Roughness: 0.5
     - _SHADOWS_SOFT: 0

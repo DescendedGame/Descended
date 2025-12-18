@@ -87,7 +87,7 @@ Material:
     m_Floats:
     - Glitter: 0
     - GlitterRoughness: 0
-    - Grit: 100
+    - Grit: 20
     - LuminescenceIntensity: 0
     - MAIN_LIGHT_CALCULATE_SHADOWS: 0
     - MainDiffuse: 0.4

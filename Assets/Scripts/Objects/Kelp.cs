@@ -38,7 +38,7 @@ public class Kelp : Algae
             for(int i = 0; i < nodes.Length; i++)
             {
                 Vector2 randomValue = Random.insideUnitCircle;
-                rigidBodies[i].AddForce(new Vector3(randomValue.x, 0, randomValue.y)*15, ForceMode.Impulse);
+                rigidBodies[i].AddForce(new Vector3(randomValue.x, 0, randomValue.y)*5f, ForceMode.Impulse);
             }
         }
 
