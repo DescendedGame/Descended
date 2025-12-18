@@ -87,15 +87,21 @@ Material:
     m_Floats:
     - LuminescenceIntensity: 0
     - MAIN_LIGHT_CALCULATE_SHADOWS: 0
-    - MainDiffuse: 0.4
-    - MainSpecular: 0.05
-    - Porosity: 0.3
+    - MainDiffuse: 1.4
+    - MainSpecular: 0.22
+    - Porosity: 0.86
+    - RandomAmbience: 0
+    - RandomDiffuse: 0
+    - RandomLuminescenceIntensity: 0
+    - RandomNormals: 0.2
+    - RandomPorosity: 0.08
+    - RandomRoughness: 0
     - SHADOWS_SHADOWMASK: 0
     - SHADOW_MASK: 0
     - _ADDITIONAL_LIGHT_SHADOWS: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Ambience: 0.2
+    - _Ambience: 0.06
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -118,6 +124,7 @@ Material:
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RandomSpecular: 0
     - _ReceiveShadows: 1
     - _Roughness: 0.5
     - _SHADOWS_SOFT: 0
@@ -136,9 +143,9 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0.59233713, g: 0.8207547, b: 0.64887613, a: 0}
+    - _MainColor: {r: 0.29156286, g: 0.6792453, b: 0.38650545, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TransitionColor: {r: 0.4481132, g: 1, b: 0.58013314, a: 0}
+    - _TransitionColor: {r: 0.38020647, g: 0.9056604, b: 0.50977045, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1573421989177205565

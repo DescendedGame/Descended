@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 4542639738857407839, guid: 95397fc1850165d488d02d28bf7d9ac7,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1951533335
+      value: 2777704361
       objectReference: {fileID: 0}
     - target: {fileID: 6781389280417327212, guid: 95397fc1850165d488d02d28bf7d9ac7,
         type: 3}
@@ -164,7 +164,7 @@ MonoBehaviour:
     ankleRadius: 0.03
     skinColor: {r: 0.9126601, g: 0.7091182, b: 0.778253, a: 1}
     hairColor: {r: 0.8931973, g: 0.6831079, b: 0.351877, a: 0.8620533}
-    basicInGameObject: {fileID: 2100000, guid: b4f431e14d9a55b4eb0e5b2f7d1aff2b, type: 2}
+    basicInGameObject: {fileID: 2100000, guid: 4420c84fb953a4243851a23601f48e73, type: 2}
     coverSettings:
       color: {r: 0.48015836, g: 0.5229426, b: 0.4998695, a: 1}
       upperNeck: 0
@@ -179,4 +179,4 @@ MonoBehaviour:
       knees: 0
       calves: 0
       ankles: 0
-  basicInGameMaterial: {fileID: 2100000, guid: b4f431e14d9a55b4eb0e5b2f7d1aff2b, type: 2}
+  basicInGameMaterial: {fileID: 2100000, guid: 4420c84fb953a4243851a23601f48e73, type: 2}

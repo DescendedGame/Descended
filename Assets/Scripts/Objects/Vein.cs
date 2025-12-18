@@ -509,6 +509,8 @@ public class Vein : MonoBehaviour
     public Transform CreateEnd(Vector3 position, Quaternion rotation, float radius, EndType type, bool is_tunnel)
     {
         Transform t_end = GameObject.Instantiate(m_vein_ends.GetEndPrefab(type, is_tunnel), transform).transform;
+        Debug.Log(t_end.name);
+        Debug.Log(t_end.GetComponentInChildren<MeshRenderer>().material.name);
         t_end.localPosition = position;
         t_end.localRotation = rotation;
         t_end.localScale = Vector3.one * radius;

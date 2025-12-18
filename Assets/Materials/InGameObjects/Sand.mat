@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WhiteGlow
+  m_Name: Sand
   m_Shader: {fileID: -6465566751694194690, guid: b25548090d1206c45ac92893a8aca845,
     type: 3}
   m_Parent: {fileID: 0}
@@ -85,17 +85,28 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - LuminescenceIntensity: 100
+    - Glitter: 2.88
+    - GlitterRoughness: 0.99
+    - Grit: 100
+    - LuminescenceIntensity: 0
     - MAIN_LIGHT_CALCULATE_SHADOWS: 0
-    - MainDiffuse: 0
-    - MainSpecular: 0
-    - Porosity: 0
+    - MainDiffuse: 1
+    - MainSpecular: 0.59
+    - Porosity: 0.4
+    - RandomAmbience: 0.01
+    - RandomDiffuse: 0.14
+    - RandomLuminescenceIntensity: 0
+    - RandomNormals: 0.23
+    - RandomPorosity: 0.02
+    - RandomRoughness: 0.5
+    - RandomSpecular: 0
+    - RandomSpecularNormals: 1.01
     - SHADOWS_SHADOWMASK: 0
     - SHADOW_MASK: 0
     - _ADDITIONAL_LIGHT_SHADOWS: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Ambience: 0
+    - _Ambience: 0.2
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -112,14 +123,17 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Grit: 100
     - _MAIN_LIGHT_SHADOW_CASCADE: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RandomSpecular: 0
+    - _RandomSpecularNormals: 0
     - _ReceiveShadows: 1
-    - _Roughness: 0
+    - _Roughness: 0.5
     - _SHADOWS_SOFT: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -132,13 +146,13 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - Luminescence: {r: 1, g: 1, b: 1, a: 0}
-    - Luminiscence: {r: 1, g: 1, b: 1, a: 0}
+    - Luminescence: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0, g: 0, b: 0, a: 0}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TransitionColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1573421989177205565

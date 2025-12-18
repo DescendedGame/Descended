@@ -25,7 +25,7 @@ void CalculateMainLight_float(float3 WorldPos, out float3 Direction, out float3 
 }
 
 void AddAdditionalLights_float(float Porosity, float Ambience, float Roughness, float3 WorldPosition, float3 WorldNormal, float3 WorldView,
-    float MainDiffuse, float MainSpecular, float3 MainColor, float4 WaterAtt,
+    float MainDiffuse, float MainSpecular, float3 MainColor, float4 WaterAtt, float3 Glitter, float3 GlitterNormals, float GlitterRoughness,
     out float3 Color)
 {
     
@@ -72,7 +72,9 @@ void AddAdditionalLights_float(float Porosity, float Ambience, float Roughness, 
         Color += diffu;
         
         float3 spec = shadowAtt * (t_color * atten) * ceil(saturate(dot(reflect(normalize(light.direction), WorldNormal), -normalize(WorldView)) - Roughness)) * MainSpecular;
+        float3 glitter = shadowAtt * (t_color * atten) * ceil(saturate(dot(reflect(normalize(light.direction), GlitterNormals), -normalize(WorldView)) - GlitterRoughness)) * Glitter;
         Color += spec;
+        Color += glitter;
 
 		//Water attenuation between the eye and the object calculated later in the shader graph
 
