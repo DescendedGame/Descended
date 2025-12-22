@@ -36,6 +36,7 @@ public class Pawn : Attackable
         new IdlePawnState().Initialize(m_brain, m_properties, m_lookUpState);
         new SprintPawnState().Initialize(m_brain, m_properties, m_lookUpState);
         new ToppledPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new GroundedPawnState().Initialize(m_brain, m_properties, m_lookUpState);
 
         // Set the initial state
         currentState = m_lookUpState[PawnStateType.Idle];
@@ -166,6 +167,28 @@ public abstract class PawnState
         m_properties.roll_speed += m_brain.commands.roll * m_properties.roll_acc * Time.deltaTime;
         m_properties.roll_speed = m_properties.roll_speed * Mathf.Pow(0.5f, Time.deltaTime * 18);
         m_properties.eyeTransform.rotation *= Quaternion.AngleAxis(m_properties.roll_speed * Time.deltaTime, Vector3.forward);
+    }
+
+    protected virtual void UpdateRotationLockedY()
+    {
+        m_properties.eyeTransform.rotation = Quaternion.AngleAxis(m_brain.commands.look.x, Vector3.up)* m_properties.eyeTransform.rotation;
+
+        float looky = m_brain.commands.look.y;
+        float angleDistance = Vector3.Angle(m_properties.eyeTransform.forward, Vector3.up);
+
+        if(looky < 0) //camera looking upwards
+        {
+            float dAngle = angleDistance + looky;
+            if (dAngle < 0) looky -= dAngle; 
+        }
+
+        if (looky > 0) //camera looking upwards
+        {
+            float dAngle = angleDistance + looky -180;
+            if (dAngle > 0) looky -= dAngle;
+        }
+
+        m_properties.eyeTransform.rotation *= Quaternion.AngleAxis(looky, Vector3.right);
     }
 
     /// <summary>

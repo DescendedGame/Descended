@@ -65,13 +65,6 @@ public class HumanTorso : BodyPart
         }
         middleTorso.transform.localPosition = Vector3.down * (bodySettings.atlasLength + bodySettings.ribLength);
 
-        if(lowerTorso == null)
-        {
-            lowerTorso = new GameObject("LowerTorso").transform;
-            lowerTorso.transform.SetParent(middleTorso.transform, false);
-        }
-        lowerTorso.transform.localPosition = Vector3.down * (bodySettings.bellyLength);
-
         //Ribs
         //---------------------------------------------------------------------------------------------------
 
@@ -126,7 +119,15 @@ public class HumanTorso : BodyPart
         //----------------------------------------------------------------------------
         //The hips will depend on what kind of lower body is desired.... but now just human.
 
-        if(leftHip == null)
+        if (lowerTorso == null)
+        {
+            lowerTorso = new GameObject("LowerTorso").transform;
+            lowerTorso.transform.SetParent(middleTorso.transform, false);
+            lowerTorso.gameObject.AddComponent<HumanLowerBody>();
+        }
+        lowerTorso.transform.localPosition = Vector3.down * (bodySettings.bellyLength);
+
+        if (leftHip == null)
         {
             GameObject go = new GameObject("LeftHip");
             go.layer = gameObject.layer;
@@ -294,4 +295,8 @@ public class HumanTorso : BodyPart
 
     }
 
+
+    public override void Grounded(Vector3 movementDirection, ActionDirection actionDirection)
+    {
+    }
 }

@@ -53,4 +53,8 @@ public abstract class BodyPart : MonoBehaviour
         Idle(movementDirection, actionDirection);
     }
 
+    public virtual void Grounded(Vector3 movementDirection, ActionDirection actionDirection)
+    {
+        Idle(movementDirection, actionDirection);
+    }
 }

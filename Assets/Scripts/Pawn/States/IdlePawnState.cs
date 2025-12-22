@@ -17,6 +17,17 @@ public class IdlePawnState : PawnState
         {
             return PawnStateType.Sprint;
         }
+        if(m_brain.commands.upwards <0)
+        {
+            RaycastHit hit;
+            string[] layerMaskNames = new string[2];
+            layerMaskNames[0] = "Solid";
+            layerMaskNames[1] = "Shifting";
+            if(Physics.Raycast(m_properties.eyeTransform.position, -m_properties.eyeTransform.up, out hit, 2, LayerMask.GetMask(layerMaskNames)))
+            {
+                return PawnStateType.Grounded;
+            }
+        }
 
         // Tool selection
         if(m_properties.selectedToolIndex != m_brain.commands.selected)

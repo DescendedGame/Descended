@@ -169,6 +169,8 @@ public class HumanoidBodyCreator : BodyCreator
             rightLeg.transform.localRotation = Quaternion.LookRotation(Quaternion.AngleAxis(-bodySettings.hipOutRotation, Vector3.up) * Vector3.forward, Vector3.up);
         }
         rightLeg.Initialize(bodySettings, true);
+
+        rightLeg.GetComponentInParent<HumanLowerBody>().Initialize(leftLeg, rightLeg);
     }
 
     void CreateTorso(out Transform leftHip, out Transform rightHip)

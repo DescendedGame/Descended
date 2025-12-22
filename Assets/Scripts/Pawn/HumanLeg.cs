@@ -112,4 +112,21 @@ public class HumanLeg : BodyLinkage
                 Time.deltaTime * 360);
     }
 
+    public override void Grounded(Vector3 movementDirection, ActionDirection actionDirection)
+    {
+
+    }
+
+    public void ReachFor(Vector3 position)
+    {
+        Debug.DrawLine(position, position + Vector3.up);
+        float distance = (transform.position - position).magnitude;
+        float angle = GetIKAngle(thighLimb.length, upperCalfLimb.length + lowerCalfLimb.length, distance);
+        float angleOffset = (Mathf.Sin(angle * Mathf.Deg2Rad) / distance) * (upperCalfLimb.length + lowerCalfLimb.length);
+        angleOffset = Mathf.Asin(angleOffset) * Mathf.Rad2Deg;
+
+        Quaternion targetRotation = Quaternion.LookRotation(position-transform.position, Vector3.Cross( position - transform.position, transform.parent.parent.right))*Quaternion.AngleAxis(angleOffset, -Vector3.right);
+        thigh.rotation = Quaternion.RotateTowards(thigh.rotation, targetRotation, Time.deltaTime *360);
+        calf.localRotation = Quaternion.RotateTowards(calf.localRotation, Quaternion.identity*Quaternion.AngleAxis(angle, Vector3.right), Time.deltaTime * 360);
+    }
 }

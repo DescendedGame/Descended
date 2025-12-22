@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 [ExecuteInEditMode]
 public class DescendedCamera : MonoBehaviour
@@ -19,6 +17,7 @@ public class DescendedCamera : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("camerastart");
         Shader.SetGlobalFloat("Sonar", 0);
         Shader.SetGlobalVector("WaterAttenuation", new Vector4(5, 10, 25, 1));
         Shader.SetGlobalColor("FogColor", new Vector4(1f, 1f, 1f, 1f));
@@ -31,15 +30,37 @@ public class DescendedCamera : MonoBehaviour
         UpdateRenderTexCam(m_sonar_camera, "SonarTexture");
     }
 
-    public void UpdateRenderTexCam(Camera camera, string texture_name)
+    void UpdateRenderTexture()
     {
         m_screen_x = (int)((float)Screen.width * 0.75f);
         m_screen_y = (int)((float)Screen.height * 0.75f);
+
+        m_fog_camera.targetTexture = m_fog_texture;
+        m_sonar_camera.targetTexture = m_sonar_texture;
+        UpdateRenderTexCam(m_fog_camera, "FogTexture");
+        UpdateRenderTexCam(m_sonar_camera, "SonarTexture");
+    }
+
+    private void Update()
+    {
+        if(m_screen_x != (int)((float)Screen.width * 0.75f) || m_screen_y != (int)((float)Screen.height * 0.75f))
+        {
+            UpdateRenderTexture();
+        }
+    }
+
+    public void UpdateRenderTexCam(Camera camera, string texture_name)
+    {
         camera.targetTexture?.Release();
         RenderTexture t_rendertex = new RenderTexture(camera.targetTexture);
         t_rendertex.width = m_screen_x;
         t_rendertex.height = m_screen_y;
         t_rendertex.Create();
+        if (camera.targetTexture != null)
+        {
+            Destroy(camera.targetTexture);
+            camera.targetTexture = null;
+        }
         camera.targetTexture = t_rendertex;
         Shader.SetGlobalTexture(texture_name, t_rendertex);
     }

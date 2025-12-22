@@ -87,6 +87,7 @@ public enum PawnStateType
     Sprint,
     Interact,
     Toppled,
+    Grounded,
 }
 
 /// <summary>
