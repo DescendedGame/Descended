@@ -15,19 +15,16 @@ public class DescendedCamera : MonoBehaviour
     int m_screen_y;
     int m_screen_x;
 
-    private void Start()
+    private void OnEnable()
     {
-        Debug.Log("camerastart");
         Shader.SetGlobalFloat("Sonar", 0);
         Shader.SetGlobalVector("WaterAttenuation", new Vector4(5, 10, 25, 1));
         Shader.SetGlobalColor("FogColor", new Vector4(1f, 1f, 1f, 1f));
         m_screen_x = (int)((float)Screen.width * 0.75f);
         m_screen_y = (int)((float)Screen.height * 0.75f);
 
-        m_fog_camera.targetTexture = m_fog_texture;
-        m_sonar_camera.targetTexture = m_sonar_texture;
-        UpdateRenderTexCam(m_fog_camera, "FogTexture");
-        UpdateRenderTexCam(m_sonar_camera, "SonarTexture");
+        UpdateRenderTexCam(m_fog_camera, "FogTexture", m_fog_texture);
+        UpdateRenderTexCam(m_sonar_camera, "SonarTexture", m_sonar_texture);
     }
 
     void UpdateRenderTexture()
@@ -35,10 +32,8 @@ public class DescendedCamera : MonoBehaviour
         m_screen_x = (int)((float)Screen.width * 0.75f);
         m_screen_y = (int)((float)Screen.height * 0.75f);
 
-        m_fog_camera.targetTexture = m_fog_texture;
-        m_sonar_camera.targetTexture = m_sonar_texture;
-        UpdateRenderTexCam(m_fog_camera, "FogTexture");
-        UpdateRenderTexCam(m_sonar_camera, "SonarTexture");
+        UpdateRenderTexCam(m_fog_camera, "FogTexture", m_fog_texture);
+        UpdateRenderTexCam(m_sonar_camera, "SonarTexture", m_sonar_texture);
     }
 
     private void Update()
@@ -49,19 +44,20 @@ public class DescendedCamera : MonoBehaviour
         }
     }
 
-    public void UpdateRenderTexCam(Camera camera, string texture_name)
+    public void UpdateRenderTexCam(Camera camera, string texture_name, RenderTexture targetTexture)
     {
-        camera.targetTexture?.Release();
-        RenderTexture t_rendertex = new RenderTexture(camera.targetTexture);
+        RenderTexture t_rendertex = new RenderTexture(targetTexture);
         t_rendertex.width = m_screen_x;
         t_rendertex.height = m_screen_y;
         t_rendertex.Create();
         if (camera.targetTexture != null)
         {
-            Destroy(camera.targetTexture);
-            camera.targetTexture = null;
+            RenderTexture previous = camera.targetTexture;
+            camera.targetTexture = t_rendertex;
+            previous.Release();
+            DestroyImmediate(previous);
         }
-        camera.targetTexture = t_rendertex;
+        else camera.targetTexture = t_rendertex;
         Shader.SetGlobalTexture(texture_name, t_rendertex);
     }
 

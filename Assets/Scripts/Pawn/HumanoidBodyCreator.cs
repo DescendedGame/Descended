@@ -61,8 +61,8 @@ public class HumanoidBodyCreator : BodyCreator
         CreateArms();
         CreateLegs(leftHip, rightHip);
         cameraTransform = CreateNeckAndHead();
-        cameraTransform.parent.gameObject.AddComponent<HumanNeck>().Initialize(cameraTransform, atlas);
-        atlas.GetComponent<HumanTorso>().head = cameraTransform;
+        cameraTransform.parent.parent.gameObject.AddComponent<HumanNeck>().Initialize(cameraTransform.parent, atlas);
+        atlas.GetComponent<HumanTorso>().head = cameraTransform.parent;
     }
 
     Transform CreateNeckAndHead()
@@ -117,7 +117,7 @@ public class HumanoidBodyCreator : BodyCreator
 
         head.transform.localPosition = Vector3.forward * upperNeck.length;
 
-        return head.transform;
+        return head.transform.Find("EyePosition");
     }
 
 

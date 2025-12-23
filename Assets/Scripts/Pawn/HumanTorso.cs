@@ -242,7 +242,7 @@ public class HumanTorso : BodyPart
         //unalteredLowerTorsoRotation = unanimatedLowerTorsoRotation;
     }
 
-    public override void Idle(Vector3 movementDirection, ActionDirection actionDirection)
+    public override void Idle(PawnProperties pawnProperties, ActionDirection actionDirection)
     {
 
         float angleToHead = Quaternion.Angle(upperTorsoTargetRotation, head.rotation);
@@ -296,7 +296,30 @@ public class HumanTorso : BodyPart
     }
 
 
-    public override void Grounded(Vector3 movementDirection, ActionDirection actionDirection)
+    public override void Grounded(PawnProperties pawnProperties, ActionDirection actionDirection)
     {
+        
+
+        //upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, targetRotation, Time.deltaTime * 360);
+
+
+
+        //upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, pawnProperties.m_pivot.rotation * Quaternion.AngleAxis(30, Vector3.right), 360);
+
+
+        //unanimatedMiddleTorsoRotation *= FollowParentSmoothly(middleTorso, unalteredMiddleTorsoPosition, unalteredMiddleTorsoRotation, Vector3.down, 2);
+
+        //Vector3 t_vectorToLast = unalteredMiddleTorsoPosition + middleTorsoTargetRotation * Vector3.down - middleTorso.position;
+        //Vector3 t_vectorToCurrent = middleTorsoTargetRotation * Vector3.down;
+        //middleTorsoTargetRotation = Quaternion.FromToRotation(t_vectorToCurrent, t_vectorToLast) * middleTorsoTargetRotation;
+
+        
+        middleTorso.rotation = Quaternion.RotateTowards(middleTorso.rotation, upperTorso.rotation * Quaternion.AngleAxis(0, Vector3.right), 360);
+
+
+        //unanimatedLowerTorsoRotation *= FollowParentSmoothly(lowerTorso, unalteredLowerTorsoPosition, unalteredLowerTorsoRotation, Vector3.down, 2);
+
+
+        lowerTorso.rotation = Quaternion.RotateTowards(lowerTorso.rotation, middleTorso.rotation * Quaternion.AngleAxis(0, Vector3.right), 360);
     }
 }

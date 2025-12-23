@@ -73,6 +73,21 @@ public class PawnProperties
     /// Where to place camera for player, from where to raycast vision for npc
     /// </summary>
     public Transform eyeTransform;
+    public Quaternion GetGroundedRotation()
+    {
+        Vector3 headForward = eyeTransform.forward;
+        if (Vector3.Angle(eyeTransform.forward, Vector3.up) < 10)
+        {
+            headForward = -eyeTransform.up;
+        }
+        else if (Vector3.Angle(eyeTransform.forward, Vector3.up) > 170)
+        {
+            headForward = eyeTransform.up;
+        }
+        Quaternion flatHeadRotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(headForward, Vector3.up), Vector3.up);
+        return flatHeadRotation;
+    }
+    public Vector3 attemptedMoveDirection = Vector3.zero;
 }
 
 /// <summary>

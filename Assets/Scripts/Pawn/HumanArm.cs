@@ -86,7 +86,7 @@ public class HumanArm : BodyLinkage
 
     }
 
-    public override void Idle(Vector3 movementDirection, ActionDirection actionDirection)
+    public override void Idle(PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
 

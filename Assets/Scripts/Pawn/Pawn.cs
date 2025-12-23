@@ -196,10 +196,15 @@ public abstract class PawnState
     /// </summary>
     public virtual void FixedUpdate()
     {
-        m_properties.m_physics.AddForce((m_properties.eyeTransform.forward * m_brain.commands.forwards + 
-            m_properties.eyeTransform.right * m_brain.commands.rightwards + 
-            m_properties.eyeTransform.up * m_brain.commands.upwards).normalized * 
-            m_properties.m_swim_force);
+
+        Vector3 forceToAdd = (m_properties.eyeTransform.forward * m_brain.commands.forwards +
+            m_properties.eyeTransform.right * m_brain.commands.rightwards +
+            m_properties.eyeTransform.up * m_brain.commands.upwards).normalized *
+            m_properties.m_swim_force;
+
+
+        m_properties.m_physics.AddForce(forceToAdd);
+        m_properties.attemptedMoveDirection = forceToAdd;
     }
 
     /// <summary>
