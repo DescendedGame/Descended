@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MagicAttack : Tool
+public class MeleeWeapon : Tool
 {
     public GameObject projectilePrefab; // Drag the projectile prefab in Unity Inspector
 

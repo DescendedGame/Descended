@@ -4,38 +4,25 @@ public class AlgaePlanter : Tool
 {
     [SerializeField] GameObject[] algaePrefabs;
 
-    Transform actionPoint;
-
     int selectedAlgae = 0;
 
-    public override PawnStateType StartPrimaryAction(Transform actionPoint, Commands commands)
+    public override PawnStateType StartPrimaryAction(Commands commands, PawnStateType stateType)
     {
         RaycastHit hit;
-        if(Physics.Raycast(actionPoint.position, actionPoint.forward, out hit, 2))
+        if(Physics.Raycast(userProperties.eyeTransform.position, userProperties.eyeTransform.forward, out hit, 2))
         {
             GameObject algae = Instantiate(algaePrefabs[selectedAlgae]);
             algae.transform.position = hit.point;
-            algae.GetComponent<Algae>().Initialize(actionPoint.rotation);
+            algae.GetComponent<Algae>().Initialize(userProperties.eyeTransform.rotation);
         }
-        return PawnStateType.Idle;
+        return stateType == PawnStateType.Grounded ? stateType : PawnStateType.Idle;
     }
 
-    public override PawnStateType StartSecondaryAction(Transform actionPoint, Commands commands)
+    public override PawnStateType StartSecondaryAction(Commands commands, PawnStateType stateType)
     {
         selectedAlgae += 1;
         if (selectedAlgae >= algaePrefabs.Length) selectedAlgae = 0;
-        return PawnStateType.Idle;
-    }
-
-    public override void Equip(Transform pActionPoint)
-    {
-        base.Equip(pActionPoint);
-        actionPoint = pActionPoint;
-    }
-
-    public override void Unequip()
-    {
-        base.Unequip();
+        return stateType == PawnStateType.Grounded ? stateType : PawnStateType.Idle;
     }
 
     private void Update()

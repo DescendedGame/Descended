@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428b75f31aa344248a4bee129f41cf3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolType: 0
+  toolType: 1
   manaCost: 0
   projectilePrefab: {fileID: 3602484550425691745, guid: f9dc21a6e01143b4cbd94a1825e816ce,
     type: 3}

@@ -88,6 +88,8 @@ public class PawnProperties
         return flatHeadRotation;
     }
     public Vector3 attemptedMoveDirection = Vector3.zero;
+
+    public float length = 0;
 }
 
 /// <summary>
@@ -114,4 +116,5 @@ public enum ActionDirection
     Down,
     Left,
     Right,
+    None,
 }

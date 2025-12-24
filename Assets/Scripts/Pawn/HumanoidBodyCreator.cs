@@ -26,6 +26,8 @@ public class HumanoidBodyCreator : BodyCreator
     HumanLeg leftLeg;
     HumanLeg rightLeg;
 
+    Transform rightHand;
+
 
     enum LowerBodyType
     {
@@ -43,10 +45,10 @@ public class HumanoidBodyCreator : BodyCreator
 
     public override void RecalculateBody()
     {
-        CreateBody(out Transform atlasTransform, out Transform cameraTransform);
+        CreateBody(out Transform atlasTransform, out Transform cameraTransform, out Transform actionPoint);
     }
 
-    public override void CreateBody(out Transform atlasTransform, out Transform cameraTransform)
+    public override void CreateBody(out Transform atlasTransform, out Transform cameraTransform, out Transform actionPoint)
     {
         bodySettings.basicInGameObject = basicInGameMaterial;
         if (FindFirstObjectByType<LocalPlayerData>() && SceneManager.GetActiveScene().name == "Game")
@@ -58,7 +60,7 @@ public class HumanoidBodyCreator : BodyCreator
         }
         CreateTorso(out Transform leftHip, out Transform rightHip);
         atlasTransform = atlas;
-        CreateArms();
+        actionPoint = CreateArms();
         CreateLegs(leftHip, rightHip);
         cameraTransform = CreateNeckAndHead();
         cameraTransform.parent.parent.gameObject.AddComponent<HumanNeck>().Initialize(cameraTransform.parent, atlas);
@@ -72,7 +74,7 @@ public class HumanoidBodyCreator : BodyCreator
 
     GeneratedLimb CreateUpperNeck()
     {
-        if(neck == null)
+        if (neck == null)
         {
             GameObject go = new GameObject("Neck");
             go.layer = gameObject.layer;
@@ -92,7 +94,7 @@ public class HumanoidBodyCreator : BodyCreator
 
     Transform PlaceHead(GeneratedLimb upperNeck)
     {
-        if(head == null)
+        if (head == null)
         {
             head = Instantiate(headPrefab);
             headCreator = head.GetComponent<HumanHeadCreator>();
@@ -121,9 +123,9 @@ public class HumanoidBodyCreator : BodyCreator
     }
 
 
-    void CreateArms()
+    Transform CreateArms()
     {
-        if(leftArm == null)
+        if (leftArm == null)
         {
             GameObject go = new GameObject("LeftShoulder");
             go.layer = gameObject.layer;
@@ -135,7 +137,7 @@ public class HumanoidBodyCreator : BodyCreator
         leftArm.transform.localPosition = Vector3.down * bodySettings.atlasLength - Vector3.right * bodySettings.torsoWidth;
         leftArm.Initialize(bodySettings, false);
 
-        if(rightArm == null)
+        if (rightArm == null)
         {
             GameObject go = new GameObject("RightShoulder");
             go.layer = gameObject.layer;
@@ -146,11 +148,19 @@ public class HumanoidBodyCreator : BodyCreator
 
         rightArm.transform.localPosition = Vector3.down * bodySettings.atlasLength + Vector3.right * bodySettings.torsoWidth;
         rightArm.Initialize(bodySettings, true);
+
+        if (rightHand == null)
+        {
+            rightHand = new GameObject("RightHand").transform;
+            rightHand.SetParent(rightArm.forearmLimb.transform);
+        }
+        rightHand.transform.localPosition = new Vector3(0, 0, rightArm.forearmLimb.length);
+        return rightHand.transform;
     }
 
     void CreateLegs(Transform leftHip, Transform rightHip)
     {
-        if(leftLeg == null)
+        if (leftLeg == null)
         {
             GameObject go = new GameObject("LeftThigh");
             go.layer = gameObject.layer;
@@ -160,7 +170,7 @@ public class HumanoidBodyCreator : BodyCreator
         }
         leftLeg.Initialize(bodySettings, false);
 
-        if(rightLeg == null)
+        if (rightLeg == null)
         {
             GameObject go = new GameObject("RightThigh");
             go.layer = gameObject.layer;
@@ -175,7 +185,7 @@ public class HumanoidBodyCreator : BodyCreator
 
     void CreateTorso(out Transform leftHip, out Transform rightHip)
     {
-        if(atlas == null)
+        if (atlas == null)
         {
             GameObject go = new GameObject("Atlas");
             go.layer = gameObject.layer;
@@ -188,6 +198,13 @@ public class HumanoidBodyCreator : BodyCreator
 
     public void SaveBody(string name)
     {
+        bodySettings.length = 0;
+        bodySettings.length += bodySettings.ribLength;
+        bodySettings.length += bodySettings.bellyLength;
+        bodySettings.length += bodySettings.hipLength;
+        bodySettings.length += bodySettings.thighLength;
+        bodySettings.length += bodySettings.upperCalfLength;
+        bodySettings.length += bodySettings.lowerCalfLength;
         string jsonData = JsonUtility.ToJson(bodySettings);
         if (Application.isEditor)
         {
@@ -208,5 +225,17 @@ public class HumanoidBodyCreator : BodyCreator
         string myString = File.ReadAllText(Application.streamingAssetsPath + "/saves/avatars" + name + ".json");
         bodySettings = (HumanBodySettings)JsonUtility.FromJson(myString, typeof(HumanBodySettings));
         bodySettings.basicInGameObject = basicInGameMaterial;
+    }
+
+    public override float GetLength()
+    {
+        float length = 0;
+        length += bodySettings.ribLength;
+        length += bodySettings.bellyLength;
+        length += bodySettings.hipLength;
+        length += bodySettings.thighLength;
+        length += bodySettings.upperCalfLength;
+        length += bodySettings.lowerCalfLength;
+        return length;
     }
 }

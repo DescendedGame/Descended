@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a915ad407b8544f40970cfc819c77b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolType: 2
+  toolType: 3
   manaCost: 0
   veinPrefab: {fileID: 7873387810287949653, guid: c0c5489fde5d77d478e7ba8c88e404d5,
     type: 3}

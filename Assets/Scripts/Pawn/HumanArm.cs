@@ -19,7 +19,7 @@ public class HumanArm : BodyLinkage
 
     GeneratedLimb shoulderLimb;
     GeneratedLimb armLimb;
-    GeneratedLimb forearmLimb;
+    public GeneratedLimb forearmLimb;
 
     public void Initialize(HumanBodySettings bodySettings, bool isRight)
     {

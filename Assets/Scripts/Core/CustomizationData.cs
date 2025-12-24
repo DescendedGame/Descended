@@ -106,6 +106,8 @@ public struct HumanBodySettings
     public Material basicInGameObject;
 
     public HumanBodyCoverageSettings coverSettings;
+
+    public float length;
 }
 
 [System.Serializable]

@@ -33,35 +33,28 @@ public class GroundedPawnState : PawnState
             return PawnStateType.Idle;
         }
 
-        // grounded placement
-        RaycastHit hit;
-        string[] layerMaskNames = new string[2];
-        layerMaskNames[0] = "Solid";
-        layerMaskNames[1] = "Shifting";
-
-
         // Tool selection
         if (m_properties.selectedToolIndex != m_brain.commands.selected)
         {
             m_properties.tools[m_properties.selectedToolIndex].Unequip();
             m_properties.selectedToolIndex = m_brain.commands.selected;
-            m_properties.tools[m_properties.selectedToolIndex].Equip(m_properties.actionPoint);
+            m_properties.tools[m_properties.selectedToolIndex].Equip();
         }
 
         // Tool usage can result in a different state!
         if (m_brain.commands.primary)
         {
-            m_properties.selectedTool.StartPrimaryAction(m_properties.actionPoint, m_brain.commands);
+            m_properties.selectedTool.StartPrimaryAction(m_brain.commands, stateType);
         }
         // Tool usage can result in a different state!
         if (m_brain.commands.secondary)
         {
-            m_properties.selectedTool.StartSecondaryAction(m_properties.actionPoint, m_brain.commands);
+            m_properties.selectedTool.StartSecondaryAction(m_brain.commands, stateType);
         }
         // Tool usage can result in a different state!
         if (m_brain.commands.secondaryHold)
         {
-            m_properties.selectedTool.HoldSecondaryAction(m_properties.actionPoint, m_brain.commands);
+            m_properties.selectedTool.HoldSecondaryAction(m_brain.commands, stateType);
         }
 
         UpdateRotationLockedY();
@@ -94,11 +87,11 @@ public class GroundedPawnState : PawnState
             m_properties.m_physics.AddForce(forceToAdd);
             m_properties.attemptedMoveDirection = forceToAdd;
 
-            if (hit.distance > 0.7f)
+            if (hit.distance > m_properties.length* 0.5f + 0.05f)
             {
                 m_properties.m_physics.AddForce(Vector3.up * -1000);
             }
-            else if(hit.distance < 0.6f)
+            else if(hit.distance < m_properties.length * 0.5f - 0.05f)
             {
                 m_properties.m_physics.AddForce(Vector3.up * 1000);
             }

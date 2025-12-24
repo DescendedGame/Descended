@@ -10,35 +10,33 @@ public class VeinBuilder : Tool
     Vein vein;
     Vein placeHolderVein;
 
-    Transform target;
     float creationDistance = 2;
 
     float startSize = 1;
     float endSize = 1;
 
     //Get the primary action to create a projectile
-    public override PawnStateType StartPrimaryAction(Transform actionPoint, Commands commands)
+    public override PawnStateType StartPrimaryAction(Commands commands, PawnStateType stateType)
     {
         if (!isBuilding)
         {
-            target = actionPoint;
             isBuilding = true;
-            vein = Instantiate(veinPrefab, target.position + target.forward * creationDistance, Quaternion.LookRotation(-target.forward, target.up)).GetComponent<Vein>();
-            vein.Generate(target.position + target.forward * creationDistance, startSize, startSize, 0, true, EndType.None, EndType.None);
+            vein = Instantiate(veinPrefab, userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, Quaternion.LookRotation(-userProperties.eyeTransform.forward, userProperties.eyeTransform.up)).GetComponent<Vein>();
+            vein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, startSize, startSize, 0, true, EndType.None, EndType.None);
         }
         else
         {
-            vein.Generate(target.position + target.forward * creationDistance, startSize,endSize, 0, true, EndType.None, EndType.None);
+            vein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, startSize,endSize, 0, true, EndType.None, EndType.None);
             vein.transform.SetParent(GameObject.Find("World").transform, true);
             vein.GetComponent<Collider>().enabled = true;
             GameObject.Find("World").GetComponent<World>().SaveWorld();
             vein = null;
             isBuilding = false;
         }
-        return PawnStateType.Idle;
+        return stateType == PawnStateType.Grounded ? stateType : PawnStateType.Idle;
     }
     //Get the primary action to create a projectile
-    public override PawnStateType HoldSecondaryAction(Transform actionPoint, Commands commands)
+    public override PawnStateType HoldSecondaryAction(Commands commands, PawnStateType stateType)
     {
         if (!isBuilding)
         {
@@ -51,17 +49,16 @@ public class VeinBuilder : Tool
             endSize += commands.look.y;
             if (endSize < 0) endSize = 0;
         }
-        return PawnStateType.Idle;
+        return stateType ==  PawnStateType.Grounded? stateType: PawnStateType.Idle;
     }
 
-    public override void Equip(Transform actionPoint)
+    public override void Equip()
     {
-        base.Equip(actionPoint);
-        target = actionPoint;
+        base.Equip();
         if (placeHolderVein == null)
         {
-            placeHolderVein = Instantiate(veinPrefab, target.position + target.forward * creationDistance, Quaternion.LookRotation(-target.forward, target.up)).GetComponent<Vein>();
-            placeHolderVein.Generate(target.position + target.forward * creationDistance * 0.1f, 1, 1, 0, true, EndType.None, EndType.None);
+            placeHolderVein = Instantiate(veinPrefab, userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, Quaternion.LookRotation(-userProperties.eyeTransform.forward, userProperties.eyeTransform.up)).GetComponent<Vein>();
+            placeHolderVein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance * 0.1f, 1, 1, 0, true, EndType.None, EndType.None);
         }
         else
         {
@@ -83,17 +80,17 @@ public class VeinBuilder : Tool
         if (!equipped) return;
         if(vein != null)
         {
-            vein.Generate(target.position + target.forward * creationDistance, startSize, endSize, 0, true, EndType.None, EndType.None);
+            vein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, startSize, endSize, 0, true, EndType.None, EndType.None);
         }
         else
         {
             if(placeHolderVein == null)
             {
-                placeHolderVein = Instantiate(veinPrefab, target.position + target.forward * creationDistance, Quaternion.LookRotation(-target.forward, target.up)).GetComponent<Vein>();
+                placeHolderVein = Instantiate(veinPrefab, userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, Quaternion.LookRotation(-userProperties.eyeTransform.forward, userProperties.eyeTransform.up)).GetComponent<Vein>();
             }
-            placeHolderVein.transform.position = target.position + target.forward * creationDistance;
-            placeHolderVein.transform.rotation = Quaternion.LookRotation(-target.forward, target.up);
-            placeHolderVein.Generate(target.position + target.forward * creationDistance * 0.9f, 1, 1, 0, true, EndType.None, EndType.None);
+            placeHolderVein.transform.position = userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance;
+            placeHolderVein.transform.rotation = Quaternion.LookRotation(-userProperties.eyeTransform.forward, userProperties.eyeTransform.up);
+            placeHolderVein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance * 0.9f, 1, 1, 0, true, EndType.None, EndType.None);
         }
     }
 }

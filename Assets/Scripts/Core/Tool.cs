@@ -8,14 +8,22 @@ public class Tool : MonoBehaviour
 {
     [SerializeField] ToolType toolType;
     [SerializeField] protected int manaCost = 0;
+    [SerializeField] protected PawnProperties userProperties;
     protected bool equipped = false;
+
+    public void Initialize(PawnProperties pawnProperties)
+    {
+        userProperties = pawnProperties;
+        transform.parent = pawnProperties.actionPoint;
+        transform.localPosition = Vector3.zero;
+    }
 
     /// <summary>
     /// The primary action of this tool. The return value results in a change of its pawn's state.
     /// </summary>
     /// <param name="actionPoint"> The hand of the user, or mouth, or whatever.</param>
     /// <returns></returns>
-    public virtual PawnStateType StartPrimaryAction(Transform actionPoint, Commands commands)
+    public virtual PawnStateType StartPrimaryAction(Commands commands, PawnStateType stateType)
     {
         return PawnStateType.Idle;
     }
@@ -25,7 +33,7 @@ public class Tool : MonoBehaviour
     /// </summary>
     /// <param name="actionPoint"> The hand of the user, or mouth, or whatever.</param>
     /// <returns></returns>
-    public virtual PawnStateType StartSecondaryAction(Transform actionPoint, Commands commands)
+    public virtual PawnStateType StartSecondaryAction(Commands commands, PawnStateType stateType)
     {
         return PawnStateType.Idle;
     }
@@ -35,12 +43,12 @@ public class Tool : MonoBehaviour
     /// </summary>
     /// <param name="actionPoint"> The hand of the user, or mouth, or whatever.</param>
     /// <returns></returns>
-    public virtual PawnStateType HoldSecondaryAction(Transform actionPoint, Commands commands)
+    public virtual PawnStateType HoldSecondaryAction(Commands commands, PawnStateType stateType)
     {
         return PawnStateType.Idle;
     }
 
-    public virtual void Equip(Transform actionPoint)
+    public virtual void Equip()
     {
         equipped = true;
     }
@@ -67,6 +75,7 @@ public class Tool : MonoBehaviour
 /// </summary>
 public enum ToolType
 {
+    Dagger,
     PressurePistol,
     ChemicalSpray,
     VeinBuilder,

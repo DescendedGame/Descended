@@ -24,8 +24,8 @@ public class Pawn : Attackable
     {
         base.Awake();
 
-        GetComponent<BodyCreator>().CreateBody(out m_properties.m_pivot, out m_properties.eyeTransform);
-        m_properties.actionPoint = m_properties.eyeTransform;
+        GetComponent<BodyCreator>().CreateBody(out m_properties.m_pivot, out m_properties.eyeTransform, out m_properties.actionPoint);
+        m_properties.length = GetComponent<BodyCreator>().GetLength();
         m_properties.bodyParts = GetComponentsInChildren<BodyPart>(); // This should already be in place when the character is created. Or maybe this is simpler (but less optimized)
         RememberBodyTransforms();
         m_brain = GetComponent<Brain>();
@@ -55,6 +55,7 @@ public class Pawn : Attackable
         {
             GameObject tool = Instantiate(m_properties.toolStorage.GetTool(m_properties.toolTypes[i]), transform);
             m_properties.tools[i] = tool.GetComponent<Tool>();
+            m_properties.tools[i].Initialize(m_properties);
         }
     }
 
