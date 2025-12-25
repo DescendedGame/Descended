@@ -28,9 +28,19 @@ public abstract class BodyPart : MonoBehaviour
         Idle(pawnProperties, actionDirection);
     }
 
+    public virtual void PrepareGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        Grounded(pawnProperties, actionDirection);
+    }
+
     public virtual void Attack(PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         Idle(pawnProperties, actionDirection);
+    }
+
+    public virtual void AttackGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        Grounded(pawnProperties, actionDirection);
     }
 
     public virtual void Defend(PawnProperties pawnProperties, ActionDirection actionDirection)
@@ -54,6 +64,16 @@ public abstract class BodyPart : MonoBehaviour
     }
 
     public virtual void Grounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        Idle(pawnProperties, actionDirection);
+    }
+
+    public virtual void DefendGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        Idle(pawnProperties, actionDirection);
+    }
+
+    public virtual void Dodge(PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         Idle(pawnProperties, actionDirection);
     }

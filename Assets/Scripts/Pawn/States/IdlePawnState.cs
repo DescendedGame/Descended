@@ -37,20 +37,21 @@ public class IdlePawnState : PawnState
             m_properties.tools[m_properties.selectedToolIndex].Equip();
         }
 
-        // Tool usage can result in a different state!
-        if (m_brain.commands.primary)
-        {
-            m_properties.selectedTool.StartPrimaryAction(m_brain.commands, stateType);
-        }
+
         // Tool usage can result in a different state!
         if (m_brain.commands.secondary)
         {
-            m_properties.selectedTool.StartSecondaryAction(m_brain.commands, stateType);
+            return m_properties.selectedTool.StartSecondaryAction(m_brain.commands, stateType);
         }
         // Tool usage can result in a different state!
         if (m_brain.commands.secondaryHold)
         {
-            m_properties.selectedTool.HoldSecondaryAction(m_brain.commands, stateType);
+            return m_properties.selectedTool.HoldSecondaryAction(m_brain.commands, stateType);
+        }
+        // Tool usage can result in a different state!
+        if (m_brain.commands.primary)
+        {
+            return m_properties.selectedTool.StartPrimaryAction(m_brain.commands, stateType);
         }
 
         UpdateRotation();

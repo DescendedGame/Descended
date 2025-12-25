@@ -3,58 +3,40 @@ using UnityEngine;
 /// <summary>
 /// The default state used for basic movement and whatnot.
 /// </summary>
-public class GroundedPawnState : PawnState
+public class DefendGroundedPawnState : PawnState
 {
 
     bool grounded = false;
 
-    public GroundedPawnState()
+    public DefendGroundedPawnState()
     {
-        stateType = PawnStateType.Grounded;
+        stateType = PawnStateType.DefendGrounded;
     }
 
     public override void Enter()
     {
         m_properties.eyeTransform.rotation = Quaternion.LookRotation(m_properties.eyeTransform.forward, Vector3.up);
         grounded = true;
+        Debug.Log("Enter DefendGrounded");
     }
 
     public override PawnStateType Update()
     {
-        // Go to sprint if sprint conditions are met.
-        if (m_brain.commands.sprint && m_brain.IsTryingToMove())
-        {
-            return PawnStateType.Sprint;
-        }
 
-        // Go to sprint if sprint conditions are met.
         if (m_brain.commands.upwards > 0 || !grounded)
         {
-            return PawnStateType.Idle;
+            return PawnStateType.Defend;
         }
 
-        // Tool selection
-        if (m_properties.selectedToolIndex != m_brain.commands.selected)
+
+        if (!m_brain.commands.secondaryHold)
         {
-            m_properties.tools[m_properties.selectedToolIndex].Unequip();
-            m_properties.selectedToolIndex = m_brain.commands.selected;
-            m_properties.tools[m_properties.selectedToolIndex].Equip();
+            return PawnStateType.Grounded;
         }
 
-        // Tool usage can result in a different state!
-        if (m_brain.commands.secondary)
-        {
-            return m_properties.selectedTool.StartSecondaryAction(m_brain.commands, stateType);
-        }
-        // Tool usage can result in a different state!
-        if (m_brain.commands.secondaryHold)
-        {
-            return m_properties.selectedTool.HoldSecondaryAction(m_brain.commands, stateType);
-        }
-        // Tool usage can result in a different state!
         if (m_brain.commands.primary)
         {
-            return m_properties.selectedTool.StartPrimaryAction(m_brain.commands, stateType);
+            //PUSH
         }
 
         UpdateRotationLockedY();
@@ -62,7 +44,7 @@ public class GroundedPawnState : PawnState
         // Move all body parts idly
         for(int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].Grounded(m_properties, ActionDirection.Down);
+            m_properties.bodyParts[i].DefendGrounded(m_properties, ActionDirection.Down);
         }
 
         return stateType;
@@ -100,5 +82,10 @@ public class GroundedPawnState : PawnState
         {
             grounded = false;
         }
+    }
+
+    public override void Exit()
+    {
+        Debug.Log("Exit DefendGrounded");
     }
 }

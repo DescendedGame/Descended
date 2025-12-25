@@ -64,6 +64,10 @@ public class PawnProperties
         private set { }
     }
 
+    public float prepareTimer = 0;
+    public float attackTimer = 0;
+    public float dodgeTimer = 0;
+
     /// <summary>
     /// All the body parts of this pawn. Should maybe be kept elsewhere.
     /// </summary>
@@ -105,6 +109,10 @@ public enum PawnStateType
     Interact,
     Toppled,
     Grounded,
+    PrepareGrounded,
+    AttackGrounded,
+    DefendGrounded,
+    Dodge,
 }
 
 /// <summary>

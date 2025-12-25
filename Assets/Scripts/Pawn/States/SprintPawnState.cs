@@ -27,7 +27,7 @@ public class SprintPawnState : PawnState
         //Can still use a tool during sprint, but with sprint behaviour!
         if (m_brain.commands.primary)
         {
-            m_properties.selectedTool.StartPrimaryAction(m_brain.commands, stateType);
+            return m_properties.selectedTool.StartPrimaryAction(m_brain.commands, stateType);
         }
 
         UpdateRotation();

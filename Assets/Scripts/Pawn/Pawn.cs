@@ -34,9 +34,17 @@ public class Pawn : Attackable
 
         // Add the states
         new IdlePawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new GroundedPawnState().Initialize(m_brain, m_properties, m_lookUpState);
         new SprintPawnState().Initialize(m_brain, m_properties, m_lookUpState);
         new ToppledPawnState().Initialize(m_brain, m_properties, m_lookUpState);
-        new GroundedPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new PreparePawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new PrepareGroundedPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new AttackPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new AttackGroundedPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new DefendPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new DefendGroundedPawnState().Initialize(m_brain, m_properties, m_lookUpState);
+        new DodgePawnState().Initialize(m_brain, m_properties, m_lookUpState);
+
 
         // Set the initial state
         currentState = m_lookUpState[PawnStateType.Idle];

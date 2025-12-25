@@ -7,8 +7,22 @@ public class MeleeWeapon : Tool
     //Get the primary action to create a projectile
     public override PawnStateType StartPrimaryAction(Commands commands, PawnStateType stateType)
     {
-        GameObject projectile = Instantiate(projectilePrefab, userProperties.actionPoint.position, userProperties.actionPoint.rotation);
-        projectile.GetComponent<Projectile>().Initialize();
-        return PawnStateType.Idle;
+        userProperties.prepareTimer = 1;
+        userProperties.attackTimer = 1;
+        
+        if (stateType == PawnStateType.Idle)
+        {
+            return PawnStateType.Prepare;
+        }
+        else return PawnStateType.PrepareGrounded;
+    }
+
+    public override PawnStateType HoldSecondaryAction(Commands commands, PawnStateType stateType)
+    {
+        if (stateType == PawnStateType.Idle)
+        {
+            return PawnStateType.Defend;
+        }
+        else return PawnStateType.DefendGrounded;
     }
 }

@@ -100,5 +100,4 @@ public class HumanArm : BodyLinkage
         forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.right), Time.deltaTime * 360);
 
     }
-
 }
