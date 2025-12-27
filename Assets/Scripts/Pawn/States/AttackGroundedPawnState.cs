@@ -6,6 +6,7 @@ using UnityEngine;
 public class AttackGroundedPawnState : PawnState
 {
     bool grounded = false;
+    ActionDirection actionDirection;
 
     public AttackGroundedPawnState()
     {
@@ -14,9 +15,9 @@ public class AttackGroundedPawnState : PawnState
 
     public override void Enter()
     {
+        actionDirection = m_brain.commands.actionDirection;
         m_properties.eyeTransform.rotation = Quaternion.LookRotation(m_properties.eyeTransform.forward, Vector3.up);
         grounded = true;
-        Debug.Log("Enter AttackGrounded");
         base.Enter();
     }
 
@@ -44,7 +45,7 @@ public class AttackGroundedPawnState : PawnState
         // Move all body parts idly
         for (int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].AttackGrounded(m_properties, ActionDirection.Down);
+            m_properties.bodyParts[i].AttackGrounded(m_properties, actionDirection);
         }
 
         return stateType;
@@ -86,7 +87,6 @@ public class AttackGroundedPawnState : PawnState
 
     public override void Exit()
     {
-        Debug.Log("Exit AttackGrounded");
         base.Exit();
     }
 }

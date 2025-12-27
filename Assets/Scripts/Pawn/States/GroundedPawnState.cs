@@ -49,6 +49,7 @@ public class GroundedPawnState : PawnState
         // Tool usage can result in a different state!
         if (m_brain.commands.secondaryHold)
         {
+            Debug.Log(stateType);
             return m_properties.selectedTool.HoldSecondaryAction(m_brain.commands, stateType);
         }
         // Tool usage can result in a different state!
@@ -62,7 +63,7 @@ public class GroundedPawnState : PawnState
         // Move all body parts idly
         for(int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].Grounded(m_properties, ActionDirection.Down);
+            m_properties.bodyParts[i].Grounded(m_properties, m_brain.commands.actionDirection);
         }
 
         return stateType;

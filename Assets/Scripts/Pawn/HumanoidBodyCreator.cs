@@ -26,9 +26,6 @@ public class HumanoidBodyCreator : BodyCreator
     HumanLeg leftLeg;
     HumanLeg rightLeg;
 
-    Transform rightHand;
-
-
     enum LowerBodyType
     {
         Human,
@@ -149,13 +146,7 @@ public class HumanoidBodyCreator : BodyCreator
         rightArm.transform.localPosition = Vector3.down * bodySettings.atlasLength + Vector3.right * bodySettings.torsoWidth;
         rightArm.Initialize(bodySettings, true);
 
-        if (rightHand == null)
-        {
-            rightHand = new GameObject("RightHand").transform;
-            rightHand.SetParent(rightArm.forearmLimb.transform);
-        }
-        rightHand.transform.localPosition = new Vector3(0, 0, rightArm.forearmLimb.length);
-        return rightHand.transform;
+        return rightArm.GetHand();
     }
 
     void CreateLegs(Transform leftHip, Transform rightHip)

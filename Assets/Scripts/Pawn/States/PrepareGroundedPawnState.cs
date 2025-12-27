@@ -7,6 +7,8 @@ public class PrepareGroundedPawnState : PawnState
 {
     bool grounded = false;
 
+    ActionDirection actionDirection;
+
     public PrepareGroundedPawnState()
     {
         stateType = PawnStateType.PrepareGrounded;
@@ -14,9 +16,9 @@ public class PrepareGroundedPawnState : PawnState
 
     public override void Enter()
     {
+        actionDirection = m_brain.commands.actionDirection;
         m_properties.eyeTransform.rotation = Quaternion.LookRotation(m_properties.eyeTransform.forward, Vector3.up);
         grounded = true;
-        Debug.Log("Enter PrepareGrounded");
         base.Enter();
     }
 
@@ -45,7 +47,7 @@ public class PrepareGroundedPawnState : PawnState
         // Move all body parts idly
         for (int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].PrepareGrounded(m_properties, ActionDirection.Down);
+            m_properties.bodyParts[i].PrepareGrounded(m_properties, actionDirection);
         }
 
         return stateType;
@@ -87,7 +89,7 @@ public class PrepareGroundedPawnState : PawnState
 
     public override void Exit()
     {
-        Debug.Log("Exit PrepareGrounded");
+        m_brain.commands.actionDirection= actionDirection;
         base.Exit();
     }
 }

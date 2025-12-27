@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class AttackPawnState : PawnState
 {
+    ActionDirection actionDirection;
+
     public AttackPawnState()
     {
         stateType = PawnStateType.Attack;
@@ -12,7 +14,8 @@ public class AttackPawnState : PawnState
 
     public override void Enter()
     {
-        Debug.Log("Enter Attack");
+        actionDirection = m_brain.commands.actionDirection;
+        m_properties.selectedTool.ReleaseAttack();
         base.Enter();
     }
 
@@ -46,7 +49,7 @@ public class AttackPawnState : PawnState
         // Move all body parts idly
         for (int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].Attack(m_properties, ActionDirection.Down);
+            m_properties.bodyParts[i].Attack(m_properties, actionDirection);
         }
 
         return stateType;
@@ -54,7 +57,7 @@ public class AttackPawnState : PawnState
 
     public override void Exit()
     {
-        Debug.Log("Exit Attack");
+        m_properties.selectedTool.StopAttack();
         base.Exit();
     }
 }

@@ -25,4 +25,19 @@ public class MeleeWeapon : Tool
         }
         else return PawnStateType.DefendGrounded;
     }
+
+    public override PawnStateType StartSecondaryAction(Commands commands, PawnStateType stateType)
+    {
+        return HoldSecondaryAction(commands, stateType);
+    }
+
+    public override void ReleaseAttack()
+    {
+        GetComponentInChildren<BoxCollider>().enabled = true;
+    }
+
+    public override void StopAttack()
+    {
+        GetComponentInChildren<BoxCollider>().enabled = false;
+    }
 }

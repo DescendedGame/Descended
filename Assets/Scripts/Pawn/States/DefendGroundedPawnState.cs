@@ -44,7 +44,7 @@ public class DefendGroundedPawnState : PawnState
         // Move all body parts idly
         for(int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].DefendGrounded(m_properties, ActionDirection.Down);
+            m_properties.bodyParts[i].DefendGrounded(m_properties, m_brain.commands.actionDirection);
         }
 
         return stateType;
@@ -57,7 +57,7 @@ public class DefendGroundedPawnState : PawnState
         layerMaskNames[0] = "Solid";
         layerMaskNames[1] = "Shifting";
 
-        if(Physics.SphereCast(m_properties.m_pivot.position, 0.25f, -Vector3.up, out hit, 2, LayerMask.GetMask(layerMaskNames)))
+        if (Physics.SphereCast(m_properties.m_pivot.position, 0.25f, -Vector3.up, out hit, 2, LayerMask.GetMask(layerMaskNames)))
         {
             Quaternion flatHeadRotation = m_properties.GetGroundedRotation();
 
@@ -69,11 +69,11 @@ public class DefendGroundedPawnState : PawnState
             m_properties.m_physics.AddForce(forceToAdd);
             m_properties.attemptedMoveDirection = forceToAdd;
 
-            if (hit.distance > m_properties.length* 0.5f + 0.05f)
+            if (hit.distance > m_properties.length * 0.5f + 0.05f)
             {
                 m_properties.m_physics.AddForce(Vector3.up * -1000);
             }
-            else if(hit.distance < m_properties.length * 0.5f - 0.05f)
+            else if (hit.distance < m_properties.length * 0.5f - 0.05f)
             {
                 m_properties.m_physics.AddForce(Vector3.up * 1000);
             }

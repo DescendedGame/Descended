@@ -61,7 +61,7 @@ public class Pawn : Attackable
         m_properties.tools = new Tool[m_properties.toolTypes.Length];
         for(int i = 0; i < m_properties.toolTypes.Length; i++)
         {
-            GameObject tool = Instantiate(m_properties.toolStorage.GetTool(m_properties.toolTypes[i]), transform);
+            GameObject tool = Instantiate(m_properties.toolStorage.GetTool(m_properties.toolTypes[i]));
             m_properties.tools[i] = tool.GetComponent<Tool>();
             m_properties.tools[i].Initialize(m_properties);
         }

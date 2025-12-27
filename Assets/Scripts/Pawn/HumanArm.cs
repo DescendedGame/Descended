@@ -12,6 +12,7 @@ public class HumanArm : BodyLinkage
     [SerializeField] Transform shoulder;
     [SerializeField] Transform arm;
     [SerializeField] Transform forearm;
+    [SerializeField] Transform hand;
 
     Quaternion initialShoulderRotation;
     Quaternion initialArmRotation;
@@ -84,6 +85,20 @@ public class HumanArm : BodyLinkage
         initialArmRotation = Quaternion.identity;
         initialForearmRotation = Quaternion.identity;
 
+
+        if (hand == null)
+        {
+            hand = new GameObject("RightHand").transform;
+            hand.SetParent(forearm.transform);
+        }
+        hand.transform.localPosition = new Vector3(0, 0, forearmLimb.length);
+        hand.transform.localRotation = Quaternion.identity;
+
+    }
+
+    public Transform GetHand()
+    {
+        return hand;
     }
 
     public override void Idle(PawnProperties pawnProperties, ActionDirection actionDirection)
@@ -99,5 +114,161 @@ public class HumanArm : BodyLinkage
 
         forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.right), Time.deltaTime * 360);
 
+    }
+
+    public override void Prepare(PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        if(isRight)
+        {
+            Quaternion torsoOffset = Quaternion.AngleAxis(30, Vector3.right);
+            switch (actionDirection)
+            {
+                case ActionDirection.Up:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation*torsoOffset * Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(-180, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-120, Vector3.right), Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Down:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(45, Vector3.forward) * Quaternion.AngleAxis(-120, Vector3.right), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.right), Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Left:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation*torsoOffset * Quaternion.AngleAxis(-120, Vector3.right), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.right), Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Right:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation*torsoOffset * Quaternion.AngleAxis(-30, Vector3.up) * Quaternion.AngleAxis(-90, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-120, Vector3.right), Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.forward), Time.deltaTime * 360);
+                    break;
+                case ActionDirection.None:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public override void PrepareGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        if (isRight)
+        {
+            float angleDifference = Quaternion.Angle(pawnProperties.GetGroundedRotation(), pawnProperties.eyeTransform.rotation);
+            angleDifference *= Mathf.Sign(pawnProperties.eyeTransform.forward.y);
+            Quaternion torsoOffset = Quaternion.AngleAxis(-45, Vector3.forward) * Quaternion.AngleAxis(30, Vector3.right) * Quaternion.AngleAxis(-angleDifference, Vector3.forward);
+            switch (actionDirection)
+            {
+                case ActionDirection.Up:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(-180, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-120, Vector3.right), Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Down:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(45, Vector3.forward) * Quaternion.AngleAxis(-120, Vector3.right), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.right), Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Left:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(-120, Vector3.right), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.right), Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Right:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(-30, Vector3.up) * Quaternion.AngleAxis(-90, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity * Quaternion.AngleAxis(-120, Vector3.right), Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity * Quaternion.AngleAxis(-90, Vector3.forward), Time.deltaTime * 360);
+                    break;
+                case ActionDirection.None:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public override void Attack(PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        if (isRight)
+        {
+            Quaternion torsoOffset = Quaternion.AngleAxis(30, Vector3.right);
+            switch (actionDirection)
+            {
+                case ActionDirection.Up:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation* torsoOffset * Quaternion.AngleAxis(-90, Vector3.right) * Quaternion.AngleAxis(-30, Vector3.up) * Quaternion.AngleAxis(-90, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Down:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation* torsoOffset * Quaternion.AngleAxis(-90, Vector3.right) * Quaternion.AngleAxis(10, Vector3.up) * Quaternion.AngleAxis(45, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity * Quaternion.AngleAxis(45, Vector3.forward), Time.deltaTime * 180);
+                    break;
+                case ActionDirection.Left:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(-60, Vector3.right), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Right:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(-120, Vector3.right)* Quaternion.AngleAxis(-90, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    
+                    break;
+                case ActionDirection.None:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public override void AttackGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        if (isRight)
+        {
+            float angleDifference = Quaternion.Angle(pawnProperties.GetGroundedRotation(), pawnProperties.eyeTransform.rotation);
+            angleDifference *= Mathf.Sign(pawnProperties.eyeTransform.forward.y);
+            Quaternion torsoOffset = Quaternion.AngleAxis(-45, Vector3.forward) * Quaternion.AngleAxis(30, Vector3.right) * Quaternion.AngleAxis(-angleDifference, Vector3.forward);
+            switch (actionDirection)
+            {
+                case ActionDirection.Up:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(-90, Vector3.right) * Quaternion.AngleAxis(-30, Vector3.up) * Quaternion.AngleAxis(-90, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Down:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(-90, Vector3.right) * Quaternion.AngleAxis(10, Vector3.up) * Quaternion.AngleAxis(45, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    hand.localRotation = Quaternion.RotateTowards(hand.localRotation, Quaternion.identity * Quaternion.AngleAxis(45, Vector3.forward), Time.deltaTime * 180);
+                    break;
+                case ActionDirection.Left:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(-60, Vector3.right), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity, Time.deltaTime * 360);
+                    break;
+                case ActionDirection.Right:
+                    shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
+                    arm.localRotation = Quaternion.RotateTowards(arm.localRotation, initialArmRotation * torsoOffset * Quaternion.AngleAxis(-120, Vector3.right) * Quaternion.AngleAxis(-90, Vector3.forward), Time.deltaTime * 360);
+                    forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation, Quaternion.identity, Time.deltaTime * 360);
+
+                    break;
+                case ActionDirection.None:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

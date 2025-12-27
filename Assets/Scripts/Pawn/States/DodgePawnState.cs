@@ -20,7 +20,7 @@ public class DodgePawnState : PawnState
         
         for(int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].Dodge(m_properties, ActionDirection.Down);
+            m_properties.bodyParts[i].Dodge(m_properties, m_brain.commands.actionDirection);
         }
 
         m_properties.dodgeTimer -= Time.deltaTime;

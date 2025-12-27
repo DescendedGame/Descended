@@ -16,6 +16,7 @@ public class Tool : MonoBehaviour
         userProperties = pawnProperties;
         transform.parent = pawnProperties.actionPoint;
         transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
 
     /// <summary>
@@ -68,6 +69,13 @@ public class Tool : MonoBehaviour
         return toolType;
     }
 
+    public virtual void ReleaseAttack()
+    {
+    }
+
+    public virtual void StopAttack()
+    {
+    }
 }
 
 /// <summary>

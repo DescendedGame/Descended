@@ -5,6 +5,9 @@ using UnityEngine;
 /// </summary>
 public class PreparePawnState : PawnState
 {
+
+    ActionDirection actionDirection;
+
     public PreparePawnState()
     {
         stateType = PawnStateType.Prepare;
@@ -12,6 +15,7 @@ public class PreparePawnState : PawnState
 
     public override void Enter()
     {
+        actionDirection = m_brain.commands.actionDirection;
         Debug.Log("Enter Prepare");
         base.Enter();
     }
@@ -48,7 +52,7 @@ public class PreparePawnState : PawnState
         // Move all body parts idly
         for(int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].Prepare(m_properties, ActionDirection.Down);
+            m_properties.bodyParts[i].Prepare(m_properties, actionDirection);
         }
 
         return stateType;
@@ -56,6 +60,7 @@ public class PreparePawnState : PawnState
 
     public override void Exit()
     {
+        m_brain.commands.actionDirection = actionDirection;
         Debug.Log("Exit Prepare");
         base.Exit();
     }

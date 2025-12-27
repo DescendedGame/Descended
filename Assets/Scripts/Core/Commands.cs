@@ -30,7 +30,9 @@ public struct Commands
     public bool sprint;
 
     /// <summary>
-    /// If this is toggled, the steering becomes less accurate and less confusing.
+    /// If this is toggled, the steering becomes less accurate and more familiar.
     /// </summary>
     public bool balance;
+
+    public ActionDirection actionDirection;
 }

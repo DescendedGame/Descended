@@ -254,9 +254,9 @@ public class HumanTorso : BodyPart
 
         //upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, targetRotation, Time.deltaTime * 360);
 
+        //UPPER TORSO LOGIC IS IN HUMAN NECK.
 
-
-        upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, upperTorsoTargetRotation * Quaternion.AngleAxis(10 * upperRotationSin, Vector3.right), Time.deltaTime * 360);
+        //upperTorso.rotation = Quaternion.RotateTowards(upperTorso.rotation, upperTorsoTargetRotation * Quaternion.AngleAxis(10 * upperRotationSin, Vector3.right), Time.deltaTime * 360);
 
 
         //unanimatedMiddleTorsoRotation *= FollowParentSmoothly(middleTorso, unalteredMiddleTorsoPosition, unalteredMiddleTorsoRotation, Vector3.down, 2);

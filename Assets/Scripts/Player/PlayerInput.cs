@@ -75,6 +75,17 @@ public class PlayerInput : Brain
         if (Input.GetKey(k_rollCounterClockwise)) commands.roll += 1;
 
         commands.look = new Vector2(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"));
+
+        if(Mathf.Abs(commands.look.x) > Mathf.Abs(commands.look.y))
+        {
+            if (commands.look.x < 0) commands.actionDirection = ActionDirection.Left;
+            else commands.actionDirection = ActionDirection.Right;
+        }
+        else
+        {
+            if (commands.look.y < 0) commands.actionDirection = ActionDirection.Up;
+            else commands.actionDirection = ActionDirection.Down;
+        }
     }
 
     /// <summary>
