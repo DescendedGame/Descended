@@ -52,7 +52,7 @@ public class PreparePawnState : PawnState
         // Move all body parts idly
         for(int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].Prepare(m_properties, actionDirection);
+            m_properties.bodyParts[i].Prepare(m_brain.commands, m_properties, actionDirection);
         }
 
         return stateType;

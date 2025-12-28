@@ -101,7 +101,7 @@ public class HumanArm : BodyLinkage
         return hand;
     }
 
-    public override void Idle(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Idle(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         shoulder.localRotation = Quaternion.RotateTowards(shoulder.localRotation, initialShoulderRotation, Time.deltaTime * 360);
 
@@ -116,7 +116,7 @@ public class HumanArm : BodyLinkage
 
     }
 
-    public override void Prepare(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Prepare(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         if(isRight)
         {
@@ -155,7 +155,7 @@ public class HumanArm : BodyLinkage
         }
     }
 
-    public override void PrepareGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void PrepareGrounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         if (isRight)
         {
@@ -196,7 +196,7 @@ public class HumanArm : BodyLinkage
         }
     }
 
-    public override void Attack(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Attack(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         if (isRight)
         {
@@ -233,7 +233,7 @@ public class HumanArm : BodyLinkage
         }
     }
 
-    public override void AttackGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void AttackGrounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         if (isRight)
         {

@@ -18,7 +18,7 @@ public class HumanLowerBody : BodyPart
         rightLeg = pRightLeg;
     }
 
-    public override void Grounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Grounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         float leftLegDistance = (leftLeg.transform.position - leftFootPos).magnitude;
         float rightLegDistance = (rightLeg.transform.position - rightFootPos).magnitude;

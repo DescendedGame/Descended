@@ -76,6 +76,7 @@ public class HumanoidBodyCreator : BodyCreator
             GameObject go = new GameObject("Neck");
             go.layer = gameObject.layer;
             go.transform.SetParent(transform, false);
+            go.transform.SetSiblingIndex(0);
             neck = go.AddComponent<GeneratedLimb>();
             neck.transform.localRotation = Quaternion.LookRotation(Vector3.up, -Vector3.forward);
         }

@@ -97,7 +97,7 @@ public class HumanLeg : BodyLinkage
         initialFootRotation = Quaternion.identity;
     }
 
-    public override void Idle(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Idle(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         if (isRight)
         {
@@ -117,7 +117,7 @@ public class HumanLeg : BodyLinkage
                 Time.deltaTime * 360);
     }
 
-    public override void Grounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Grounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
 
     }

@@ -83,7 +83,7 @@ public class Pawn : Attackable
             SetState(nextState);
         }
 
-        // Remember the orientation of body parts so they can move smoothly towards their parent next frame if they want to.
+        // Remember the orientation of body parts so they can move drag behind their parent next frame if they want to.
         RememberBodyTransforms();
     }
 

@@ -5,23 +5,38 @@ public class HumanNeck : BodyPart
     Transform m_head;
     Transform m_atlas;
     Quaternion upperTorsoTargetRotation = Quaternion.identity;
+    Vector3 previousPosition;
+    Quaternion previousRotation;
     public void Initialize(Transform head, Transform atlas)
     {
         m_head = head;
         m_atlas = atlas;
     }
 
-    public override void Idle(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void RememberTransform()
     {
-        //SMOOTHNESS
+        previousPosition = transform.position;
+        previousRotation = upperTorsoTargetRotation;
+    }
+
+    public override void Idle(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
 
 
         Quaternion currentEyeRotation = pawnProperties.eyeTransform.rotation;
 
         float angleToHead = Quaternion.Angle(upperTorsoTargetRotation, m_head.rotation);
         if (angleToHead > 60) upperTorsoTargetRotation = Quaternion.RotateTowards(upperTorsoTargetRotation, m_head.rotation, angleToHead - 60);
-        m_atlas.rotation = Quaternion.RotateTowards(m_atlas.rotation, upperTorsoTargetRotation * Quaternion.AngleAxis(10 * WaveVariables.sinTimeRushQuarter, Vector3.right), Time.deltaTime * 360);
 
+        if(commands.upwards < 0)
+        {
+            upperTorsoTargetRotation = Quaternion.RotateTowards(upperTorsoTargetRotation, currentEyeRotation, Time.deltaTime * 90);
+        }
+        else upperTorsoTargetRotation = DragBehind(previousPosition, previousRotation, transform.position, upperTorsoTargetRotation, -Vector3.up);
+
+        m_atlas.rotation = Quaternion.RotateTowards(m_atlas.rotation, upperTorsoTargetRotation * Quaternion.AngleAxis(10 * WaveVariables.sinTimeRushQuarter, Vector3.right), Time.deltaTime * 360);
+        
+        
         float rotationDifference = Quaternion.Angle(m_atlas.rotation, currentEyeRotation);
         if (rotationDifference > 60) m_atlas.rotation = Quaternion.RotateTowards(m_atlas.rotation, currentEyeRotation, rotationDifference -60);
         transform.rotation =Quaternion.RotateTowards(m_atlas.rotation, currentEyeRotation, Quaternion.Angle(m_atlas.rotation, currentEyeRotation) / 2) * Quaternion.LookRotation(Vector3.up, Vector3.back);
@@ -29,7 +44,7 @@ public class HumanNeck : BodyPart
         pawnProperties.eyeTransform.rotation = currentEyeRotation;
     }
 
-    public override void Prepare(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Prepare(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         Quaternion currentEyeRotation = pawnProperties.eyeTransform.rotation;
 
@@ -40,12 +55,12 @@ public class HumanNeck : BodyPart
         m_head.rotation = currentEyeRotation;
         pawnProperties.eyeTransform.rotation = currentEyeRotation;
     }
-    public override void Attack(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Attack(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Prepare(pawnProperties, actionDirection);
+        Prepare(commands, pawnProperties, actionDirection);
     }
 
-    public override void Grounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void Grounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         Quaternion currentEyeRotation = pawnProperties.eyeTransform.rotation;
 
@@ -77,7 +92,7 @@ public class HumanNeck : BodyPart
         pawnProperties.eyeTransform.rotation = currentEyeRotation;
     }
 
-    public override void PrepareGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void PrepareGrounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         Quaternion currentEyeRotation = pawnProperties.eyeTransform.rotation;
 
@@ -100,13 +115,13 @@ public class HumanNeck : BodyPart
         pawnProperties.eyeTransform.rotation = currentEyeRotation;
     }
 
-    public override void AttackGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void AttackGrounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        PrepareGrounded(pawnProperties, actionDirection);
+        PrepareGrounded(commands, pawnProperties, actionDirection);
     }
 
-    public override void DefendGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public override void DefendGrounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        base.Grounded(pawnProperties, actionDirection);
+        base.Grounded(commands, pawnProperties, actionDirection);
     }
 }

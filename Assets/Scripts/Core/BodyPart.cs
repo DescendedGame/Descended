@@ -2,79 +2,80 @@ using UnityEngine;
 
 public abstract class BodyPart : MonoBehaviour
 {
-    Quaternion unalteredRotation;
-    Vector3 unalteredPosition;
-
-    protected Quaternion FollowParentSmoothly(Vector3 unalteredTransformPosition, Quaternion unalteredTransformRotation, Vector3 alteredPosition, Vector3 downVector, float followSpeed)
+    protected Quaternion DragBehind(Vector3 previousPosition, Quaternion previousRotation, Vector3 currentPosition, Quaternion currentRotation, Vector3 backwardsVector, float weightCenterDistance = 0.3f)
     {
-        Vector3 t_vectorToLast = unalteredTransformPosition + unalteredTransformRotation * Vector3.down/followSpeed - alteredPosition;
-        Vector3 t_vectorToCurrent = unalteredTransformRotation * downVector;
-        return Quaternion.FromToRotation(t_vectorToCurrent, t_vectorToLast) * unalteredTransformRotation;
+        float moveDistance = Vector3.Distance(previousPosition, currentPosition);
+        Vector3 lastEnd = previousPosition + previousRotation * backwardsVector * weightCenterDistance;
+        Vector3 wannabeBackwards = lastEnd - currentPosition;
+        Vector3 torsoBackwards = currentRotation * backwardsVector * weightCenterDistance;
+        Vector3 rotationAxis = Vector3.Cross(wannabeBackwards, torsoBackwards);
+        Debug.Log(moveDistance);
+        Debug.Log(Mathf.Clamp(moveDistance * 90, 0, Vector3.Angle(wannabeBackwards, torsoBackwards)));
+        return Quaternion.AngleAxis(Mathf.Clamp(moveDistance * 90,0, Vector3.Angle(wannabeBackwards, torsoBackwards)), 
+            -rotationAxis) * currentRotation;
     }
 
     public virtual void RememberTransform()
     {
-        unalteredPosition = transform.position;
-        unalteredRotation = transform.rotation;
     }
 
-    public virtual void Idle(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Idle(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
 
     }
 
-    public virtual void Prepare(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Prepare(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void PrepareGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void PrepareGrounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Grounded(pawnProperties, actionDirection);
+        Grounded(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void Attack(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Attack(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void AttackGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void AttackGrounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Grounded(pawnProperties, actionDirection);
+        Grounded(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void Defend(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Defend(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle( commands, pawnProperties, actionDirection);
     }
 
-    public virtual void Sprint(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Sprint(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void Interact(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Interact(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void Toppled(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Toppled(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void Grounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Grounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void DefendGrounded(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void DefendGrounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle(commands, pawnProperties, actionDirection);
     }
 
-    public virtual void Dodge(PawnProperties pawnProperties, ActionDirection actionDirection)
+    public virtual void Dodge(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
-        Idle(pawnProperties, actionDirection);
+        Idle(commands, pawnProperties, actionDirection);
     }
 }

@@ -47,7 +47,7 @@ public class PrepareGroundedPawnState : PawnState
         // Move all body parts idly
         for (int i = 0; i < m_properties.bodyParts.Length; i++)
         {
-            m_properties.bodyParts[i].PrepareGrounded(m_properties, actionDirection);
+            m_properties.bodyParts[i].PrepareGrounded(m_brain.commands, m_properties, actionDirection);
         }
 
         return stateType;
