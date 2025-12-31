@@ -238,13 +238,19 @@ public class HumanTorso : BodyPart
 
     public override void Idle(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
+
         float middleRotationSin = WaveVariables.sinTime;
         float lowerRotationSin = -WaveVariables.sinTimeRushQuarter;
+        if (pawnProperties.attemptedMoveDirection.magnitude == 0)
+        {
+            middleRotationSin = 0;
+            lowerRotationSin = 0;
+        }
 
-        //UPPER TORSO LOGIC IS IN HUMAN NECK.
+            //UPPER TORSO LOGIC IS IN HUMAN NECK.
 
-        //middleTorsoTargetRotation = Quaternion.RotateTowards(middleTorsoTargetRotation, upperTorso.rotation, Time.deltaTime * 10);
-        float t_angle = Quaternion.Angle(middleTorsoTargetRotation, upperTorso.rotation);
+            //middleTorsoTargetRotation = Quaternion.RotateTowards(middleTorsoTargetRotation, upperTorso.rotation, Time.deltaTime * 10);
+            float t_angle = Quaternion.Angle(middleTorsoTargetRotation, upperTorso.rotation);
         if (t_angle > 25)
         {
             middleTorsoTargetRotation = Quaternion.RotateTowards(middleTorsoTargetRotation, upperTorso.rotation, t_angle - 25);
@@ -281,6 +287,49 @@ public class HumanTorso : BodyPart
 
     }
 
+
+    public override void Sprint(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        float middleRotationSin = WaveVariables.sinTime8;
+        float lowerRotationSin = -WaveVariables.sinTimeRushQuarter8;
+        //UPPER TORSO LOGIC IS IN HUMAN NECK.
+
+        //middleTorsoTargetRotation = Quaternion.RotateTowards(middleTorsoTargetRotation, upperTorso.rotation, Time.deltaTime * 10);
+        float t_angle = Quaternion.Angle(middleTorsoTargetRotation, upperTorso.rotation);
+        if (t_angle > 25)
+        {
+            middleTorsoTargetRotation = Quaternion.RotateTowards(middleTorsoTargetRotation, upperTorso.rotation, t_angle - 25);
+        }
+        if (commands.upwards < 0)
+        {
+            middleTorsoTargetRotation = middleTorso.rotation;
+            middleTorsoTargetRotation = Quaternion.RotateTowards(middleTorsoTargetRotation, pawnProperties.eyeTransform.rotation, Time.deltaTime * 360);
+        }
+        else middleTorsoTargetRotation = DragBehind(previousMiddleTorsoPosition, previousMiddleTorsoRotation, middleTorso.position, middleTorsoTargetRotation, -Vector3.up);
+
+        middleTorso.rotation = Quaternion.RotateTowards(middleTorso.rotation, middleTorsoTargetRotation * Quaternion.AngleAxis(10 * middleRotationSin, Vector3.right), Time.deltaTime * 90);
+        float rotationDifference = Quaternion.Angle(middleTorso.rotation, upperTorso.rotation);
+        if (rotationDifference > 25) middleTorso.rotation = Quaternion.RotateTowards(middleTorso.rotation, upperTorso.rotation, rotationDifference - 25);
+
+
+
+        //lowerTorsoTargetRotation = Quaternion.RotateTowards(lowerTorsoTargetRotation, middleTorso.rotation, Time.deltaTime * 10);
+        t_angle = Quaternion.Angle(lowerTorsoTargetRotation, middleTorso.rotation);
+        if (t_angle > 25)
+        {
+            lowerTorsoTargetRotation = Quaternion.RotateTowards(lowerTorsoTargetRotation, middleTorso.rotation, t_angle - 25);
+        }
+        if (commands.upwards < 0)
+        {
+            lowerTorsoTargetRotation = lowerTorso.rotation;
+            lowerTorsoTargetRotation = Quaternion.RotateTowards(lowerTorsoTargetRotation, pawnProperties.eyeTransform.rotation, Time.deltaTime * 90);
+        }
+        else lowerTorsoTargetRotation = DragBehind(previousLowerTorsoPosition, previousLowerTorsoRotation, lowerTorso.position, lowerTorsoTargetRotation, -Vector3.up);
+
+        lowerTorso.rotation = Quaternion.RotateTowards(lowerTorso.rotation, lowerTorsoTargetRotation * Quaternion.AngleAxis(20 * lowerRotationSin, Vector3.right), 360);
+        rotationDifference = Quaternion.Angle(lowerTorso.rotation, middleTorso.rotation);
+        if (rotationDifference > 25) lowerTorso.rotation = Quaternion.RotateTowards(lowerTorso.rotation, middleTorso.rotation, rotationDifference - 25);
+    }
 
     public override void Grounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {

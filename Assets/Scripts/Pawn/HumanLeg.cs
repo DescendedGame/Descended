@@ -99,22 +99,70 @@ public class HumanLeg : BodyLinkage
 
     public override void Idle(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
+        if(commands.upwards >= 0 && (commands.forwards != 0 || commands.rightwards != 0 || commands.upwards > 0))
+        {
+            if (isRight)
+            {
+                thigh.localRotation = Quaternion.RotateTowards(thigh.localRotation,
+                    initialThighRotation * Quaternion.AngleAxis(-10 * WaveVariables.sinTime8 - 10, Vector3.right),
+                    Time.deltaTime * 360);
+                calf.localRotation = Quaternion.RotateTowards(calf.localRotation,
+                        Quaternion.AngleAxis(30 * WaveVariables.sinTimeRushQuarter8 + 30, Vector3.right),
+                        Time.deltaTime * 360);
+            }
+            else
+            {
+                thigh.localRotation = Quaternion.RotateTowards(thigh.localRotation,
+                    initialThighRotation  * Quaternion.AngleAxis(10 * WaveVariables.sinTime8 - 10, Vector3.right),
+                    Time.deltaTime * 360);
+                calf.localRotation = Quaternion.RotateTowards(calf.localRotation,
+                        Quaternion.AngleAxis(-30 * WaveVariables.sinTimeRushQuarter8 + 30, Vector3.right),
+                        Time.deltaTime * 360);
+            }
+
+        }
+        else
+        {
+
+            if (isRight)
+            {
+                thigh.localRotation = Quaternion.RotateTowards(thigh.localRotation,
+                    initialThighRotation * Quaternion.AngleAxis(10 * WaveVariables.sinTime + 10, Vector3.up) * Quaternion.AngleAxis(-10 * WaveVariables.sinTimeRushQuarter - 10, Vector3.right),
+                    Time.deltaTime * 360);
+            }
+            else
+            {
+                thigh.localRotation = Quaternion.RotateTowards(thigh.localRotation,
+                    initialThighRotation * Quaternion.AngleAxis(-10 * WaveVariables.sinTime - 10, Vector3.up) * Quaternion.AngleAxis(-10 * WaveVariables.sinTimeRushQuarter - 10, Vector3.right),
+                    Time.deltaTime * 360);
+            }
+
+            calf.localRotation = Quaternion.RotateTowards(calf.localRotation,
+                    Quaternion.AngleAxis(30 * WaveVariables.sinTimeRushQuarter + 30, Vector3.right),
+                    Time.deltaTime * 360);
+        }
+    }
+
+    public override void Sprint(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
         if (isRight)
         {
             thigh.localRotation = Quaternion.RotateTowards(thigh.localRotation,
-                initialThighRotation*Quaternion.AngleAxis(10 * WaveVariables.sinTime  + 10, Vector3.up) * Quaternion.AngleAxis(-10 * WaveVariables.sinTimeRushQuarter - 10, Vector3.right),
+                initialThighRotation * Quaternion.AngleAxis(-10 * WaveVariables.sinTime8 - 10, Vector3.right),
                 Time.deltaTime * 360);
+            calf.localRotation = Quaternion.RotateTowards(calf.localRotation,
+                    Quaternion.AngleAxis(-30 * WaveVariables.sinTimeRushQuarter8 + 30, Vector3.right),
+                    Time.deltaTime * 360);
         }
         else
         {
             thigh.localRotation = Quaternion.RotateTowards(thigh.localRotation,
-                initialThighRotation * Quaternion.AngleAxis(-10 * WaveVariables.sinTime - 10, Vector3.up) * Quaternion.AngleAxis(-10 * WaveVariables.sinTimeRushQuarter - 10, Vector3.right),
+                initialThighRotation * Quaternion.AngleAxis(-10 * WaveVariables.sinTime8 - 10, Vector3.right),
                 Time.deltaTime * 360);
+            calf.localRotation = Quaternion.RotateTowards(calf.localRotation,
+                    Quaternion.AngleAxis(-30 * WaveVariables.sinTimeRushQuarter8 + 30, Vector3.right),
+                    Time.deltaTime * 360);
         }
-
-        calf.localRotation = Quaternion.RotateTowards(calf.localRotation,
-                Quaternion.AngleAxis(30 * WaveVariables.sinTimeRushQuarter + 30, Vector3.right),
-                Time.deltaTime * 360);
     }
 
     public override void Grounded(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)

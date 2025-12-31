@@ -13,7 +13,7 @@ public class IdlePawnState : PawnState
     public override PawnStateType Update()
     {
         // Go to sprint if sprint conditions are met.
-        if (m_brain.commands.sprint && m_brain.IsTryingToMove())
+        if (m_brain.commands.sprint && m_brain.commands.forwards > 0)
         {
             return PawnStateType.Sprint;
         }

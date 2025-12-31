@@ -44,6 +44,27 @@ public class HumanNeck : BodyPart
         pawnProperties.eyeTransform.rotation = currentEyeRotation;
     }
 
+    public override void Sprint(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        Quaternion currentEyeRotation = pawnProperties.eyeTransform.rotation ;
+        Quaternion currentHeadRotation = m_head.rotation;
+
+        currentHeadRotation = Quaternion.RotateTowards(currentHeadRotation, currentEyeRotation* Quaternion.AngleAxis(90, Vector3.right), Time.deltaTime * 120);
+
+        float angleToHead = Quaternion.Angle(upperTorsoTargetRotation, currentHeadRotation);
+        if (angleToHead > 60) upperTorsoTargetRotation = Quaternion.RotateTowards(upperTorsoTargetRotation, currentHeadRotation, angleToHead - 60);
+        else upperTorsoTargetRotation = DragBehind(previousPosition, previousRotation, transform.position, upperTorsoTargetRotation, -Vector3.up);
+
+        m_atlas.rotation = Quaternion.RotateTowards(m_atlas.rotation, upperTorsoTargetRotation * Quaternion.AngleAxis(10 * WaveVariables.sinTimeRushQuarter8, Vector3.right), Time.deltaTime * 360);
+
+
+        float rotationDifference = Quaternion.Angle(m_atlas.rotation, currentHeadRotation);
+        if (rotationDifference > 60) m_atlas.rotation = Quaternion.RotateTowards(m_atlas.rotation, currentHeadRotation, rotationDifference - 60);
+        transform.rotation = Quaternion.RotateTowards(m_atlas.rotation, currentHeadRotation, Quaternion.Angle(m_atlas.rotation, currentHeadRotation) / 2) * Quaternion.LookRotation(Vector3.up, Vector3.back);
+        m_head.rotation = currentHeadRotation;
+        pawnProperties.eyeTransform.rotation = currentEyeRotation;
+    }
+
     public override void Prepare(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         Quaternion currentEyeRotation = pawnProperties.eyeTransform.rotation;

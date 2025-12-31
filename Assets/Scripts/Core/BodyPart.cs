@@ -9,8 +9,6 @@ public abstract class BodyPart : MonoBehaviour
         Vector3 wannabeBackwards = lastEnd - currentPosition;
         Vector3 torsoBackwards = currentRotation * backwardsVector * weightCenterDistance;
         Vector3 rotationAxis = Vector3.Cross(wannabeBackwards, torsoBackwards);
-        Debug.Log(moveDistance);
-        Debug.Log(Mathf.Clamp(moveDistance * 90, 0, Vector3.Angle(wannabeBackwards, torsoBackwards)));
         return Quaternion.AngleAxis(Mathf.Clamp(moveDistance * 90,0, Vector3.Angle(wannabeBackwards, torsoBackwards)), 
             -rotationAxis) * currentRotation;
     }

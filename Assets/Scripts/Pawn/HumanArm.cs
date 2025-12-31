@@ -116,6 +116,28 @@ public class HumanArm : BodyLinkage
 
     }
 
+    public override void Sprint(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
+    {
+        if (isRight)
+        {
+            arm.localRotation = Quaternion.RotateTowards(arm.localRotation,
+                initialArmRotation * Quaternion.AngleAxis(-60, Vector3.up) * Quaternion.AngleAxis(10 * WaveVariables.sinTime8 - 10, Vector3.right),
+                Time.deltaTime * 360);
+            forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation,
+                    Quaternion.AngleAxis(30 * WaveVariables.sinTimeRushQuarter8 - 30, Vector3.right),
+                    Time.deltaTime * 360);
+        }
+        else
+        {
+            arm.localRotation = Quaternion.RotateTowards(arm.localRotation,
+                initialArmRotation * Quaternion.AngleAxis(60, Vector3.up) * Quaternion.AngleAxis(10 * WaveVariables.sinTime8 - 10, Vector3.right),
+                Time.deltaTime * 360);
+            forearm.localRotation = Quaternion.RotateTowards(forearm.localRotation,
+                    Quaternion.AngleAxis(30 * WaveVariables.sinTimeRushQuarter8 - 30, Vector3.right),
+                    Time.deltaTime * 360);
+        }
+    }
+
     public override void Prepare(Commands commands, PawnProperties pawnProperties, ActionDirection actionDirection)
     {
         if(isRight)
