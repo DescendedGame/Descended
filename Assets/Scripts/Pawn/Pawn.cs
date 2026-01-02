@@ -27,6 +27,7 @@ public class Pawn : Attackable
         GetComponent<BodyCreator>().CreateBody(out m_properties.m_pivot, out m_properties.eyeTransform, out m_properties.actionPoint);
         m_properties.length = GetComponent<BodyCreator>().GetLength();
         m_properties.bodyParts = GetComponentsInChildren<BodyPart>(); // This should already be in place when the character is created. Or maybe this is simpler (but less optimized)
+        m_properties.attackable = this; // Unsure about this architecture, it's a quick solution really... It's just here because I want a self-heal.
         RememberBodyTransforms();
         m_brain = GetComponent<Brain>();
         

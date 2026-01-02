@@ -9,6 +9,8 @@ public class Brain : NetworkBehaviour
     //Should maybe have this private and only send out a copy with Get so that other's can't alter something's commands.
     public Commands commands;
 
+    protected Attackable attackable;
+
     /// <summary>
     /// Contains vital data of the pawn, important for AI and GUI!
     /// </summary>
@@ -18,6 +20,7 @@ public class Brain : NetworkBehaviour
     {
         ZeroCommands();
         m_properties = properties;
+        attackable = GetComponentInParent<Attackable>();
     }
     public virtual void UpdateCommands()
     {

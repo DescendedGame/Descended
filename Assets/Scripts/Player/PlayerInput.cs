@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerInput : Brain
 {
     public GameObject playerCamera;
+    PlayerGUI playerGUI;
 
     public KeyCode k_forwards = KeyCode.W;
     public KeyCode k_rightwards = KeyCode.D;
@@ -35,6 +36,8 @@ public class PlayerInput : Brain
         playerCamera.transform.localPosition = new Vector3(0,0.1f,0.1f);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        playerGUI = playerCamera.transform.GetComponentInChildren<PlayerGUI>();
     }
     private void Awake()
     {
@@ -46,6 +49,10 @@ public class PlayerInput : Brain
     public override void UpdateCommands()
     {
         if (!IsLocalPlayer) return;
+        playerGUI.SetHealth(attackable.GetHealth() / attackable.GetMaxHealth());
+        playerGUI.SetAura(m_properties.aura / m_properties.maxAura);
+        playerGUI.SetSoft(m_properties.soft / m_properties.maxSoft);
+        playerGUI.SetHard(m_properties.hard / m_properties.maxHard);
         base.UpdateCommands();
         SetMovementDirections();
         SetRotationDirections();
@@ -119,6 +126,6 @@ public class PlayerInput : Brain
 
     public override void OnDamaged(Hazard damage)
     {
-        // Update healthbar not implemented
+        playerGUI.SetHealth(attackable.GetHealth()/attackable.GetMaxHealth());
     }
 }

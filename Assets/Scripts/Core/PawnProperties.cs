@@ -7,6 +7,17 @@ using UnityEngine;
 [Serializable]
 public class PawnProperties
 {
+    public float maxAura = 100;
+    public float aura = 100;
+
+    public float maxSoft = 100;
+    public float soft = 100;
+
+    public float maxHard = 100;
+    public float hard = 100;
+
+    public Attackable attackable;
+
     /// <summary>
     /// The part of the pawn that rotates, check its forward vector to know which direction it faces.
     /// </summary>
