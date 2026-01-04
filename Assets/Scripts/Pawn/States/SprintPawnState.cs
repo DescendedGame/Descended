@@ -20,6 +20,12 @@ public class SprintPawnState : PawnState
         {
             return PawnStateType.Idle;
         }
+        m_properties.aura -= 20 * Time.deltaTime;
+        if (m_properties.aura <= 0)
+        {
+            m_properties.aura = 0;
+            return PawnStateType.Idle;
+        }
 
         //Can still change the selected tool during sprint.
         m_properties.selectedToolIndex = m_brain.commands.selected;

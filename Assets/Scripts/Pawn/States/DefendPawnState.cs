@@ -12,7 +12,6 @@ public class DefendPawnState : PawnState
 
     public override void Enter()
     {
-        Debug.Log("Enter Defend");
     }
 
     public override PawnStateType Update()
@@ -60,6 +59,5 @@ public class DefendPawnState : PawnState
 
     public override void Exit()
     {
-        Debug.Log("Exit Defend");
     }
 }

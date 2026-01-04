@@ -16,7 +16,6 @@ public class PreparePawnState : PawnState
     public override void Enter()
     {
         actionDirection = m_brain.commands.actionDirection;
-        Debug.Log("Enter Prepare");
         base.Enter();
     }
 

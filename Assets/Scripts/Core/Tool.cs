@@ -9,9 +9,41 @@ public class Tool : MonoBehaviour
     [SerializeField] ToolType toolType;
     [SerializeField] protected int manaCost = 0;
     [SerializeField] protected PawnProperties userProperties;
+
+    [SerializeField] protected float auraCost=0;
+    [SerializeField] protected float softCost=0;
+    [SerializeField] protected float hardCost=0;
+
+    [SerializeField] protected float secondayAuraCost = 0;
+    [SerializeField] protected float secondarySoftCost = 0;
+    [SerializeField] protected float secondaryHardCost = 0;
+
     protected bool equipped = false;
 
-    public void Initialize(PawnProperties pawnProperties)
+
+    public bool PrimaryCost()
+    {
+        if (userProperties.aura >= auraCost
+            && userProperties.soft >= softCost
+            && userProperties.hard >= hardCost)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    public bool SecondaryCost()
+    {
+        if (userProperties.aura >= secondayAuraCost
+            && userProperties.soft >= secondarySoftCost
+            && userProperties.hard >= secondaryHardCost)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    public virtual void Initialize(PawnProperties pawnProperties)
     {
         userProperties = pawnProperties;
         transform.parent = pawnProperties.actionPoint;

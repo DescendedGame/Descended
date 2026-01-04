@@ -70,6 +70,9 @@ public class Pawn : Attackable
 
     protected virtual void Update()
     {
+        m_properties.aura += m_properties.auraRegen * Time.deltaTime;
+        if (m_properties.aura > m_properties.maxAura) m_properties.aura = m_properties.maxAura;
+
         // All pawns trigger small bioluminescent things around them when they move.
         //var emission = m_glitter.emission;
         //emission.rateOverTime = m_properties.m_physics.linearVelocity.magnitude * 5;

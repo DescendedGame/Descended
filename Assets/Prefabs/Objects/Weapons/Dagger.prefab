@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7525515792521736147}
   - component: {fileID: 649319359780140540}
   - component: {fileID: 5380728642950619120}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6859969790486160903}
   - component: {fileID: 8543938749340393971}
-  m_Layer: 8
+  - component: {fileID: 3463330048742492397}
+  m_Layer: 6
   m_Name: Dagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +136,14 @@ MonoBehaviour:
   toolType: 0
   manaCost: 0
   userProperties:
+    maxAura: 100
+    aura: 100
+    auraRegen: 10
+    maxSoft: 100
+    soft: 100
+    maxHard: 100
+    hard: 100
+    attackable: {fileID: 0}
     m_pivot: {fileID: 0}
     m_physics: {fileID: 0}
     m_swim_force: 0
@@ -154,8 +163,27 @@ MonoBehaviour:
     eyeTransform: {fileID: 0}
     attemptedMoveDirection: {x: 0, y: 0, z: 0}
     length: 0
-  projectilePrefab: {fileID: 3602484550425691745, guid: f9dc21a6e01143b4cbd94a1825e816ce,
-    type: 3}
+--- !u!114 &3463330048742492397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691927518201371361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52cba2ba4effd394b9dc1f66ed9c5e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cut: 0
+  temperature: 0
+  suffocation: 0
+  impact: 0
+  stun: 0
+  unbalance: 0
+  push: 0
+  pushForce: {x: 0, y: 0, z: 0}
+  hitCount: 1
 --- !u!1 &7858884349736761836
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,5 +235,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.02, y: 0.14, z: -0.03}
+  m_Size: {x: 0.02, y: 0.14, z: 0.03}
   m_Center: {x: 0, y: 0, z: 0}

@@ -36,6 +36,11 @@ public class Vein : MonoBehaviour
     [SerializeField] Transform m_vein_start = null;
     [SerializeField] Transform m_vein_end = null;
 
+    public float GetCost()
+    {
+        return  Mathf.PI * (m_start_size + m_end_size) * m_vein_length;
+    }
+
     public void GenerateFromSettings(VeinSettings settings)
     {
         transform.position = settings.start_position;
@@ -81,7 +86,8 @@ public class Vein : MonoBehaviour
         m_rotation = rotation;
 
         if (end_position.magnitude == 0) return;
-
+        Vector3 localEndPos = transform.InverseTransformPoint(end_position);
+        if (localEndPos.normalized == Vector3.back) return;
         PrepareMathematics(transform.InverseTransformPoint(end_position), 12);
 
         Vector3[] vertices;

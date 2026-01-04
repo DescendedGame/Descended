@@ -6,11 +6,19 @@ public class AlgaePlanter : Tool
 
     int selectedAlgae = 0;
 
+    public override void Initialize(PawnProperties pawnProperties)
+    {
+        base.Initialize(pawnProperties);
+        softCost = 20;
+    }
+
     public override PawnStateType StartPrimaryAction(Commands commands, PawnStateType stateType)
     {
         RaycastHit hit;
         if(Physics.Raycast(userProperties.eyeTransform.position, userProperties.eyeTransform.forward, out hit, 2))
         {
+            userProperties.soft -= softCost;
+            if (userProperties.soft < 0) userProperties.soft = 0;
             GameObject algae = Instantiate(algaePrefabs[selectedAlgae]);
             algae.transform.position = hit.point;
             algae.GetComponent<Algae>().Initialize(userProperties.eyeTransform.rotation);

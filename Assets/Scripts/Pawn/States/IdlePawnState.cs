@@ -13,7 +13,7 @@ public class IdlePawnState : PawnState
     public override PawnStateType Update()
     {
         // Go to sprint if sprint conditions are met.
-        if (m_brain.commands.sprint && m_brain.commands.forwards > 0)
+        if (m_brain.commands.sprint && m_brain.commands.forwards > 0 && m_properties.aura > 0)
         {
             return PawnStateType.Sprint;
         }
@@ -41,17 +41,26 @@ public class IdlePawnState : PawnState
         // Tool usage can result in a different state!
         if (m_brain.commands.secondary)
         {
-            return m_properties.selectedTool.StartSecondaryAction(m_brain.commands, stateType);
+            if(m_properties.selectedTool.SecondaryCost())
+            {
+                return m_properties.selectedTool.StartSecondaryAction(m_brain.commands, stateType);
+            }
         }
         // Tool usage can result in a different state!
         if (m_brain.commands.secondaryHold)
         {
-            return m_properties.selectedTool.HoldSecondaryAction(m_brain.commands, stateType);
+            if (m_properties.selectedTool.SecondaryCost())
+            {
+                return m_properties.selectedTool.HoldSecondaryAction(m_brain.commands, stateType);
+            }
         }
         // Tool usage can result in a different state!
         if (m_brain.commands.primary)
         {
-            return m_properties.selectedTool.StartPrimaryAction(m_brain.commands, stateType);
+            if (m_properties.selectedTool.PrimaryCost())
+            {
+                return m_properties.selectedTool.StartPrimaryAction(m_brain.commands, stateType);
+            }
         }
 
         UpdateRotation();

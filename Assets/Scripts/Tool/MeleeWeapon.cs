@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class MeleeWeapon : Tool
 {
-    public GameObject projectilePrefab; // Drag the projectile prefab in Unity Inspector
+    Hazard dangerZone;
 
-    //Get the primary action to create a projectile
+    public override void Initialize(PawnProperties pawnProperties)
+    {
+        base.Initialize(pawnProperties);
+        dangerZone = GetComponent<Hazard>();
+    }
+
     public override PawnStateType StartPrimaryAction(Commands commands, PawnStateType stateType)
     {
         userProperties.prepareTimer = 1;
@@ -33,6 +38,7 @@ public class MeleeWeapon : Tool
 
     public override void ReleaseAttack()
     {
+        dangerZone.ResetHitCounter();
         GetComponentInChildren<BoxCollider>().enabled = true;
     }
 

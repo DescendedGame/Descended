@@ -9,6 +9,7 @@ public class PawnProperties
 {
     public float maxAura = 100;
     public float aura = 100;
+    public float auraRegen = 10;
 
     public float maxSoft = 100;
     public float soft = 100;

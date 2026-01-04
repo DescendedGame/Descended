@@ -26,12 +26,16 @@ public class VeinBuilder : Tool
         }
         else
         {
-            vein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, startSize,endSize, 0, true, EndType.None, EndType.None);
-            vein.transform.SetParent(GameObject.Find("World").transform, true);
-            vein.GetComponent<Collider>().enabled = true;
-            GameObject.Find("World").GetComponent<World>().SaveWorld();
-            vein = null;
-            isBuilding = false;
+            if(userProperties.hard > vein.GetCost() && (startSize > 0 || endSize > 0))
+            {
+                userProperties.hard -= vein.GetCost();
+                vein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, startSize, endSize, 0, true, EndType.None, EndType.None);
+                vein.transform.SetParent(GameObject.Find("World").transform, true);
+                vein.GetComponent<Collider>().enabled = true;
+                GameObject.Find("World").GetComponent<World>().SaveWorld();
+                vein = null;
+                isBuilding = false;
+            }
         }
         return stateType == PawnStateType.Grounded ? stateType : PawnStateType.Idle;
     }
@@ -84,13 +88,13 @@ public class VeinBuilder : Tool
         }
         else
         {
-            if(placeHolderVein == null)
+            if (placeHolderVein == null)
             {
                 placeHolderVein = Instantiate(veinPrefab, userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance, Quaternion.LookRotation(-userProperties.eyeTransform.forward, userProperties.eyeTransform.up)).GetComponent<Vein>();
             }
             placeHolderVein.transform.position = userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance;
             placeHolderVein.transform.rotation = Quaternion.LookRotation(-userProperties.eyeTransform.forward, userProperties.eyeTransform.up);
-            placeHolderVein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance * 0.9f, 1, 1, 0, true, EndType.None, EndType.None);
+            placeHolderVein.Generate(userProperties.eyeTransform.position + userProperties.eyeTransform.forward * creationDistance * 0.9f, startSize, endSize, 0, true, EndType.None, EndType.None);
         }
     }
 }

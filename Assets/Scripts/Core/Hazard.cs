@@ -49,17 +49,31 @@ public class Hazard : MonoBehaviour
     [HideInInspector] public Vector3 pushForce;
 
 
+    public int hitCount = 1;
+    int hitCounter = 1;
+
     //some default behaviour below, feel free to override.
+
+    public void ResetHitCounter()
+    {
+        hitCounter = hitCount;
+    }
 
     virtual protected void OnCollisionEnter(Collision collision)
     {
-        pushForce = (collision.GetContact(0).point - transform.position).normalized * push;
-
-        collision.collider?.GetComponent<Attackable>()?.Hit(this);
+        if(hitCount == -1 || hitCounter > 0)
+        {
+            hitCounter--;
+            pushForce = (collision.GetContact(0).point - transform.position).normalized * push;
+            collision.collider?.GetComponent<Attackable>()?.Hit(this);
+        }
     }
 
     virtual protected void OnTriggerEnter(Collider other)
     {
-        other?.GetComponent<Attackable>()?.Hit(this);
+        if (hitCount == -1 || hitCounter > 0)
+        {
+            other?.GetComponent<Attackable>()?.Hit(this);
+        }
     }
 }
